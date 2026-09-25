@@ -8,5 +8,12 @@
     "LICENSE",
     "node_modules/**"
   ],
-  "words": ["Capgo", "oxlint", "publint", "tsconfig", "Uint8Array"]
+  "words": [
+    "automations",
+    "Capgo",
+    "oxlint",
+    "publint",
+    "tsconfig",
+    "Uint8Array"
+  ]
 }

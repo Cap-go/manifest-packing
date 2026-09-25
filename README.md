@@ -83,15 +83,16 @@ The release flow follows Capgo's commit-and-tag model:
    matching semantic version tag. With no existing version tag, it creates the
    initial `0.0.1` release without incrementing `package.json`.
 3. The tag workflow verifies the tag and package versions, runs all checks
-   again, publishes the package to npm with provenance, and creates a GitHub
-   release.
+   again, stages the package on npm with provenance, requests approval from
+   Capgo's npm stage automation, and creates a GitHub release.
 
 Subsequent versions follow Conventional Commits: fixes produce patch releases,
 features produce minor releases, and breaking changes produce major releases.
 
-Repository configuration requires a `PERSONAL_ACCESS_TOKEN` Actions secret to
-push the release commit and tag, plus an `NPM_TOKEN` secret allowed to publish
-the `@capgo/manifest-packing` package.
+Repository configuration requires the Capgo Actions secrets used by the other
+npm packages: `PERSONAL_ACCESS_TOKEN` pushes the release commit and tag,
+`NPM_TOKEN` stages `@capgo/manifest-packing`, and `NPM_STAGE_DISPATCH_TOKEN`
+requests approval from `Cap-go/automations`.
 
 ## License
 
