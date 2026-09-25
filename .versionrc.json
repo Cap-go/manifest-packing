@@ -1,3 +1,6 @@
 {
-  "releaseCommitMessageFormat": "chore(release): {{currentTag}}"
+  "releaseCommitMessageFormat": "chore(release): {{currentTag}}",
+  "scripts": {
+    "postchangelog": "bunx prettier --write CHANGELOG.md"
+  }
 }
