@@ -30,22 +30,26 @@ describe("manifest packing foundation", () => {
       () => entry
     );
 
+    expect(() => packManifest(entries)).toThrowError(ManifestPackingError);
     expect(() => packManifest(entries)).toThrowError(
-      new ManifestPackingError(
-        ManifestPackingErrorCode.TooManyEntries,
-        `Manifest entries cannot exceed ${MAX_MANIFEST_ENTRIES}`
-      )
+      `Manifest entries cannot exceed ${MAX_MANIFEST_ENTRIES}`
     );
+
+    try {
+      packManifest(entries);
+    } catch (error) {
+      expect(error).toMatchObject({
+        code: ManifestPackingErrorCode.TooManyEntries
+      });
+    }
   });
 
   it("accepts exactly 10,000 entries before reporting unimplemented packing", () => {
     const entries = Array.from({ length: MAX_MANIFEST_ENTRIES }, () => entry);
 
+    expect(() => packManifest(entries)).toThrowError(ManifestPackingError);
     expect(() => packManifest(entries)).toThrowError(
-      new ManifestPackingError(
-        ManifestPackingErrorCode.NotImplemented,
-        "Manifest packing is not yet implemented"
-      )
+      "Manifest packing is not yet implemented"
     );
   });
 
@@ -57,11 +61,15 @@ describe("manifest packing foundation", () => {
         payload_hash: new Uint8Array(32),
         manifest: new Uint8Array()
       })
-    ).toThrowError(
-      new ManifestPackingError(
-        ManifestPackingErrorCode.NotImplemented,
-        "Manifest unpacking is not yet implemented"
-      )
-    );
+    ).toThrowError(ManifestPackingError);
+
+    expect(() =>
+      unpackManifest({
+        format_version: MANIFEST_FORMAT_VERSION,
+        entry_count: 0,
+        payload_hash: new Uint8Array(32),
+        manifest: new Uint8Array()
+      })
+    ).toThrowError("Manifest unpacking is not yet implemented");
   });
 });

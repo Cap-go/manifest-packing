@@ -1,0 +1,12 @@
+{
+  "version": "0.2",
+  "useGitignore": true,
+  "ignorePaths": [
+    "bun.lock",
+    "coverage/**",
+    "dist/**",
+    "LICENSE",
+    "node_modules/**"
+  ],
+  "words": ["Capgo", "oxlint", "publint", "tsconfig", "Uint8Array"]
+}

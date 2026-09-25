@@ -1,0 +1,6 @@
+bun.lock
+coverage/
+dist/
+node_modules/
+codedb.snapshot
+

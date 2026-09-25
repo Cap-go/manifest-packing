@@ -26,9 +26,15 @@ export interface PackedManifest {
   readonly format_version: typeof MANIFEST_FORMAT_VERSION;
   /** Unsigned 32-bit number of entries encoded in `manifest`. */
   readonly entry_count: number;
-  /** Sum of every encoded entry's `file_size`, in bytes. */
+  /**
+   * Sum of every encoded entry's `file_size`, in bytes.
+   * This is not the size of the binary `manifest` payload.
+   */
   readonly total_file_size: number;
-  /** Raw 32-byte SHA-256 digest of the exact bytes in `manifest`. */
+  /**
+   * Raw 32-byte SHA-256 digest of the exact bytes in `manifest`.
+   * Different app versions may have the same digest.
+   */
   readonly payload_hash: Uint8Array;
   /** Versioned, compressed binary manifest payload. */
   readonly manifest: Uint8Array;
@@ -87,9 +93,7 @@ export function packManifest(
  *
  * Decoding will be introduced with the first defined binary format.
  */
-export function unpackManifest(
-  _input: UnpackManifestInput
-): ManifestEntry[] {
+export function unpackManifest(_input: UnpackManifestInput): ManifestEntry[] {
   throw new ManifestPackingError(
     ManifestPackingErrorCode.NotImplemented,
     "Manifest unpacking is not yet implemented"
