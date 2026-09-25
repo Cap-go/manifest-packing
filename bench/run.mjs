@@ -5,12 +5,28 @@ import { tmpdir, cpus, platform, arch } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { promisify } from "node:util";
-import { WebSocket } from "ws";
+import {
+  fetchJson,
+  openInspector,
+  portAvailable,
+  stopChildGroup,
+  trackChild,
+  withDeadline
+} from "./lifecycle.mjs";
 
 const exec = promisify(execFile);
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const port = Number(process.env.BENCH_PORT ?? 8787);
 const inspectorPort = Number(process.env.BENCH_INSPECTOR_PORT ?? 9231);
+if (
+  ![port, inspectorPort].every(
+    (value) => Number.isInteger(value) && value > 0 && value <= 65_535
+  ) ||
+  port === inspectorPort
+)
+  throw new Error(
+    "Benchmark ports must be distinct integers between 1 and 65535"
+  );
 const base = `http://127.0.0.1:${port}`;
 const MIB = 1024 * 1024;
 const guardBytes = 96 * MIB;
@@ -54,33 +70,69 @@ class Inspector {
       }
     });
   }
-  call(method, params = {}) {
+  call(method, params = {}, signal) {
     const id = this.nextId++;
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
         this.pending.delete(id);
+        cleanup();
         reject(new Error(`CDP timed out: ${method}`));
       }, 20_000);
-      this.pending.set(id, { resolve, reject, timer });
+      const abort = () => {
+        this.pending.delete(id);
+        clearTimeout(timer);
+        cleanup();
+        reject(new Error(`CDP aborted: ${method}`));
+      };
+      signal?.addEventListener("abort", abort, { once: true });
+      const cleanup = () => signal?.removeEventListener("abort", abort);
+      this.pending.set(id, {
+        resolve: (value) => {
+          cleanup();
+          resolve(value);
+        },
+        reject: (error) => {
+          cleanup();
+          reject(error);
+        },
+        timer
+      });
+      if (signal?.aborted) {
+        abort();
+        return;
+      }
       this.socket.send(JSON.stringify({ id, method, params }));
     });
   }
   close() {
-    this.socket.close();
+    for (const pending of this.pending.values()) {
+      clearTimeout(pending.timer);
+      pending.reject(new Error("Inspector closed"));
+    }
+    this.pending.clear();
+    this.socket.terminate();
   }
 }
 
 async function request(path, options = {}) {
-  const response = await fetch(`${base}${path}`, {
-    ...options,
-    signal: AbortSignal.timeout(120_000)
-  });
-  const value = await response.json();
+  const { response, value } = await fetchJson(`${base}${path}`, options);
   if (!response.ok) throw new Error(`${path}: ${JSON.stringify(value)}`);
   return value;
 }
 
 async function start() {
+  const deadline = performance.now() + 30_000;
+  const ports = [port, inspectorPort];
+  if (
+    !(
+      await withDeadline(
+        30_000,
+        () => Promise.all(ports.map(portAvailable)),
+        "Port preflight"
+      )
+    ).every(Boolean)
+  )
+    throw new Error("Benchmark service or inspector port is already occupied");
   let output = "";
   const child = spawn(
     process.execPath,
@@ -116,6 +168,8 @@ async function start() {
       stdio: ["ignore", "pipe", "pipe"]
     }
   );
+  const lifecycle = trackChild(child);
+  let inspector;
   child.stdout.on("data", (chunk) => {
     output += chunk;
   });
@@ -123,65 +177,71 @@ async function start() {
     output += chunk;
   });
   try {
-    for (let attempt = 0; ; attempt++) {
-      if (child.exitCode !== null)
-        throw new Error(`Wrangler exited ${child.exitCode}\n${output}`);
-      try {
-        await request("/health");
-        break;
-      } catch {
-        if (attempt > 100) throw new Error(`Wrangler did not start\n${output}`);
-        await pause(200);
-      }
-    }
-    const targets = await (
-      await fetch(`http://127.0.0.1:${inspectorPort}/json/list`)
-    ).json();
-    const target =
-      targets.find(
-        (entry) =>
-          entry.webSocketDebuggerUrl &&
-          /manifest-packing/.test(entry.title ?? entry.id ?? "")
-      ) ?? targets.find((entry) => entry.webSocketDebuggerUrl);
-    if (!target) throw new Error("No workerd inspector target");
-    const socket = new WebSocket(target.webSocketDebuggerUrl, {
-      headers: { Origin: "http://localhost" }
-    });
-    await new Promise((resolve, reject) => {
-      socket.addEventListener("open", resolve, { once: true });
-      socket.addEventListener(
-        "error",
-        (error) =>
-          reject(
-            new Error(
-              `Inspector connection failed (${error.message}): ${JSON.stringify(targets)}`
-            )
-          ),
-        { once: true }
-      );
-    });
-    const inspector = new Inspector(socket);
-    await inspector.call("Runtime.enable");
-    return {
-      child,
-      inspector,
-      target: { id: target.id, title: target.title, url: target.url },
-      output: () => output
-    };
+    return await withDeadline(
+      Math.max(1, Math.ceil(deadline - performance.now())),
+      async (signal) => {
+        const checkChild = () => {
+          if (lifecycle.error) throw lifecycle.error;
+          if (
+            lifecycle.closed ||
+            child.exitCode !== null ||
+            child.signalCode !== null
+          )
+            throw new Error(`Wrangler exited before startup completed`);
+        };
+        while (!signal.aborted) {
+          checkChild();
+          try {
+            await request("/health", { timeoutMs: 1_000, signal });
+            checkChild();
+            break;
+          } catch {
+            checkChild();
+            if (signal.aborted) throw new Error("Wrangler startup aborted");
+            await pause(200);
+          }
+        }
+        const { value: targets } = await fetchJson(
+          `http://127.0.0.1:${inspectorPort}/json/list`,
+          { timeoutMs: 5_000, signal }
+        );
+        const target =
+          targets.find(
+            (entry) =>
+              entry.webSocketDebuggerUrl &&
+              /manifest-packing/.test(entry.title ?? entry.id ?? "")
+          ) ?? targets.find((entry) => entry.webSocketDebuggerUrl);
+        if (!target) throw new Error("No workerd inspector target");
+        const socket = await openInspector(target.webSocketDebuggerUrl, signal);
+        inspector = new Inspector(socket);
+        await inspector.call("Runtime.enable", {}, signal);
+        checkChild();
+        return {
+          child,
+          lifecycle,
+          inspector,
+          target: { id: target.id, title: target.title, url: target.url },
+          output: () => output
+        };
+      },
+      "Wrangler startup"
+    );
   } catch (error) {
-    await stop({ child });
+    try {
+      await stop({ child, lifecycle, inspector });
+    } catch (cleanupError) {
+      throw new AggregateError(
+        [error, cleanupError],
+        `${error.message}; ${cleanupError.message}`
+      );
+    }
     throw error;
   }
 }
 
 async function stop(server) {
   server.inspector?.close();
-  try {
-    process.kill(-server.child.pid, "SIGTERM");
-  } catch {
-    /* Already exited. */
-  }
-  await pause(100);
+  await stopChildGroup(server.lifecycle, [port, inspectorPort]);
 }
 
 async function hostMetrics(parentPid) {
@@ -454,10 +514,16 @@ const report = {
     workerBundleSha256: createHash("sha256")
       .update(await readFile(workerBundle))
       .digest("hex"),
+    runnerSourceSha256: createHash("sha256")
+      .update(await readFile(fileURLToPath(import.meta.url)))
+      .update(await readFile(join(root, "bench/lifecycle.mjs")))
+      .digest("hex"),
     compatibilityDate: "2026-09-25"
   },
   methodology: {
     localOnly: true,
+    lifecycleDescription:
+      "Port preflight; startup deadline 30 seconds; shutdown confirms child close, process-group exit, and both ports released, with 5-second graceful and 5-second forced-stop budgets.",
     diagnosticLimitBytes: guardBytes,
     hardLimitBytes,
     productionMemoryGuarantee: false,
@@ -591,8 +657,10 @@ try {
       const guardedConcurrent = await freshPhase(() =>
         Promise.all(
           Array.from({ length: 8 }, async () => {
-            const response = await fetch(`${base}/hold?guarded=1`);
-            return { status: response.status, ...(await response.json()) };
+            const { response, value } = await fetchJson(
+              `${base}/hold?guarded=1`
+            );
+            return { status: response.status, ...value };
           })
         )
       );
@@ -657,7 +725,19 @@ try {
   };
   process.exitCode = 1;
 } finally {
-  if (active) await stop(active);
+  if (active) {
+    try {
+      await stop(active);
+    } catch (error) {
+      report.error ??= {
+        message: error.message
+          .split("\n")[0]
+          .replaceAll(root, "<repository>")
+          .replaceAll(temp, "<temporary-directory>")
+      };
+      process.exitCode = 1;
+    }
+  }
   await mkdir(dirname(destination), { recursive: true });
   await writeFile(destination, `${JSON.stringify(report, null, 2)}\n`);
   console.log(`Report: ${destination}`);

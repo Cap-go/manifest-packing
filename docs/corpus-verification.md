@@ -5,8 +5,10 @@ PostgreSQL archive. It makes no production database or network requests. Source 
 SQLite imports, identifiers, filenames, paths, checksums, and checkpoints remain
 private. Only the aggregate result belongs in this repository.
 
-Use Node.js 24 or newer for native TypeScript script execution, `node:sqlite`, and
-Zstandard support. Build the package first:
+Node.js 24 is recommended. Node 22.15 is also supported when TypeScript stripping
+is explicitly enabled; the package commands below supply that flag. Both runtimes
+have been checked against a synthetic import and full round trip, including big
+integers. The recorded production-corpus pass used Node 24. Build the package first:
 
 ```sh
 bun install
@@ -28,7 +30,7 @@ It decodes COPY escapes before retaining exact UTF-8 field bytes and uses SQLite
 integers for lossless file sizes.
 
 ```sh
-node scripts/ingest-corpus.ts \
+bun run ingest:corpus \
   --dump /private/local-data/manifest-data.dump \
   --expected-dump-sha256 EXPECTED_SHA256 \
   --private-directory /private/local-data/manifest-corpus \
@@ -55,7 +57,7 @@ actual archive rather than trusting a cache merely because it exists.
 ## Verify every version
 
 ```sh
-node scripts/verify-corpus.ts \
+bun run verify:corpus \
   --dump /private/local-data/manifest-data.dump \
   --expected-dump-sha256 EXPECTED_SHA256 \
   --sqlite /private/local-data/manifest-corpus/corpus.sqlite \

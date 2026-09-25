@@ -173,8 +173,9 @@ The private-corpus tools verify every version from a local PostgreSQL dump,
 including exact bytes, duplicates, file sizes, and metadata. They emit only
 aggregate evidence; no customer data is included in this repository or npm
 package. See [full-corpus verification](docs/corpus-verification.md) for local
-commands and provenance checks. These scripts require Node.js 24 or newer for
-native TypeScript execution and SQLite; the library itself supports Node 22.15+.
+commands and provenance checks. Node.js 24 is recommended for these tools.
+Node 22.15 is also tested; the package commands explicitly enable TypeScript
+stripping instead of relying on a newer Node version's default.
 
 Recorded evidence includes the [aggregate corpus result](docs/corpus-verification-results.json),
 [local Worker results and codec matrix](docs/benchmark-results.md), and a
