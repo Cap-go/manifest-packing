@@ -81,7 +81,7 @@ The release flow follows Capgo's commit-and-tag model:
 1. A push to `main` runs the complete check workflow.
 2. After it passes, Capgo's standard-version tool creates a release commit and
    matching semantic version tag. With no existing version tag, it creates the
-   initial `v0.0.1` release without incrementing `package.json`.
+   initial `0.0.1` release without incrementing `package.json`.
 3. The tag workflow verifies the tag and package versions, runs all checks
    again, publishes the package to npm with provenance, and creates a GitHub
    release.

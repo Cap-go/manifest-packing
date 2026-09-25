@@ -45,8 +45,8 @@
     "spellcheck": "cspell --no-progress --show-suggestions .",
     "publint": "publint",
     "check": "bun run format:check && bun run lint && bun run typecheck && bun run spellcheck && bun run test:coverage && bun run build && bun run publint",
-    "release": "capacitor-standard-version --tag-prefix v",
-    "release:first": "capacitor-standard-version --first-release --tag-prefix v",
+    "release": "capacitor-standard-version",
+    "release:first": "capacitor-standard-version --first-release",
     "prepack": "bun run build"
   },
   "devDependencies": {
