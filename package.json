@@ -1,0 +1,54 @@
+{
+  "name": "@capgo/manifest-packing",
+  "version": "0.0.1",
+  "description": "Versioned binary packing for Capgo manifests",
+  "type": "module",
+  "sideEffects": false,
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cap-go/manifest-packing.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Cap-go/manifest-packing/issues"
+  },
+  "homepage": "https://github.com/Cap-go/manifest-packing#readme",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint --deny-warnings src test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "spellcheck": "cspell --no-progress --show-suggestions .",
+    "publint": "publint",
+    "check": "bun run format:check && bun run lint && bun run typecheck && bun run test:coverage && bun run build && bun run publint",
+    "prepack": "bun run check"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^5.0.2",
+    "cspell": "^10.3.4",
+    "oxlint": "^1.85.0",
+    "prettier": "^3.9.9",
+    "publint": "^0.3.24",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.2"
+  }
+}
