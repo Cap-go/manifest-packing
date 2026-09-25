@@ -11,7 +11,15 @@
     "noUnusedParameters": true,
     "exactOptionalPropertyTypes": true,
     "verbatimModuleSyntax": true,
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "test/**/*.ts", "vitest.config.ts"]
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts",
+    "fixtures/**/*.ts",
+    "scripts/**/*.ts",
+    "vitest.config.ts"
+  ]
 }

@@ -3,4 +3,10 @@ dist/
 coverage/
 *.tgz
 codedb.snapshot
-
+.wrangler/
+.dev.vars*
+.env*
+*.dump
+*.sqlite*
+private/
+bench/worker-configuration.d.ts

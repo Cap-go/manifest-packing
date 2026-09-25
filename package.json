@@ -28,7 +28,7 @@
     }
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22.15.0"
   },
   "publishConfig": {
     "access": "public",
@@ -39,24 +39,33 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
-    "lint": "oxlint --deny-warnings src test",
+    "lint": "oxlint --deny-warnings src test fixtures scripts bench",
+    "typecheck:worker": "wrangler types bench/worker-configuration.d.ts && tsc -p bench/tsconfig.json",
+    "bench": "node bench/run.mjs suite",
+    "bench:matrix": "node bench/run.mjs matrix",
+    "bench:memory": "node bench/run.mjs memory",
+    "verify:corpus": "node scripts/verify-corpus.ts",
+    "ingest:corpus": "node scripts/ingest-corpus.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "spellcheck": "cspell --no-progress --show-suggestions .",
     "publint": "publint",
-    "check": "bun run format:check && bun run lint && bun run typecheck && bun run spellcheck && bun run test:coverage && bun run build && bun run publint",
+    "check": "bun run format:check && bun run lint && bun run build && bun run typecheck && bun run typecheck:worker && bun run spellcheck && bun run test:coverage && bun run publint",
     "release": "capacitor-standard-version",
     "release:first": "capacitor-standard-version --first-release",
     "prepack": "bun run build"
   },
   "devDependencies": {
     "@capgo/capacitor-standard-version": "^1.3.32",
+    "@types/node": "^26.6.2",
     "@vitest/coverage-v8": "^5.0.2",
     "cspell": "8.19.4",
     "oxlint": "^1.85.0",
     "prettier": "^3.9.9",
     "publint": "^0.3.24",
     "typescript": "^7.0.2",
-    "vitest": "^5.0.2"
+    "vitest": "^5.0.2",
+    "wrangler": "^4.140.0",
+    "ws": "^8.21.3"
   }
 }

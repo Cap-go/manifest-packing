@@ -1,0 +1,258 @@
+{
+  "generatedAt": "2026-09-25T16:06:29.652Z",
+  "mode": "probe",
+  "environment": {
+    "node": "v22.15.0",
+    "wrangler": "4.140.0",
+    "workerd": "1.20260923.1",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M4 Pro",
+    "logicalCpus": 14,
+    "workerBundleSha256": "aa3de5cb52ad3e2e7916c4064e4afdbd1fe5cfec212ccb8590256ae542d8ace5",
+    "compatibilityDate": "2026-09-25"
+  },
+  "methodology": {
+    "localOnly": true,
+    "diagnosticLimitBytes": 100663296,
+    "hardLimitBytes": 128000000,
+    "productionMemoryGuarantee": false,
+    "memoryDescription": "CDP Runtime.getHeapUsage, independent fields and same-sample sum when all available. Native codec allocations may be absent. Host workerd RSS is process-wide and includes other isolates/runtime. No forced GC during workloads.",
+    "coldDescription": "Fresh Wrangler/workerd per named case. Fixture is encoded first; firstDecodeMs measures first unpack in fresh isolate, excluding process startup and I/O."
+  },
+  "timings": [],
+  "memory": [],
+  "guards": [],
+  "probe": {
+    "brotli": {
+      "info": true,
+      "engine": [
+        "_events",
+        "_readableState",
+        "_writableState",
+        "allowHalfOpen",
+        "_maxListeners",
+        "domain",
+        "_eventsCount",
+        "bytesWritten",
+        "_maxOutputLength",
+        "_outBuffer",
+        "_outOffset",
+        "_chunkSize",
+        "_defaultFlushFlag",
+        "_finishFlushFlag",
+        "_defaultFullFlushFlag",
+        "_info",
+        "_handle",
+        "_writeState",
+        "_writesInProgress",
+        "_hadWrites"
+      ],
+      "bytesWritten": 32,
+      "packedLength": 32
+    },
+    "zstd": {
+      "info": true,
+      "engine": [
+        "_events",
+        "_readableState",
+        "_writableState",
+        "allowHalfOpen",
+        "_maxListeners",
+        "domain",
+        "_eventsCount",
+        "bytesWritten",
+        "_maxOutputLength",
+        "_outBuffer",
+        "_outOffset",
+        "_chunkSize",
+        "_defaultFlushFlag",
+        "_finishFlushFlag",
+        "_defaultFullFlushFlag",
+        "_info",
+        "_handle",
+        "_writeState",
+        "_writesInProgress",
+        "_hadWrites"
+      ],
+      "bytesWritten": 40,
+      "packedLength": 40
+    },
+    "brotli-names-16000": {
+      "packedBytes": 16004,
+      "decodedBytes": 16000,
+      "consumedBytes": 16004,
+      "correct": true
+    },
+    "brotli-metadata-16000": {
+      "packedBytes": 16004,
+      "decodedBytes": 16000,
+      "consumedBytes": 16004,
+      "correct": true
+    },
+    "zstd-16000": {
+      "packedBytes": 16010,
+      "decodedBytes": 16000,
+      "consumedBytes": 16010,
+      "correct": true
+    },
+    "zstd-full-chunk-16000": {
+      "packedBytes": 16010,
+      "decodedBytes": 16000,
+      "consumedBytes": 16010,
+      "correct": true
+    },
+    "brotli-names-16384": {
+      "packedBytes": 16388,
+      "decodedBytes": 16384,
+      "consumedBytes": 16388,
+      "correct": true
+    },
+    "brotli-metadata-16384": {
+      "packedBytes": 16388,
+      "decodedBytes": 16384,
+      "consumedBytes": 16388,
+      "correct": true
+    },
+    "zstd-16384": {
+      "packedBytes": 16394,
+      "decodedBytes": 16384,
+      "consumedBytes": 16394,
+      "correct": true
+    },
+    "zstd-full-chunk-16384": {
+      "packedBytes": 16394,
+      "decodedBytes": 16384,
+      "consumedBytes": 16394,
+      "correct": true
+    },
+    "brotli-names-16385": {
+      "packedBytes": 16389,
+      "decodedBytes": 16385,
+      "consumedBytes": 16389,
+      "correct": true
+    },
+    "brotli-metadata-16385": {
+      "packedBytes": 16389,
+      "decodedBytes": 16385,
+      "consumedBytes": 16389,
+      "correct": true
+    },
+    "zstd-16385": {
+      "packedBytes": 16395,
+      "decodedBytes": 16385,
+      "consumedBytes": 16395,
+      "correct": true
+    },
+    "zstd-full-chunk-16385": {
+      "packedBytes": 16395,
+      "decodedBytes": 16385,
+      "consumedBytes": 16395,
+      "correct": true
+    },
+    "brotli-names-65536": {
+      "packedBytes": 65540,
+      "decodedBytes": 65536,
+      "consumedBytes": 65540,
+      "correct": true
+    },
+    "brotli-metadata-65536": {
+      "packedBytes": 65540,
+      "decodedBytes": 65536,
+      "consumedBytes": 65540,
+      "correct": true
+    },
+    "zstd-65536": {
+      "stage": "compress",
+      "error": "Unexpected end of file"
+    },
+    "zstd-full-chunk-65536": {
+      "stage": "compress",
+      "error": "Unexpected end of file"
+    },
+    "brotli-names-262144": {
+      "packedBytes": 262149,
+      "decodedBytes": 262144,
+      "consumedBytes": 262149,
+      "correct": true
+    },
+    "brotli-metadata-262144": {
+      "packedBytes": 262149,
+      "decodedBytes": 262144,
+      "consumedBytes": 262149,
+      "correct": true
+    },
+    "zstd-262144": {
+      "stage": "compress",
+      "error": "Unexpected end of file"
+    },
+    "zstd-full-chunk-262144": {
+      "stage": "compress",
+      "error": "Unexpected end of file"
+    },
+    "brotli-names-1048576": {
+      "packedBytes": 1048581,
+      "decodedBytes": 1048576,
+      "consumedBytes": 1048581,
+      "correct": true
+    },
+    "brotli-metadata-1048576": {
+      "packedBytes": 1048581,
+      "decodedBytes": 1048576,
+      "consumedBytes": 1048581,
+      "correct": true
+    },
+    "zstd-1048576": {
+      "stage": "compress",
+      "error": "Unexpected end of file"
+    },
+    "zstd-full-chunk-1048576": {
+      "stage": "compress",
+      "error": "Unexpected end of file"
+    },
+    "brotli-names-4194304": {
+      "packedBytes": 4194320,
+      "decodedBytes": 4194304,
+      "consumedBytes": 4194320,
+      "correct": true
+    },
+    "brotli-metadata-4194304": {
+      "packedBytes": 4194317,
+      "decodedBytes": 4194304,
+      "consumedBytes": 4194317,
+      "correct": true
+    },
+    "zstd-4194304": {
+      "stage": "compress",
+      "error": "Unexpected end of file"
+    },
+    "zstd-full-chunk-4194304": {
+      "stage": "compress",
+      "error": "Unexpected end of file"
+    },
+    "zstd-params-default": {
+      "error": "Unexpected end of file"
+    },
+    "zstd-info-default": {
+      "error": "Unexpected end of file"
+    },
+    "zstd-params-level-only": {
+      "error": "Unexpected end of file"
+    },
+    "zstd-info-level-only": {
+      "error": "Unexpected end of file"
+    },
+    "zstd-params-window-only": {
+      "error": "Unexpected end of file"
+    },
+    "zstd-info-window-only": {
+      "error": "Unexpected end of file"
+    },
+    "heap": {
+      "usedSize": 1644196,
+      "totalSize": 5242880,
+      "embedderHeapUsedSize": 515872,
+      "backingStorageSize": 13991671
+    }
+  }
+}
