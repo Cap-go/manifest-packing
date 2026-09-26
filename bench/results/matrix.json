@@ -1,0 +1,3599 @@
+{
+  "generatedAt": "2026-09-25T16:36:05.119Z",
+  "mode": "matrix",
+  "environment": {
+    "node": "v22.15.0",
+    "wrangler": "4.140.0",
+    "workerd": "1.20260923.1",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M4 Pro",
+    "logicalCpus": 14,
+    "workerBundleSha256": "aa3de5cb52ad3e2e7916c4064e4afdbd1fe5cfec212ccb8590256ae542d8ace5",
+    "runnerSourceSha256": "692ddcf626adee59a13cb357272d698d64d2589e7e2d5d2ee7dca7f1c56a4283",
+    "compatibilityDate": "2026-09-25"
+  },
+  "methodology": {
+    "localOnly": true,
+    "lifecycleDescription": "Port preflight; startup deadline 30 seconds; shutdown confirms child close, process-group exit, and both ports released, with 5-second graceful and 5-second forced-stop budgets.",
+    "diagnosticLimitBytes": 100663296,
+    "hardLimitBytes": 128000000,
+    "productionMemoryGuarantee": false,
+    "memoryDescription": "CDP Runtime.getHeapUsage, independent fields and same-sample sum when all available. Native codec allocations may be absent. Host workerd RSS is process-wide and includes other isolates/runtime. No forced GC during workloads.",
+    "coldDescription": "Fresh Wrangler/workerd per named case. Fixture is encoded first; firstDecodeMs measures first unpack in fresh isolate, excluding process startup and I/O."
+  },
+  "timings": [
+    {
+      "name": "maximum",
+      "count": 10000,
+      "compression": "none",
+      "transform": "raw",
+      "sizeMode": "absolute",
+      "sizeCorpus": "monotonic",
+      "encoder": "node",
+      "packetBytes": 869885,
+      "jsonBytes": 2565550,
+      "encodeMs": 69.31658399999992,
+      "firstDecodeMs": 27,
+      "warmupDecodes": 3,
+      "batchIterations": 2,
+      "yieldBetweenBatchesMs": 5,
+      "warmDecodeMs": {
+        "samples": [22.5, 17.5, 17, 21.5, 18.5, 18, 16.5, 15.5, 20],
+        "median": 18,
+        "p95": 22.5,
+        "min": 15.5,
+        "max": 22.5
+      },
+      "jsonParseMs": {
+        "samples": [2.5, 1, 1.5, 1, 3, 4, 1, 1.5, 1],
+        "median": 1.5,
+        "p95": 4,
+        "min": 1,
+        "max": 4
+      },
+      "sink": 390000,
+      "correct": true,
+      "memoryDuringTiming": {
+        "sampleIntervalRequestedMs": 8,
+        "peaks": {
+          "usedSize": 28623356,
+          "totalSize": 84049920,
+          "backingStorageSize": 1989362,
+          "embedderHeapUsedSize": 773792,
+          "accountedBytes": 31257550
+        },
+        "guardBytes": 100663296,
+        "hardLimitBytes": 128000000,
+        "hardLimitExceeded": false,
+        "guardFailure": null,
+        "samples": [
+          {
+            "elapsedMs": 62.98345900000004,
+            "phase": "starting",
+            "usedSize": 24506240,
+            "totalSize": 34504704,
+            "embedderHeapUsedSize": 515872,
+            "backingStorageSize": 1974098,
+            "accountedBytes": 26996210
+          },
+          {
+            "elapsedMs": 89.93570900000009,
+            "phase": "starting",
+            "usedSize": 21964132,
+            "totalSize": 41844736,
+            "embedderHeapUsedSize": 644832,
+            "backingStorageSize": 1913650,
+            "accountedBytes": 24522614
+          },
+          {
+            "elapsedMs": 132.59850000000006,
+            "phase": "starting",
+            "usedSize": 19456556,
+            "totalSize": 50233344,
+            "embedderHeapUsedSize": 644832,
+            "backingStorageSize": 1784402,
+            "accountedBytes": 21885790
+          },
+          {
+            "elapsedMs": 185.42141700000002,
+            "phase": "starting",
+            "usedSize": 15804036,
+            "totalSize": 50495488,
+            "embedderHeapUsedSize": 644832,
+            "backingStorageSize": 1697682,
+            "accountedBytes": 18146550
+          },
+          {
+            "elapsedMs": 225.5379170000001,
+            "phase": "starting",
+            "usedSize": 28623356,
+            "totalSize": 50495488,
+            "embedderHeapUsedSize": 644832,
+            "backingStorageSize": 1989362,
+            "accountedBytes": 31257550
+          },
+          {
+            "elapsedMs": 268.582459,
+            "phase": "starting",
+            "usedSize": 26491992,
+            "totalSize": 50495488,
+            "embedderHeapUsedSize": 644832,
+            "backingStorageSize": 1877586,
+            "accountedBytes": 29014410
+          },
+          {
+            "elapsedMs": 320.96849999999995,
+            "phase": "starting",
+            "usedSize": 25218036,
+            "totalSize": 50495488,
+            "embedderHeapUsedSize": 644832,
+            "backingStorageSize": 1809874,
+            "accountedBytes": 27672742
+          },
+          {
+            "elapsedMs": 370.3475840000001,
+            "phase": "starting",
+            "usedSize": 21756072,
+            "totalSize": 67272704,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 1833618,
+            "accountedBytes": 24363482
+          },
+          {
+            "elapsedMs": 421.2934170000001,
+            "phase": "starting",
+            "usedSize": 19417728,
+            "totalSize": 84049920,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 1818290,
+            "accountedBytes": 22009810
+          },
+          {
+            "elapsedMs": 467.7382090000001,
+            "phase": "starting",
+            "usedSize": 16430072,
+            "totalSize": 84049920,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 1818290,
+            "accountedBytes": 19022154
+          },
+          {
+            "elapsedMs": 507.3432500000001,
+            "phase": "starting",
+            "usedSize": 16430140,
+            "totalSize": 84049920,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 1818290,
+            "accountedBytes": 19022222
+          },
+          {
+            "elapsedMs": 556.37725,
+            "phase": "starting",
+            "usedSize": 16430308,
+            "totalSize": 84049920,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 1818290,
+            "accountedBytes": 19022390
+          }
+        ],
+        "rssSamples": [
+          {
+            "elapsedMs": 0.10554200000001401,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 280150016,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57458688,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 70123520,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12697600,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 158695424,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 146.6395,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 280215552,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57524224,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 70434816,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12697600,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 182517760,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 296.392834,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 278904832,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57606144,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 70647808,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12697600,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 182894592,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 440.212542,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 278921216,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57606144,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 70860800,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12697600,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 219119616,
+                "kind": "workerd-process"
+              }
+            ]
+          }
+        ]
+      },
+      "firstDecodeIsCold": false
+    },
+    {
+      "name": "maximum",
+      "count": 10000,
+      "compression": "none",
+      "transform": "raw",
+      "sizeMode": "delta",
+      "sizeCorpus": "monotonic",
+      "encoder": "node",
+      "packetBytes": 850051,
+      "jsonBytes": 2565550,
+      "encodeMs": 50.535624999999754,
+      "firstDecodeMs": 15,
+      "warmupDecodes": 3,
+      "batchIterations": 2,
+      "yieldBetweenBatchesMs": 5,
+      "warmDecodeMs": {
+        "samples": [14, 17, 15, 14.5, 15, 15, 14.5, 14, 14.5],
+        "median": 14.5,
+        "p95": 17,
+        "min": 14,
+        "max": 17
+      },
+      "jsonParseMs": {
+        "samples": [1, 1, 1, 1, 1, 1, 1, 0.5, 1],
+        "median": 1,
+        "p95": 1,
+        "min": 0.5,
+        "max": 1
+      },
+      "sink": 390000,
+      "correct": true,
+      "memoryDuringTiming": {
+        "sampleIntervalRequestedMs": 8,
+        "peaks": {
+          "usedSize": 43587024,
+          "totalSize": 96632832,
+          "backingStorageSize": 3214389,
+          "embedderHeapUsedSize": 773792,
+          "accountedBytes": 47575205
+        },
+        "guardBytes": 100663296,
+        "hardLimitBytes": 128000000,
+        "hardLimitExceeded": false,
+        "guardFailure": null,
+        "samples": [
+          {
+            "elapsedMs": 43.94166700000005,
+            "phase": "starting",
+            "usedSize": 32438172,
+            "totalSize": 93749248,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 2787445,
+            "accountedBytes": 35999409
+          },
+          {
+            "elapsedMs": 62.60112500000014,
+            "phase": "starting",
+            "usedSize": 43587024,
+            "totalSize": 93749248,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 3214389,
+            "accountedBytes": 47575205
+          },
+          {
+            "elapsedMs": 86.62895900000012,
+            "phase": "starting",
+            "usedSize": 27003968,
+            "totalSize": 96632832,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 2707957,
+            "accountedBytes": 30485717
+          },
+          {
+            "elapsedMs": 122.865542,
+            "phase": "starting",
+            "usedSize": 26816992,
+            "totalSize": 96632832,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 2668373,
+            "accountedBytes": 30259157
+          },
+          {
+            "elapsedMs": 164.63104199999998,
+            "phase": "starting",
+            "usedSize": 26817092,
+            "totalSize": 96632832,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 2668373,
+            "accountedBytes": 30259257
+          },
+          {
+            "elapsedMs": 203.67325000000028,
+            "phase": "starting",
+            "usedSize": 26817144,
+            "totalSize": 96632832,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 2668373,
+            "accountedBytes": 30259309
+          },
+          {
+            "elapsedMs": 242.23837500000036,
+            "phase": "starting",
+            "usedSize": 26817196,
+            "totalSize": 96632832,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 2668373,
+            "accountedBytes": 30259361
+          },
+          {
+            "elapsedMs": 279.44987500000025,
+            "phase": "starting",
+            "usedSize": 26817248,
+            "totalSize": 96632832,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 2668373,
+            "accountedBytes": 30259413
+          },
+          {
+            "elapsedMs": 317.6366250000001,
+            "phase": "starting",
+            "usedSize": 26817300,
+            "totalSize": 96632832,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 2668373,
+            "accountedBytes": 30259465
+          },
+          {
+            "elapsedMs": 354.38483399999996,
+            "phase": "starting",
+            "usedSize": 26817352,
+            "totalSize": 96632832,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 2668373,
+            "accountedBytes": 30259517
+          },
+          {
+            "elapsedMs": 392.11908399999993,
+            "phase": "starting",
+            "usedSize": 26817404,
+            "totalSize": 96632832,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 2668373,
+            "accountedBytes": 30259569
+          },
+          {
+            "elapsedMs": 429.14020900000014,
+            "phase": "starting",
+            "usedSize": 26817456,
+            "totalSize": 96632832,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 2668373,
+            "accountedBytes": 30259621
+          }
+        ],
+        "rssSamples": [
+          {
+            "elapsedMs": 0.032959000000118976,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 278937600,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57606144,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 71598080,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 248446976,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 131.06100000000015,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 278953984,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57606144,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 71925760,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 255754240,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 270.9133750000001,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 264224768,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57606144,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 72155136,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 255950848,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 402.52741700000024,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 264257536,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57622528,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 72433664,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 256147456,
+                "kind": "workerd-process"
+              }
+            ]
+          }
+        ]
+      },
+      "firstDecodeIsCold": false
+    },
+    {
+      "name": "maximum",
+      "count": 10000,
+      "compression": "brotli",
+      "transform": "raw",
+      "sizeMode": "absolute",
+      "sizeCorpus": "monotonic",
+      "encoder": "node",
+      "packetBytes": 377021,
+      "jsonBytes": 2565550,
+      "encodeMs": 233.04879100000016,
+      "firstDecodeMs": 19,
+      "warmupDecodes": 3,
+      "batchIterations": 2,
+      "yieldBetweenBatchesMs": 5,
+      "warmDecodeMs": {
+        "samples": [16, 16, 16, 15.5, 16, 16, 16.5, 17, 19],
+        "median": 16,
+        "p95": 19,
+        "min": 15.5,
+        "max": 19
+      },
+      "jsonParseMs": {
+        "samples": [1, 1, 1, 1, 1, 1, 1, 1, 1],
+        "median": 1,
+        "p95": 1,
+        "min": 1,
+        "max": 1
+      },
+      "sink": 390000,
+      "correct": true,
+      "memoryDuringTiming": {
+        "sampleIntervalRequestedMs": 8,
+        "peaks": {
+          "usedSize": 53649204,
+          "totalSize": 111165440,
+          "backingStorageSize": 6286328,
+          "embedderHeapUsedSize": 773792,
+          "accountedBytes": 60709324
+        },
+        "guardBytes": 100663296,
+        "hardLimitBytes": 128000000,
+        "hardLimitExceeded": false,
+        "guardFailure": null,
+        "samples": [
+          {
+            "elapsedMs": 48.904917000000296,
+            "phase": "starting",
+            "usedSize": 42412828,
+            "totalSize": 108281856,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 4104815,
+            "accountedBytes": 47291435
+          },
+          {
+            "elapsedMs": 70.86041700000033,
+            "phase": "starting",
+            "usedSize": 53649204,
+            "totalSize": 108281856,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 6286328,
+            "accountedBytes": 60709324
+          },
+          {
+            "elapsedMs": 96.72450000000026,
+            "phase": "starting",
+            "usedSize": 36831836,
+            "totalSize": 111165440,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 3217814,
+            "accountedBytes": 40823442
+          },
+          {
+            "elapsedMs": 137.05154200000015,
+            "phase": "starting",
+            "usedSize": 36697776,
+            "totalSize": 111165440,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 3242166,
+            "accountedBytes": 40713734
+          },
+          {
+            "elapsedMs": 177.998959,
+            "phase": "starting",
+            "usedSize": 36702112,
+            "totalSize": 111165440,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 3307734,
+            "accountedBytes": 40783638
+          },
+          {
+            "elapsedMs": 217.90962500000023,
+            "phase": "starting",
+            "usedSize": 36713388,
+            "totalSize": 111165440,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 3373302,
+            "accountedBytes": 40860482
+          },
+          {
+            "elapsedMs": 257.6584170000001,
+            "phase": "starting",
+            "usedSize": 36716368,
+            "totalSize": 111165440,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 3438870,
+            "accountedBytes": 40929030
+          },
+          {
+            "elapsedMs": 298.24558400000024,
+            "phase": "starting",
+            "usedSize": 36731200,
+            "totalSize": 111165440,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 3504438,
+            "accountedBytes": 41009430
+          },
+          {
+            "elapsedMs": 338.46970899999997,
+            "phase": "starting",
+            "usedSize": 36734116,
+            "totalSize": 111165440,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 3570006,
+            "accountedBytes": 41077914
+          },
+          {
+            "elapsedMs": 379.3742500000003,
+            "phase": "starting",
+            "usedSize": 36737072,
+            "totalSize": 111165440,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 3635574,
+            "accountedBytes": 41146438
+          },
+          {
+            "elapsedMs": 422.144417,
+            "phase": "starting",
+            "usedSize": 36740052,
+            "totalSize": 111165440,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 3701142,
+            "accountedBytes": 41214986
+          },
+          {
+            "elapsedMs": 467.914084,
+            "phase": "starting",
+            "usedSize": 36743032,
+            "totalSize": 111165440,
+            "embedderHeapUsedSize": 773792,
+            "backingStorageSize": 3766710,
+            "accountedBytes": 41283534
+          }
+        ],
+        "rssSamples": [
+          {
+            "elapsedMs": 0.032959000000118976,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 264273920,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57704448,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 73072640,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 266846208,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 131.12841700000035,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 264339456,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57704448,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 73269248,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 278036480,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 258.7579169999999,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 249675776,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57720832,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 73482240,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 285032448,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 386.28266699999995,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 249692160,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57720832,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 73809920,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 292339712,
+                "kind": "workerd-process"
+              }
+            ]
+          }
+        ]
+      },
+      "firstDecodeIsCold": false
+    },
+    {
+      "name": "maximum",
+      "count": 10000,
+      "compression": "brotli",
+      "transform": "raw",
+      "sizeMode": "delta",
+      "sizeCorpus": "monotonic",
+      "encoder": "node",
+      "packetBytes": 349767,
+      "jsonBytes": 2565550,
+      "encodeMs": 240.400666,
+      "firstDecodeMs": 18,
+      "warmupDecodes": 3,
+      "batchIterations": 2,
+      "yieldBetweenBatchesMs": 5,
+      "warmDecodeMs": {
+        "samples": [16.5, 17.5, 17.5, 15, 15.5, 15.5, 16, 17, 16],
+        "median": 16,
+        "p95": 17.5,
+        "min": 15,
+        "max": 17.5
+      },
+      "jsonParseMs": {
+        "samples": [1, 1.5, 1, 3.5, 3, 1, 1, 1, 1],
+        "median": 1,
+        "p95": 3.5,
+        "min": 1,
+        "max": 3.5
+      },
+      "sink": 390000,
+      "correct": true,
+      "memoryDuringTiming": {
+        "sampleIntervalRequestedMs": 8,
+        "peaks": {
+          "usedSize": 38576668,
+          "totalSize": 95698944,
+          "backingStorageSize": 10883639,
+          "embedderHeapUsedSize": 516064,
+          "accountedBytes": 49746803
+        },
+        "guardBytes": 100663296,
+        "hardLimitBytes": 128000000,
+        "hardLimitExceeded": false,
+        "guardFailure": null,
+        "samples": [
+          {
+            "elapsedMs": 42.218166999999994,
+            "phase": "starting",
+            "usedSize": 38576668,
+            "totalSize": 95698944,
+            "embedderHeapUsedSize": 286496,
+            "backingStorageSize": 10883639,
+            "accountedBytes": 49746803
+          },
+          {
+            "elapsedMs": 70.06983299999956,
+            "phase": "starting",
+            "usedSize": 17872808,
+            "totalSize": 90554368,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 2736108,
+            "accountedBytes": 21124980
+          },
+          {
+            "elapsedMs": 91.99654199999986,
+            "phase": "starting",
+            "usedSize": 29136440,
+            "totalSize": 90554368,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 4881403,
+            "accountedBytes": 34533907
+          },
+          {
+            "elapsedMs": 134.54654200000004,
+            "phase": "starting",
+            "usedSize": 27997096,
+            "totalSize": 90554368,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 3030684,
+            "accountedBytes": 31543844
+          },
+          {
+            "elapsedMs": 178.89445799999976,
+            "phase": "starting",
+            "usedSize": 25023300,
+            "totalSize": 90554368,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 2942044,
+            "accountedBytes": 28481408
+          },
+          {
+            "elapsedMs": 222.6790000000001,
+            "phase": "starting",
+            "usedSize": 22693284,
+            "totalSize": 90554368,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 2883868,
+            "accountedBytes": 26093216
+          },
+          {
+            "elapsedMs": 265.82433299999957,
+            "phase": "starting",
+            "usedSize": 19917776,
+            "totalSize": 90554368,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 2069085,
+            "accountedBytes": 22502925
+          },
+          {
+            "elapsedMs": 309.40149999999994,
+            "phase": "starting",
+            "usedSize": 17276040,
+            "totalSize": 90554368,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 2134205,
+            "accountedBytes": 19926309
+          },
+          {
+            "elapsedMs": 351.4076249999998,
+            "phase": "starting",
+            "usedSize": 14653544,
+            "totalSize": 90554368,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 2199773,
+            "accountedBytes": 17369381
+          },
+          {
+            "elapsedMs": 392.1123749999997,
+            "phase": "starting",
+            "usedSize": 14656492,
+            "totalSize": 90554368,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 2265341,
+            "accountedBytes": 17437897
+          },
+          {
+            "elapsedMs": 434.51145799999995,
+            "phase": "starting",
+            "usedSize": 14659472,
+            "totalSize": 90554368,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 2330909,
+            "accountedBytes": 17506445
+          },
+          {
+            "elapsedMs": 474.37354199999936,
+            "phase": "starting",
+            "usedSize": 14673312,
+            "totalSize": 90554368,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 2396477,
+            "accountedBytes": 17585853
+          }
+        ],
+        "rssSamples": [
+          {
+            "elapsedMs": 0.029541999999310065,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 249741312,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57819136,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 74694656,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 286375936,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 128.38162499999999,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 249790464,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57819136,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 75120640,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 293126144,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 255.3262079999995,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251559936,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57819136,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 75317248,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 294699008,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 381.5232499999993,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251609088,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57819136,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 75481088,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 297615360,
+                "kind": "workerd-process"
+              }
+            ]
+          }
+        ]
+      },
+      "firstDecodeIsCold": false
+    },
+    {
+      "name": "maximum",
+      "count": 10000,
+      "compression": "zstd",
+      "transform": "raw",
+      "sizeMode": "absolute",
+      "sizeCorpus": "monotonic",
+      "encoder": "node",
+      "packetBytes": 399593,
+      "jsonBytes": 2565550,
+      "encodeMs": 41.076084000000264,
+      "firstDecodeMs": 16,
+      "warmupDecodes": 3,
+      "batchIterations": 2,
+      "yieldBetweenBatchesMs": 5,
+      "warmDecodeMs": {
+        "samples": [14.5, 16, 16, 16.5, 15.5, 15.5, 15.5, 15, 15],
+        "median": 15.5,
+        "p95": 16.5,
+        "min": 14.5,
+        "max": 16.5
+      },
+      "jsonParseMs": {
+        "samples": [1, 1, 2, 1, 1, 1, 1, 1, 1],
+        "median": 1,
+        "p95": 2,
+        "min": 1,
+        "max": 2
+      },
+      "sink": 390000,
+      "correct": true,
+      "memoryDuringTiming": {
+        "sampleIntervalRequestedMs": 8,
+        "peaks": {
+          "usedSize": 41410080,
+          "totalSize": 98271232,
+          "backingStorageSize": 6035816,
+          "embedderHeapUsedSize": 516064,
+          "accountedBytes": 47961960
+        },
+        "guardBytes": 100663296,
+        "hardLimitBytes": 128000000,
+        "hardLimitExceeded": false,
+        "guardFailure": null,
+        "samples": [
+          {
+            "elapsedMs": 43.74912500000028,
+            "phase": "starting",
+            "usedSize": 30228060,
+            "totalSize": 98271232,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 3854303,
+            "accountedBytes": 34598427
+          },
+          {
+            "elapsedMs": 65.19004200000018,
+            "phase": "starting",
+            "usedSize": 41410080,
+            "totalSize": 98271232,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 6035816,
+            "accountedBytes": 47961960
+          },
+          {
+            "elapsedMs": 90.62824999999975,
+            "phase": "starting",
+            "usedSize": 24726876,
+            "totalSize": 98271232,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 2968070,
+            "accountedBytes": 28211010
+          },
+          {
+            "elapsedMs": 126.92950000000019,
+            "phase": "starting",
+            "usedSize": 24571508,
+            "totalSize": 98271232,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 2992806,
+            "accountedBytes": 28080378
+          },
+          {
+            "elapsedMs": 167.54791699999987,
+            "phase": "starting",
+            "usedSize": 24574428,
+            "totalSize": 98271232,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 3058374,
+            "accountedBytes": 28148866
+          },
+          {
+            "elapsedMs": 208.6324999999997,
+            "phase": "starting",
+            "usedSize": 24577408,
+            "totalSize": 98271232,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 3123942,
+            "accountedBytes": 28217414
+          },
+          {
+            "elapsedMs": 250.30224999999973,
+            "phase": "starting",
+            "usedSize": 24580388,
+            "totalSize": 98271232,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 3189510,
+            "accountedBytes": 28285962
+          },
+          {
+            "elapsedMs": 290.58687499999996,
+            "phase": "starting",
+            "usedSize": 24583368,
+            "totalSize": 98271232,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 3255078,
+            "accountedBytes": 28354510
+          },
+          {
+            "elapsedMs": 329.4778749999996,
+            "phase": "starting",
+            "usedSize": 24586348,
+            "totalSize": 98271232,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 3320646,
+            "accountedBytes": 28423058
+          },
+          {
+            "elapsedMs": 367.91720799999985,
+            "phase": "starting",
+            "usedSize": 24589328,
+            "totalSize": 98271232,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 3386214,
+            "accountedBytes": 28491606
+          },
+          {
+            "elapsedMs": 407.5915420000001,
+            "phase": "starting",
+            "usedSize": 24592380,
+            "totalSize": 98271232,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 3451782,
+            "accountedBytes": 28560226
+          },
+          {
+            "elapsedMs": 446.8205420000004,
+            "phase": "starting",
+            "usedSize": 24595288,
+            "totalSize": 98271232,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 3517350,
+            "accountedBytes": 28628702
+          }
+        ],
+        "rssSamples": [
+          {
+            "elapsedMs": 0.0281249999998181,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251641856,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57819136,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 76136448,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 309641216,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 132.6485419999999,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251658240,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57819136,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 76398592,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 315244544,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 321.908375,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251674624,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 57835520,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 76742656,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 319946752,
+                "kind": "workerd-process"
+              }
+            ]
+          }
+        ]
+      },
+      "firstDecodeIsCold": false
+    },
+    {
+      "name": "maximum",
+      "count": 10000,
+      "compression": "zstd",
+      "transform": "raw",
+      "sizeMode": "delta",
+      "sizeCorpus": "monotonic",
+      "encoder": "node",
+      "packetBytes": 372018,
+      "jsonBytes": 2565550,
+      "encodeMs": 47.26862500000061,
+      "firstDecodeMs": 15,
+      "warmupDecodes": 3,
+      "batchIterations": 2,
+      "yieldBetweenBatchesMs": 5,
+      "warmDecodeMs": {
+        "samples": [16, 16, 15.5, 15, 15, 18, 15, 14, 15.5],
+        "median": 15.5,
+        "p95": 18,
+        "min": 14,
+        "max": 18
+      },
+      "jsonParseMs": {
+        "samples": [1.5, 1, 1, 1.5, 1, 1, 1, 1, 1],
+        "median": 1,
+        "p95": 1.5,
+        "min": 1,
+        "max": 1.5
+      },
+      "sink": 390000,
+      "correct": true,
+      "memoryDuringTiming": {
+        "sampleIntervalRequestedMs": 8,
+        "peaks": {
+          "usedSize": 51741832,
+          "totalSize": 108658688,
+          "backingStorageSize": 7087206,
+          "embedderHeapUsedSize": 516064,
+          "accountedBytes": 59345102
+        },
+        "guardBytes": 100663296,
+        "hardLimitBytes": 128000000,
+        "hardLimitExceeded": false,
+        "guardFailure": null,
+        "samples": [
+          {
+            "elapsedMs": 52.365625000000364,
+            "phase": "starting",
+            "usedSize": 40632368,
+            "totalSize": 105775104,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 4941911,
+            "accountedBytes": 46090343
+          },
+          {
+            "elapsedMs": 68.371083,
+            "phase": "starting",
+            "usedSize": 51741832,
+            "totalSize": 105775104,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 7087206,
+            "accountedBytes": 59345102
+          },
+          {
+            "elapsedMs": 136.83637499999986,
+            "phase": "starting",
+            "usedSize": 34600940,
+            "totalSize": 108658688,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 4086136,
+            "accountedBytes": 39203140
+          },
+          {
+            "elapsedMs": 175.9189580000002,
+            "phase": "starting",
+            "usedSize": 34614896,
+            "totalSize": 108658688,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 4151704,
+            "accountedBytes": 39282664
+          },
+          {
+            "elapsedMs": 215.23700000000008,
+            "phase": "starting",
+            "usedSize": 34617748,
+            "totalSize": 108658688,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 4217272,
+            "accountedBytes": 39351084
+          },
+          {
+            "elapsedMs": 254.67995799999971,
+            "phase": "starting",
+            "usedSize": 34620632,
+            "totalSize": 108658688,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 4282840,
+            "accountedBytes": 39419536
+          },
+          {
+            "elapsedMs": 292.6548750000002,
+            "phase": "starting",
+            "usedSize": 34623516,
+            "totalSize": 108658688,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 4348408,
+            "accountedBytes": 39487988
+          },
+          {
+            "elapsedMs": 337.88958300000013,
+            "phase": "starting",
+            "usedSize": 34626400,
+            "totalSize": 108658688,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 4413976,
+            "accountedBytes": 39556440
+          },
+          {
+            "elapsedMs": 375.48054200000024,
+            "phase": "starting",
+            "usedSize": 34629284,
+            "totalSize": 108658688,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 4479544,
+            "accountedBytes": 39624892
+          },
+          {
+            "elapsedMs": 413.81587500000023,
+            "phase": "starting",
+            "usedSize": 34632168,
+            "totalSize": 108658688,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 4545112,
+            "accountedBytes": 39693344
+          },
+          {
+            "elapsedMs": 451.98633299999983,
+            "phase": "starting",
+            "usedSize": 34644264,
+            "totalSize": 108658688,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 4610680,
+            "accountedBytes": 39771008
+          }
+        ],
+        "rssSamples": [
+          {
+            "elapsedMs": 0.03016699999989214,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251707392,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 77774848,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 328220672,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 145.67012500000055,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251772928,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 77889536,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 336019456,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 277.4090420000002,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251789312,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 78217216,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 343457792,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 411.78558299999986,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251805696,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 78430208,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 351764480,
+                "kind": "workerd-process"
+              }
+            ]
+          }
+        ]
+      },
+      "firstDecodeIsCold": false
+    },
+    {
+      "name": "maximum",
+      "count": 10000,
+      "compression": "none",
+      "transform": "prefix",
+      "sizeMode": "absolute",
+      "sizeCorpus": "monotonic",
+      "encoder": "node",
+      "packetBytes": 613653,
+      "jsonBytes": 2565550,
+      "encodeMs": 50.96345900000051,
+      "firstDecodeMs": 17,
+      "warmupDecodes": 3,
+      "batchIterations": 2,
+      "yieldBetweenBatchesMs": 5,
+      "warmDecodeMs": {
+        "samples": [14.5, 15, 15.5, 15, 15.5, 15, 15.5, 15.5, 15.5],
+        "median": 15.5,
+        "p95": 15.5,
+        "min": 14.5,
+        "max": 15.5
+      },
+      "jsonParseMs": {
+        "samples": [2.5, 1, 1, 1, 1, 1, 1, 1, 1],
+        "median": 1,
+        "p95": 2.5,
+        "min": 1,
+        "max": 2.5
+      },
+      "sink": 390000,
+      "correct": true,
+      "memoryDuringTiming": {
+        "sampleIntervalRequestedMs": 8,
+        "peaks": {
+          "usedSize": 64323912,
+          "totalSize": 120881152,
+          "backingStorageSize": 5821965,
+          "embedderHeapUsedSize": 516064,
+          "accountedBytes": 70661941
+        },
+        "guardBytes": 100663296,
+        "hardLimitBytes": 128000000,
+        "hardLimitExceeded": false,
+        "guardFailure": null,
+        "samples": [
+          {
+            "elapsedMs": 44.871000000000095,
+            "phase": "starting",
+            "usedSize": 52415496,
+            "totalSize": 117997568,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5395021,
+            "accountedBytes": 58326581
+          },
+          {
+            "elapsedMs": 66.77120899999954,
+            "phase": "starting",
+            "usedSize": 64323912,
+            "totalSize": 117997568,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5821965,
+            "accountedBytes": 70661941
+          },
+          {
+            "elapsedMs": 96.70404199999939,
+            "phase": "starting",
+            "usedSize": 48904596,
+            "totalSize": 120881152,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5315693,
+            "accountedBytes": 54736353
+          },
+          {
+            "elapsedMs": 137.72437499999978,
+            "phase": "starting",
+            "usedSize": 47783016,
+            "totalSize": 120881152,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5235821,
+            "accountedBytes": 53534901
+          },
+          {
+            "elapsedMs": 180.06670899999972,
+            "phase": "starting",
+            "usedSize": 45077636,
+            "totalSize": 120881152,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5224397,
+            "accountedBytes": 50818097
+          },
+          {
+            "elapsedMs": 219.11966699999994,
+            "phase": "starting",
+            "usedSize": 45077616,
+            "totalSize": 120881152,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5224397,
+            "accountedBytes": 50818077
+          },
+          {
+            "elapsedMs": 256.9586669999999,
+            "phase": "starting",
+            "usedSize": 45077668,
+            "totalSize": 120881152,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5224397,
+            "accountedBytes": 50818129
+          },
+          {
+            "elapsedMs": 295.66654199999994,
+            "phase": "starting",
+            "usedSize": 45077720,
+            "totalSize": 120881152,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5224397,
+            "accountedBytes": 50818181
+          },
+          {
+            "elapsedMs": 334.3500839999997,
+            "phase": "starting",
+            "usedSize": 45077772,
+            "totalSize": 120881152,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5224397,
+            "accountedBytes": 50818233
+          },
+          {
+            "elapsedMs": 373.2054589999998,
+            "phase": "starting",
+            "usedSize": 45077824,
+            "totalSize": 120881152,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5224397,
+            "accountedBytes": 50818285
+          },
+          {
+            "elapsedMs": 412.89074999999957,
+            "phase": "starting",
+            "usedSize": 45078808,
+            "totalSize": 120881152,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5224397,
+            "accountedBytes": 50819269
+          },
+          {
+            "elapsedMs": 451.6366250000001,
+            "phase": "starting",
+            "usedSize": 45078860,
+            "totalSize": 120881152,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5224397,
+            "accountedBytes": 50819321
+          }
+        ],
+        "rssSamples": [
+          {
+            "elapsedMs": 0.03108399999928224,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251805696,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 78790656,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 363937792,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 127.45174999999927,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251822080,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 79020032,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 369278976,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 255.91570899999988,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251887616,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 79216640,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 369475584,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 381.1764169999997,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 251969536,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 79478784,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 369606656,
+                "kind": "workerd-process"
+              }
+            ]
+          }
+        ]
+      },
+      "firstDecodeIsCold": false
+    },
+    {
+      "name": "maximum",
+      "count": 10000,
+      "compression": "none",
+      "transform": "prefix",
+      "sizeMode": "delta",
+      "sizeCorpus": "monotonic",
+      "encoder": "node",
+      "packetBytes": 593819,
+      "jsonBytes": 2565550,
+      "encodeMs": 47.20499999999993,
+      "firstDecodeMs": 15,
+      "warmupDecodes": 3,
+      "batchIterations": 2,
+      "yieldBetweenBatchesMs": 5,
+      "warmDecodeMs": {
+        "samples": [15, 15, 14.5, 15, 16, 15, 15, 15, 15],
+        "median": 15,
+        "p95": 16,
+        "min": 14.5,
+        "max": 16
+      },
+      "jsonParseMs": {
+        "samples": [2.5, 1.5, 1, 1, 1, 1, 1, 1, 1],
+        "median": 1,
+        "p95": 2.5,
+        "min": 1,
+        "max": 2.5
+      },
+      "sink": 390000,
+      "correct": true,
+      "memoryDuringTiming": {
+        "sampleIntervalRequestedMs": 8,
+        "peaks": {
+          "usedSize": 74451636,
+          "totalSize": 133103616,
+          "backingStorageSize": 6413224,
+          "embedderHeapUsedSize": 516064,
+          "accountedBytes": 81380924
+        },
+        "guardBytes": 100663296,
+        "hardLimitBytes": 128000000,
+        "hardLimitExceeded": false,
+        "guardFailure": null,
+        "samples": [
+          {
+            "elapsedMs": 43.3881250000004,
+            "phase": "starting",
+            "usedSize": 62607400,
+            "totalSize": 130220032,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5986280,
+            "accountedBytes": 69109744
+          },
+          {
+            "elapsedMs": 63.975374999999985,
+            "phase": "starting",
+            "usedSize": 74451636,
+            "totalSize": 130220032,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 6413224,
+            "accountedBytes": 81380924
+          },
+          {
+            "elapsedMs": 90.28929200000039,
+            "phase": "starting",
+            "usedSize": 58987940,
+            "totalSize": 133103616,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5901672,
+            "accountedBytes": 65405676
+          },
+          {
+            "elapsedMs": 132.28220899999997,
+            "phase": "starting",
+            "usedSize": 58033828,
+            "totalSize": 133103616,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5827336,
+            "accountedBytes": 64377228
+          },
+          {
+            "elapsedMs": 175.41325000000052,
+            "phase": "starting",
+            "usedSize": 55371248,
+            "totalSize": 133103616,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5818248,
+            "accountedBytes": 61705560
+          },
+          {
+            "elapsedMs": 211.60662500000035,
+            "phase": "starting",
+            "usedSize": 55371276,
+            "totalSize": 133103616,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5818248,
+            "accountedBytes": 61705588
+          },
+          {
+            "elapsedMs": 250.6031670000002,
+            "phase": "starting",
+            "usedSize": 55371328,
+            "totalSize": 133103616,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5818248,
+            "accountedBytes": 61705640
+          },
+          {
+            "elapsedMs": 289.8977500000001,
+            "phase": "starting",
+            "usedSize": 55371380,
+            "totalSize": 133103616,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5818248,
+            "accountedBytes": 61705692
+          },
+          {
+            "elapsedMs": 328.1544590000003,
+            "phase": "starting",
+            "usedSize": 55371432,
+            "totalSize": 133103616,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5818248,
+            "accountedBytes": 61705744
+          },
+          {
+            "elapsedMs": 366.9160840000004,
+            "phase": "starting",
+            "usedSize": 55371484,
+            "totalSize": 133103616,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5818248,
+            "accountedBytes": 61705796
+          },
+          {
+            "elapsedMs": 405.1980000000003,
+            "phase": "starting",
+            "usedSize": 55371536,
+            "totalSize": 133103616,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5818248,
+            "accountedBytes": 61705848
+          },
+          {
+            "elapsedMs": 443.42958400000043,
+            "phase": "starting",
+            "usedSize": 55371588,
+            "totalSize": 133103616,
+            "embedderHeapUsedSize": 516064,
+            "backingStorageSize": 5818248,
+            "accountedBytes": 61705900
+          }
+        ],
+        "rssSamples": [
+          {
+            "elapsedMs": 0.035542000000532425,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 252002304,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 79904768,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 377339904,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 128.65837499999998,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 252395520,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 80068608,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 382713856,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 252.9516250000006,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 252411904,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 80363520,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 382910464,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 380.3114169999999,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 252428288,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 80592896,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 383123456,
+                "kind": "workerd-process"
+              }
+            ]
+          }
+        ]
+      },
+      "firstDecodeIsCold": false
+    },
+    {
+      "name": "maximum",
+      "count": 10000,
+      "compression": "brotli",
+      "transform": "prefix",
+      "sizeMode": "absolute",
+      "sizeCorpus": "monotonic",
+      "encoder": "node",
+      "packetBytes": 362646,
+      "jsonBytes": 2565550,
+      "encodeMs": 178.00258399999984,
+      "firstDecodeMs": 20,
+      "warmupDecodes": 3,
+      "batchIterations": 2,
+      "yieldBetweenBatchesMs": 5,
+      "warmDecodeMs": {
+        "samples": [24, 22.5, 24, 25, 22.5, 23, 19, 20, 17.5],
+        "median": 22.5,
+        "p95": 25,
+        "min": 17.5,
+        "max": 25
+      },
+      "jsonParseMs": {
+        "samples": [1, 1, 1.5, 1, 1.5, 1, 3.5, 3.5, 1],
+        "median": 1,
+        "p95": 3.5,
+        "min": 1,
+        "max": 3.5
+      },
+      "sink": 390000,
+      "correct": true,
+      "memoryDuringTiming": {
+        "sampleIntervalRequestedMs": 8,
+        "peaks": {
+          "usedSize": 40397804,
+          "totalSize": 97288192,
+          "backingStorageSize": 10149032,
+          "embedderHeapUsedSize": 390936,
+          "accountedBytes": 50849220
+        },
+        "guardBytes": 100663296,
+        "hardLimitBytes": 128000000,
+        "hardLimitExceeded": false,
+        "guardFailure": null,
+        "samples": [
+          {
+            "elapsedMs": 44.769374999999854,
+            "phase": "starting",
+            "usedSize": 40397804,
+            "totalSize": 97288192,
+            "embedderHeapUsedSize": 302384,
+            "backingStorageSize": 10149032,
+            "accountedBytes": 50849220
+          },
+          {
+            "elapsedMs": 70.75195799999892,
+            "phase": "starting",
+            "usedSize": 19818996,
+            "totalSize": 92143616,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 2789419,
+            "accountedBytes": 22999351
+          },
+          {
+            "elapsedMs": 93.67162499999904,
+            "phase": "starting",
+            "usedSize": 31840304,
+            "totalSize": 92143616,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 4452556,
+            "accountedBytes": 36683796
+          },
+          {
+            "elapsedMs": 151.6984999999986,
+            "phase": "starting",
+            "usedSize": 31396068,
+            "totalSize": 92143616,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3137115,
+            "accountedBytes": 34924119
+          },
+          {
+            "elapsedMs": 205.0424579999999,
+            "phase": "starting",
+            "usedSize": 28921292,
+            "totalSize": 92143616,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3085723,
+            "accountedBytes": 32397951
+          },
+          {
+            "elapsedMs": 263.23983299999963,
+            "phase": "starting",
+            "usedSize": 26961708,
+            "totalSize": 92143616,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3055195,
+            "accountedBytes": 30407839
+          },
+          {
+            "elapsedMs": 322.0069999999996,
+            "phase": "starting",
+            "usedSize": 25393420,
+            "totalSize": 92143616,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3045211,
+            "accountedBytes": 28829567
+          },
+          {
+            "elapsedMs": 376.4576249999991,
+            "phase": "starting",
+            "usedSize": 24161756,
+            "totalSize": 92143616,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3050459,
+            "accountedBytes": 27603151
+          },
+          {
+            "elapsedMs": 433.36120799999844,
+            "phase": "starting",
+            "usedSize": 23194640,
+            "totalSize": 92143616,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3068411,
+            "accountedBytes": 26653987
+          },
+          {
+            "elapsedMs": 484.2464999999993,
+            "phase": "starting",
+            "usedSize": 20220932,
+            "totalSize": 92143616,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 2498538,
+            "accountedBytes": 23110406
+          },
+          {
+            "elapsedMs": 538.2874579999989,
+            "phase": "starting",
+            "usedSize": 17583180,
+            "totalSize": 92143616,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 2560618,
+            "accountedBytes": 20534734
+          },
+          {
+            "elapsedMs": 586.4627499999988,
+            "phase": "starting",
+            "usedSize": 14961680,
+            "totalSize": 92143616,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 2626186,
+            "accountedBytes": 17978802
+          }
+        ],
+        "rssSamples": [
+          {
+            "elapsedMs": 0.04279099999985192,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 252428288,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58261504,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 81477632,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 358465536,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 128.8039579999986,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 252428288,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 81641472,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 361758720,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 283.9733749999996,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 252461056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 81772544,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 361758720,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 429.9924999999985,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 222167040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 81952768,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 361857024,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 569.74575,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 222707712,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 82149376,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 361938944,
+                "kind": "workerd-process"
+              }
+            ]
+          }
+        ]
+      },
+      "firstDecodeIsCold": false
+    },
+    {
+      "name": "maximum",
+      "count": 10000,
+      "compression": "brotli",
+      "transform": "prefix",
+      "sizeMode": "delta",
+      "sizeCorpus": "monotonic",
+      "encoder": "node",
+      "packetBytes": 335392,
+      "jsonBytes": 2565550,
+      "encodeMs": 185.7372090000008,
+      "firstDecodeMs": 16,
+      "warmupDecodes": 3,
+      "batchIterations": 2,
+      "yieldBetweenBatchesMs": 5,
+      "warmDecodeMs": {
+        "samples": [16, 16, 16.5, 17, 17, 16.5, 17, 16.5, 16.5],
+        "median": 16.5,
+        "p95": 17,
+        "min": 16,
+        "max": 17
+      },
+      "jsonParseMs": {
+        "samples": [0.5, 1, 1, 1, 1, 1, 1, 1, 1],
+        "median": 1,
+        "p95": 1,
+        "min": 0.5,
+        "max": 1
+      },
+      "sink": 390000,
+      "correct": true,
+      "memoryDuringTiming": {
+        "sampleIntervalRequestedMs": 8,
+        "peaks": {
+          "usedSize": 43361776,
+          "totalSize": 99860480,
+          "backingStorageSize": 5400712,
+          "embedderHeapUsedSize": 390936,
+          "accountedBytes": 49153424
+        },
+        "guardBytes": 100663296,
+        "hardLimitBytes": 128000000,
+        "hardLimitExceeded": false,
+        "guardFailure": null,
+        "samples": [
+          {
+            "elapsedMs": 43.10375000000022,
+            "phase": "starting",
+            "usedSize": 31470144,
+            "totalSize": 99860480,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3773793,
+            "accountedBytes": 35634873
+          },
+          {
+            "elapsedMs": 66.09295799999927,
+            "phase": "starting",
+            "usedSize": 43361776,
+            "totalSize": 99860480,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 5400712,
+            "accountedBytes": 49153424
+          },
+          {
+            "elapsedMs": 94.22929099999965,
+            "phase": "starting",
+            "usedSize": 27972920,
+            "totalSize": 99860480,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3753921,
+            "accountedBytes": 32117777
+          },
+          {
+            "elapsedMs": 137.98925000000054,
+            "phase": "starting",
+            "usedSize": 24690928,
+            "totalSize": 99860480,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3163754,
+            "accountedBytes": 28245618
+          },
+          {
+            "elapsedMs": 178.40504099999998,
+            "phase": "starting",
+            "usedSize": 24681596,
+            "totalSize": 99860480,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3223882,
+            "accountedBytes": 28296414
+          },
+          {
+            "elapsedMs": 221.47766600000068,
+            "phase": "starting",
+            "usedSize": 24684576,
+            "totalSize": 99860480,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3289450,
+            "accountedBytes": 28364962
+          },
+          {
+            "elapsedMs": 263.61020800000006,
+            "phase": "starting",
+            "usedSize": 24687556,
+            "totalSize": 99860480,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3355018,
+            "accountedBytes": 28433510
+          },
+          {
+            "elapsedMs": 307.534040999999,
+            "phase": "starting",
+            "usedSize": 24690536,
+            "totalSize": 99860480,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3420586,
+            "accountedBytes": 28502058
+          },
+          {
+            "elapsedMs": 347.0606250000001,
+            "phase": "starting",
+            "usedSize": 24693516,
+            "totalSize": 99860480,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3486154,
+            "accountedBytes": 28570606
+          },
+          {
+            "elapsedMs": 389.62320799999907,
+            "phase": "starting",
+            "usedSize": 24698792,
+            "totalSize": 99860480,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3551722,
+            "accountedBytes": 28641450
+          },
+          {
+            "elapsedMs": 431.4868750000005,
+            "phase": "starting",
+            "usedSize": 24714192,
+            "totalSize": 99860480,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3617290,
+            "accountedBytes": 28722418
+          },
+          {
+            "elapsedMs": 470.39799999999923,
+            "phase": "starting",
+            "usedSize": 24717072,
+            "totalSize": 99860480,
+            "embedderHeapUsedSize": 390936,
+            "backingStorageSize": 3682858,
+            "accountedBytes": 28790866
+          }
+        ],
+        "rssSamples": [
+          {
+            "elapsedMs": 0.03054100000008475,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 216367104,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 82542592,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 367869952,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 125.74595799999952,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 216612864,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 82771968,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 370868224,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 251.26904099999956,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 215826432,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 82935808,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 371458048,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 381.94237500000054,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 215891968,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 83214336,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 372195328,
+                "kind": "workerd-process"
+              }
+            ]
+          }
+        ]
+      },
+      "firstDecodeIsCold": false
+    },
+    {
+      "name": "maximum",
+      "count": 10000,
+      "compression": "zstd",
+      "transform": "prefix",
+      "sizeMode": "absolute",
+      "sizeCorpus": "monotonic",
+      "encoder": "node",
+      "packetBytes": 386805,
+      "jsonBytes": 2565550,
+      "encodeMs": 39.67012500000055,
+      "firstDecodeMs": 29,
+      "warmupDecodes": 3,
+      "batchIterations": 2,
+      "yieldBetweenBatchesMs": 5,
+      "warmDecodeMs": {
+        "samples": [23.5, 19.5, 19, 24.5, 19, 23, 21.5, 17.5, 15.5],
+        "median": 19.5,
+        "p95": 24.5,
+        "min": 15.5,
+        "max": 24.5
+      },
+      "jsonParseMs": {
+        "samples": [1, 1, 1, 1.5, 1.5, 1.5, 3.5, 3.5, 1.5],
+        "median": 1.5,
+        "p95": 3.5,
+        "min": 1,
+        "max": 3.5
+      },
+      "sink": 390000,
+      "correct": true,
+      "memoryDuringTiming": {
+        "sampleIntervalRequestedMs": 8,
+        "peaks": {
+          "usedSize": 39709480,
+          "totalSize": 94961664,
+          "backingStorageSize": 9914764,
+          "embedderHeapUsedSize": 381456,
+          "accountedBytes": 49917300
+        },
+        "guardBytes": 100663296,
+        "hardLimitBytes": 128000000,
+        "hardLimitExceeded": false,
+        "guardFailure": null,
+        "samples": [
+          {
+            "elapsedMs": 62.53120900000067,
+            "phase": "starting",
+            "usedSize": 39709480,
+            "totalSize": 94961664,
+            "embedderHeapUsedSize": 293056,
+            "backingStorageSize": 9914764,
+            "accountedBytes": 49917300
+          },
+          {
+            "elapsedMs": 95.29412500000035,
+            "phase": "starting",
+            "usedSize": 19143504,
+            "totalSize": 89817088,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 2556015,
+            "accountedBytes": 22080975
+          },
+          {
+            "elapsedMs": 120.17633399999977,
+            "phase": "starting",
+            "usedSize": 31186292,
+            "totalSize": 89817088,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 4219152,
+            "accountedBytes": 35786900
+          },
+          {
+            "elapsedMs": 177.40137500000128,
+            "phase": "starting",
+            "usedSize": 30727136,
+            "totalSize": 89817088,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 2904223,
+            "accountedBytes": 34012815
+          },
+          {
+            "elapsedMs": 222.54512500000055,
+            "phase": "starting",
+            "usedSize": 28245608,
+            "totalSize": 89817088,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 2852895,
+            "accountedBytes": 31479959
+          },
+          {
+            "elapsedMs": 271.285167,
+            "phase": "starting",
+            "usedSize": 26292256,
+            "totalSize": 89817088,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 2822367,
+            "accountedBytes": 29496079
+          },
+          {
+            "elapsedMs": 328.0410000000011,
+            "phase": "starting",
+            "usedSize": 24725508,
+            "totalSize": 89817088,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 2812383,
+            "accountedBytes": 27919347
+          },
+          {
+            "elapsedMs": 375.9317920000012,
+            "phase": "starting",
+            "usedSize": 23513860,
+            "totalSize": 89817088,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 2817663,
+            "accountedBytes": 26712979
+          },
+          {
+            "elapsedMs": 441.04995899999994,
+            "phase": "starting",
+            "usedSize": 22526624,
+            "totalSize": 89817088,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 2835615,
+            "accountedBytes": 25743695
+          },
+          {
+            "elapsedMs": 488.7918750000008,
+            "phase": "starting",
+            "usedSize": 19527828,
+            "totalSize": 89817088,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 2264686,
+            "accountedBytes": 22173970
+          },
+          {
+            "elapsedMs": 537.6105420000004,
+            "phase": "starting",
+            "usedSize": 16886720,
+            "totalSize": 89817088,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 2326414,
+            "accountedBytes": 19594590
+          },
+          {
+            "elapsedMs": 581.7498750000013,
+            "phase": "starting",
+            "usedSize": 14263596,
+            "totalSize": 89817088,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 2391982,
+            "accountedBytes": 17037034
+          }
+        ],
+        "rssSamples": [
+          {
+            "elapsedMs": 0.053708999999798834,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 215941120,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 83525632,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 365871104,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 139.33862500000032,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 215990272,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 83656704,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 368672768,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 279.74966700000004,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 216023040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 83984384,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 368738304,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 422.70074999999997,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 216072192,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 84131840,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 369131520,
+                "kind": "workerd-process"
+              }
+            ]
+          }
+        ]
+      },
+      "firstDecodeIsCold": false
+    },
+    {
+      "name": "maximum",
+      "count": 10000,
+      "compression": "zstd",
+      "transform": "prefix",
+      "sizeMode": "delta",
+      "sizeCorpus": "monotonic",
+      "encoder": "node",
+      "packetBytes": 359230,
+      "jsonBytes": 2565550,
+      "encodeMs": 38.12062499999956,
+      "firstDecodeMs": 15,
+      "warmupDecodes": 3,
+      "batchIterations": 2,
+      "yieldBetweenBatchesMs": 5,
+      "warmDecodeMs": {
+        "samples": [14.5, 16, 16, 15.5, 15, 15.5, 14.5, 15.5, 16.5],
+        "median": 15.5,
+        "p95": 16.5,
+        "min": 14.5,
+        "max": 16.5
+      },
+      "jsonParseMs": {
+        "samples": [1, 1, 1, 0.5, 1, 1, 1, 1, 1],
+        "median": 1,
+        "p95": 1,
+        "min": 0.5,
+        "max": 1
+      },
+      "sink": 390000,
+      "correct": true,
+      "memoryDuringTiming": {
+        "sampleIntervalRequestedMs": 8,
+        "peaks": {
+          "usedSize": 42948304,
+          "totalSize": 97533952,
+          "backingStorageSize": 5189194,
+          "embedderHeapUsedSize": 381456,
+          "accountedBytes": 48518954
+        },
+        "guardBytes": 100663296,
+        "hardLimitBytes": 128000000,
+        "hardLimitExceeded": false,
+        "guardFailure": null,
+        "samples": [
+          {
+            "elapsedMs": 44.66116599999987,
+            "phase": "starting",
+            "usedSize": 31084872,
+            "totalSize": 97533952,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 3562275,
+            "accountedBytes": 35028603
+          },
+          {
+            "elapsedMs": 65.45483299999978,
+            "phase": "starting",
+            "usedSize": 42948304,
+            "totalSize": 97533952,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 5189194,
+            "accountedBytes": 48518954
+          },
+          {
+            "elapsedMs": 93.82841600000029,
+            "phase": "starting",
+            "usedSize": 27601000,
+            "totalSize": 97533952,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 3542499,
+            "accountedBytes": 31524955
+          },
+          {
+            "elapsedMs": 172.62491600000067,
+            "phase": "starting",
+            "usedSize": 24329396,
+            "totalSize": 97533952,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 3013516,
+            "accountedBytes": 27724368
+          },
+          {
+            "elapsedMs": 213.12637499999983,
+            "phase": "starting",
+            "usedSize": 24332376,
+            "totalSize": 97533952,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 3079084,
+            "accountedBytes": 27792916
+          },
+          {
+            "elapsedMs": 251.61575000000084,
+            "phase": "starting",
+            "usedSize": 24335356,
+            "totalSize": 97533952,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 3144652,
+            "accountedBytes": 27861464
+          },
+          {
+            "elapsedMs": 290.0353329999998,
+            "phase": "starting",
+            "usedSize": 24338336,
+            "totalSize": 97533952,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 3210220,
+            "accountedBytes": 27930012
+          },
+          {
+            "elapsedMs": 329.6672500000004,
+            "phase": "starting",
+            "usedSize": 24341316,
+            "totalSize": 97533952,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 3275788,
+            "accountedBytes": 27998560
+          },
+          {
+            "elapsedMs": 367.2022500000003,
+            "phase": "starting",
+            "usedSize": 24344296,
+            "totalSize": 97533952,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 3341356,
+            "accountedBytes": 28067108
+          },
+          {
+            "elapsedMs": 405.993625000001,
+            "phase": "starting",
+            "usedSize": 24357824,
+            "totalSize": 97533952,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 3406924,
+            "accountedBytes": 28146204
+          },
+          {
+            "elapsedMs": 446.971375000001,
+            "phase": "starting",
+            "usedSize": 24360704,
+            "totalSize": 97533952,
+            "embedderHeapUsedSize": 381456,
+            "backingStorageSize": 3472492,
+            "accountedBytes": 28214652
+          }
+        ],
+        "rssSamples": [
+          {
+            "elapsedMs": 0.032916000000113854,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 216186880,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58327040,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 84803584,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 374800384,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 128.19654100000116,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 216301568,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58343424,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 85000192,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 377389056,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 258.43462499999987,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 216334336,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58343424,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 85180416,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 377929728,
+                "kind": "workerd-process"
+              }
+            ]
+          },
+          {
+            "elapsedMs": 384.4094160000004,
+            "processes": [
+              {
+                "pid": 75743,
+                "rssBytes": 43565056,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75744,
+                "rssBytes": 216367104,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75749,
+                "rssBytes": 58343424,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75752,
+                "rssBytes": 85393408,
+                "kind": "workerd-process"
+              },
+              {
+                "pid": 75754,
+                "rssBytes": 12746752,
+                "kind": "wrangler-or-helper-process"
+              },
+              {
+                "pid": 75755,
+                "rssBytes": 378257408,
+                "kind": "workerd-process"
+              }
+            ]
+          }
+        ]
+      },
+      "firstDecodeIsCold": false
+    }
+  ],
+  "memory": [],
+  "guards": []
+}

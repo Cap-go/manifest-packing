@@ -1,0 +1,904 @@
+{
+  "phases": [
+    {
+      "timestamp": "2026-09-26T13:00:46.881Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 64
+      },
+      "summary": [
+        {
+          "codec": "64",
+          "method": "createHash",
+          "medianMs": 22,
+          "p95Ms": 24
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 5566092,
+          "totalSize": 11272192,
+          "embedderHeapUsedSize": 644832,
+          "backingStorageSize": 1116142
+        },
+        "maximumAccountedBytes": 10784242,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "64",
+          "method": "createHash",
+          "elapsedMs": 26,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "64",
+          "method": "createHash",
+          "elapsedMs": 20,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "64",
+          "method": "createHash",
+          "elapsedMs": 20,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "64",
+          "method": "createHash",
+          "elapsedMs": 21,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "64",
+          "method": "createHash",
+          "elapsedMs": 24,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "64",
+          "method": "createHash",
+          "elapsedMs": 22,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:00:48.308Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 64
+      },
+      "summary": [
+        {
+          "codec": "64",
+          "method": "hash",
+          "medianMs": 19,
+          "p95Ms": 20
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 5476372,
+          "totalSize": 11010048,
+          "embedderHeapUsedSize": 644832,
+          "backingStorageSize": 1111886
+        },
+        "maximumAccountedBytes": 10791582,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "64",
+          "method": "hash",
+          "elapsedMs": 27,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "64",
+          "method": "hash",
+          "elapsedMs": 21,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "64",
+          "method": "hash",
+          "elapsedMs": 19,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "64",
+          "method": "hash",
+          "elapsedMs": 20,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "64",
+          "method": "hash",
+          "elapsedMs": 18,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "64",
+          "method": "hash",
+          "elapsedMs": 19,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:00:49.837Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 64
+      },
+      "summary": [
+        {
+          "codec": "64",
+          "method": "webcrypto-sequential",
+          "medianMs": 22,
+          "p95Ms": 23
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 5424116,
+          "totalSize": 11010048,
+          "embedderHeapUsedSize": 644832,
+          "backingStorageSize": 1105102
+        },
+        "maximumAccountedBytes": 21802826,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "64",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 27,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "64",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 24,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "64",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 22,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "64",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 22,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "64",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 23,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "64",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 22,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:00:51.357Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 64
+      },
+      "summary": [
+        {
+          "codec": "64",
+          "method": "webcrypto-batch32",
+          "medianMs": 23,
+          "p95Ms": 24
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 5505060,
+          "totalSize": 11010048,
+          "embedderHeapUsedSize": 644832,
+          "backingStorageSize": 1115502
+        },
+        "maximumAccountedBytes": 24351082,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "64",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 28,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "64",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 20,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "64",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 23,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "64",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 23,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "64",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 22,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "64",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 24,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:00:52.942Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 344
+      },
+      "summary": [
+        {
+          "codec": "344",
+          "method": "createHash",
+          "medianMs": 23,
+          "p95Ms": 27
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 7789040,
+          "totalSize": 19398656,
+          "embedderHeapUsedSize": 773792,
+          "backingStorageSize": 1383070
+        },
+        "maximumAccountedBytes": 24987826,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "344",
+          "method": "createHash",
+          "elapsedMs": 28,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "344",
+          "method": "createHash",
+          "elapsedMs": 27,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "344",
+          "method": "createHash",
+          "elapsedMs": 23,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "344",
+          "method": "createHash",
+          "elapsedMs": 27,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "344",
+          "method": "createHash",
+          "elapsedMs": 19,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "344",
+          "method": "createHash",
+          "elapsedMs": 21,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:00:54.521Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 344
+      },
+      "summary": [
+        {
+          "codec": "344",
+          "method": "hash",
+          "medianMs": 23,
+          "p95Ms": 27
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 7752020,
+          "totalSize": 19660800,
+          "embedderHeapUsedSize": 773792,
+          "backingStorageSize": 1368198
+        },
+        "maximumAccountedBytes": 24994754,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "344",
+          "method": "hash",
+          "elapsedMs": 26,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "344",
+          "method": "hash",
+          "elapsedMs": 25,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "344",
+          "method": "hash",
+          "elapsedMs": 23,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "344",
+          "method": "hash",
+          "elapsedMs": 27,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "344",
+          "method": "hash",
+          "elapsedMs": 19,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "344",
+          "method": "hash",
+          "elapsedMs": 18,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:00:56.079Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 344
+      },
+      "summary": [
+        {
+          "codec": "344",
+          "method": "webcrypto-sequential",
+          "medianMs": 21,
+          "p95Ms": 23
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 7816940,
+          "totalSize": 19136512,
+          "embedderHeapUsedSize": 773792,
+          "backingStorageSize": 1394550
+        },
+        "maximumAccountedBytes": 33886206,
+        "sampleCount": 7
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "344",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 24,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "344",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 23,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "344",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 23,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "344",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 21,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "344",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 21,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "344",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 19,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:00:57.488Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 344
+      },
+      "summary": [
+        {
+          "codec": "344",
+          "method": "webcrypto-batch32",
+          "medianMs": 19,
+          "p95Ms": 19
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 7221044,
+          "totalSize": 18874368,
+          "embedderHeapUsedSize": 773792,
+          "backingStorageSize": 1151606
+        },
+        "maximumAccountedBytes": 26816590,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "344",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 27,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "344",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 21,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "344",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 18,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "344",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 19,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "344",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 18,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "344",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 19,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:00:58.886Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 512
+      },
+      "summary": [
+        {
+          "codec": "512",
+          "method": "createHash",
+          "medianMs": 25,
+          "p95Ms": 26
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 12010896,
+          "totalSize": 21757952,
+          "embedderHeapUsedSize": 644832,
+          "backingStorageSize": 3054766
+        },
+        "maximumAccountedBytes": 29036034,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "512",
+          "method": "createHash",
+          "elapsedMs": 27,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "512",
+          "method": "createHash",
+          "elapsedMs": 22,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "512",
+          "method": "createHash",
+          "elapsedMs": 18,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "512",
+          "method": "createHash",
+          "elapsedMs": 19,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "512",
+          "method": "createHash",
+          "elapsedMs": 25,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "512",
+          "method": "createHash",
+          "elapsedMs": 26,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:01:00.199Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 512
+      },
+      "summary": [
+        {
+          "codec": "512",
+          "method": "hash",
+          "medianMs": 25,
+          "p95Ms": 26
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 12001452,
+          "totalSize": 21757952,
+          "embedderHeapUsedSize": 644832,
+          "backingStorageSize": 3052078
+        },
+        "maximumAccountedBytes": 29029170,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "512",
+          "method": "hash",
+          "elapsedMs": 25,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "512",
+          "method": "hash",
+          "elapsedMs": 22,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "512",
+          "method": "hash",
+          "elapsedMs": 21,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "512",
+          "method": "hash",
+          "elapsedMs": 18,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "512",
+          "method": "hash",
+          "elapsedMs": 25,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "512",
+          "method": "hash",
+          "elapsedMs": 26,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:01:01.399Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 512
+      },
+      "summary": [
+        {
+          "codec": "512",
+          "method": "webcrypto-sequential",
+          "medianMs": 18,
+          "p95Ms": 18
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 12044020,
+          "totalSize": 22020096,
+          "embedderHeapUsedSize": 644832,
+          "backingStorageSize": 3054766
+        },
+        "maximumAccountedBytes": 41133502,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "512",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 20,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "512",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 19,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "512",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 18,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "512",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 18,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "512",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 17,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "512",
+          "method": "webcrypto-sequential",
+          "elapsedMs": 15,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:01:02.560Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 512
+      },
+      "summary": [
+        {
+          "codec": "512",
+          "method": "webcrypto-batch32",
+          "medianMs": 17,
+          "p95Ms": 18
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 12059964,
+          "totalSize": 22282240,
+          "embedderHeapUsedSize": 644832,
+          "backingStorageSize": 3064558
+        },
+        "maximumAccountedBytes": 35644922,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "512",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 18,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "512",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 18,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "512",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 17,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "512",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 16,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "512",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 18,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "512",
+          "method": "webcrypto-batch32",
+          "elapsedMs": 16,
+          "verifiedHashes": 10000
+        }
+      ]
+    }
+  ]
+}

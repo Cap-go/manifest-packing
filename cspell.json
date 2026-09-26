@@ -10,10 +10,23 @@
   ],
   "words": [
     "automations",
+    "bunx",
     "Capgo",
+    "checkpointed",
+    "codepoint",
+    "embedder",
+    "Ints",
+    "noncanonical",
+    "nondecreasing",
+    "nonmaximal",
+    "nonminimal",
     "oxlint",
     "publint",
     "tsconfig",
-    "Uint8Array"
+    "Uint8Array",
+    "uncheckpointed",
+    "workerd",
+    "zstd",
+    "Zstandard"
   ]
 }

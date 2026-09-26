@@ -1,0 +1,187 @@
+{
+  "timestamp": "2026-09-26T12:57:45.157Z",
+  "runtime": {
+    "node": "v22.15.0",
+    "wrangler": "4.140.0",
+    "workerd": "1.20260923.1"
+  },
+  "method": "Synthetic10000 RSA-v3 entries; same independently framed filename and metadata bytes compressed in Node. Fresh workerd per codec/method;15 rounds, first3 warmup; one decode pair per HTTP request. Timings exclude preparation, transport and SHA256 correctness checks. CDP sampled every5ms without forced GC; memory includes retained synthetic fixture; native allocations may be absent. Earlier combined90-pair pilot exceeded128MB and was discarded; separate phases avoid accumulated pilot allocation history.",
+  "prepared": {
+    "variants": [
+      {
+        "codec": "brotli",
+        "blocks": [
+          {
+            "rawLength": 73768,
+            "storedLength": 1221
+          },
+          {
+            "rawLength": 2779815,
+            "storedLength": 2643513
+          }
+        ]
+      },
+      {
+        "codec": "zstd",
+        "blocks": [
+          {
+            "rawLength": 73768,
+            "storedLength": 1751
+          },
+          {
+            "rawLength": 2779815,
+            "storedLength": 2636972
+          }
+        ]
+      }
+    ]
+  },
+  "capabilities": {
+    "workerError": "Error [ERR_METHOD_NOT_IMPLEMENTED]: The Worker method is not implemented",
+    "consumption": [
+      {
+        "codec": "brotli",
+        "inputBytes": 1221,
+        "bytesWritten": 1221,
+        "trailing": {
+          "inputBytes": 1222,
+          "bytesWritten": 1221
+        }
+      },
+      {
+        "codec": "zstd",
+        "inputBytes": 1751,
+        "bytesWritten": 1751,
+        "trailing": {
+          "inputBytes": 1752,
+          "bytesWritten": 1751
+        }
+      }
+    ]
+  },
+  "summary": [
+    {
+      "codec": "brotli",
+      "method": "async-sequential",
+      "medianMs": 10,
+      "p95Ms": 108
+    }
+  ],
+  "memory": {
+    "baseline": {
+      "usedSize": 15411220,
+      "totalSize": 18055168,
+      "embedderHeapUsedSize": 515872,
+      "backingStorageSize": 6649299
+    },
+    "maximumAccountedBytes": 80593933,
+    "sampleCount": 15
+  },
+  "timings": [
+    {
+      "round": 0,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 10,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 1,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 7,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 2,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 9,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 3,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 8,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 4,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 10,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 5,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 10,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 6,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 9,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 7,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 12,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 8,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 10,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 9,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 7,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 10,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 108,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 11,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 71,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 12,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 7,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 13,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 36,
+      "verifiedBlocks": 2
+    },
+    {
+      "round": 14,
+      "codec": "brotli",
+      "method": "async-sequential",
+      "elapsedMs": 9,
+      "verifiedBlocks": 2
+    }
+  ]
+}
