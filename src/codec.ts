@@ -27,6 +27,9 @@ import {
   decodeHash,
   deltaPrefix,
   encodeHash,
+  encodePathName,
+  PATH_HASH_SCRATCH_BYTES,
+  PathHasher,
   pathPrefix,
   readHeaderStrings,
   requirePathHeader,
@@ -354,6 +357,7 @@ export function unpackManifest(
     tailsBlock.rawLength * 2 +
     count * 256 +
     limits.maxStringBytes * 2 +
+    PATH_HASH_SCRATCH_BYTES +
     NATIVE_WORKSPACE_BYTES;
   const budget = new Budget(limits, fixedBytes);
   const nameData = decompress(namesBlock);
@@ -372,6 +376,9 @@ export function unpackManifest(
   let total: number | bigint = 0;
   const legacy = pathPrefix(header) + header.version + "/";
   const delta = deltaPrefix(header);
+  const legacyLength = Buffer.byteLength(legacy);
+  const deltaLength = Buffer.byteLength(delta);
+  const pathHasher = new PathHasher();
   for (let i = 0; i < count; i++) {
     let name: string;
     let nameLength: number;
@@ -432,24 +439,21 @@ export function unpackManifest(
     previousSize = size;
     total = addSize(total, size);
     const hash = decodeHash(tails, limits.maxStringBytes);
-    budget.text(Buffer.byteLength(hash));
+    const hashLength = Buffer.byteLength(hash);
+    budget.text(hashLength);
     if (mode === 1) {
-      const length = Buffer.byteLength(legacy) + nameLength;
+      const length = legacyLength + nameLength;
       if (length > limits.maxStringBytes)
         resource("Reconstructed path exceeds byte limit");
       budget.text(length);
       path = legacy + name;
     } else if (mode === 2) {
-      const encoded = name.split("/").map(encodeURIComponent).join("/");
-      const length = Buffer.byteLength(delta) + 65 + encoded.length;
+      const encoded = encodePathName(name);
+      const length = deltaLength + 65 + encoded.length;
       if (length > limits.maxStringBytes)
         resource("Reconstructed path exceeds byte limit");
       budget.text(length);
-      path =
-        delta +
-        createHash("sha256").update(hash, "utf8").digest("hex") +
-        "_" +
-        encoded;
+      path = delta + pathHasher.digest(hash, hashLength) + "_" + encoded;
     }
     validatePath(path);
     rows[i] = {

@@ -1,0 +1,3996 @@
+{
+  "passed": true,
+  "generatedAt": "2026-09-26T13:00:20.541Z",
+  "mode": "profile",
+  "baselineRef": "b8b099401f78ea8c52c648fbd250c82af7d682ac",
+  "runtime": {
+    "node": "v22.15.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M4 Pro",
+    "wrangler": "4.140.0",
+    "workerd": "1.20260923.1"
+  },
+  "method": {
+    "rounds": 1,
+    "warmSamples": 9,
+    "warmups": 3,
+    "profileIterations": 12,
+    "profileIntervalUs": 250,
+    "freshIsolatePerScenarioVariantRound": true,
+    "order": "AB/BA alternates each round",
+    "syntheticOnly": true,
+    "exactTupleFingerprintAfterFirstTimedDecode": true,
+    "inputPacketsFromBaselineNodeEncoder": true,
+    "forcedGc": false,
+    "singleDecodePerRequest": true,
+    "timingExcludesFixtureAndVerification": true,
+    "profileOnlyCoarseStageInstrumentation": true
+  },
+  "source": {
+    "baseline": {
+      "hashes": {
+        "src/binary.ts": "b5527ebc474423cf53cbfafa32ee87a525016ad25ba96e5a4a59713607e4b195",
+        "src/codec.ts": "1b709ea0ed92c7a729263ed08976059098a748276bee282e50f8c0a170ff4b83",
+        "src/compression.ts": "7a8c2919d111482d1b89ca8905428f8596fa2ed2147fb05c280e4c329fa8ee02",
+        "src/errors.ts": "b94921d49472fa1aef3eee49208ef9702ff42797048aa1a90e5df34cc1f9a57b",
+        "src/index.ts": "875c5b487fc373bc768568732ee4764a34cea4a648d87245a3bfd9e9fc365c6f",
+        "src/paths.ts": "ce9218b1275f582196b9fd1373edc94e0e7a490852a4231f578462c6cea971b5",
+        "src/types.ts": "b9ec239f714b3995766a361cfea26b76cc9f4bbd620840fe930310a11fcf41c5",
+        "fixtures/synthetic.ts": "35b63dac1f0188bd9d2b5f842a83825fa576c5c8f84ab1b7b34d0d66783f9998",
+        "bench/decoder-comparison-worker.ts": "6fb8d00dab16e72fe7a3f67f7f1a547b45d43294d1d45adb372fcacd86d8e447",
+        "bench/decoder-comparison-fixtures.ts": "c104e1032602842d7e839c8b42f0cd531d88a32d0de0bf686841b1b433ef7671"
+      },
+      "bundleSha256": "5509b99cec233050924a47d9de616805cf0810de83229ec8becf9330adbc4210"
+    },
+    "candidate": {
+      "hashes": {
+        "src/binary.ts": "3cd46ae049478160b4ebd80bf123b8c0d4c0657e4ba57a99ebd2937d550c2391",
+        "src/codec.ts": "366145d464b1bff136ccf180c9686f291a1de79b136614c15fea4bd90538005a",
+        "src/compression.ts": "7a8c2919d111482d1b89ca8905428f8596fa2ed2147fb05c280e4c329fa8ee02",
+        "src/errors.ts": "b94921d49472fa1aef3eee49208ef9702ff42797048aa1a90e5df34cc1f9a57b",
+        "src/index.ts": "875c5b487fc373bc768568732ee4764a34cea4a648d87245a3bfd9e9fc365c6f",
+        "src/paths.ts": "984c9b1737f3047678b34c6f50015f1aa2977758951f3ce170218081f688d0a4",
+        "src/types.ts": "b9ec239f714b3995766a361cfea26b76cc9f4bbd620840fe930310a11fcf41c5",
+        "fixtures/synthetic.ts": "35b63dac1f0188bd9d2b5f842a83825fa576c5c8f84ab1b7b34d0d66783f9998",
+        "bench/decoder-comparison-worker.ts": "6fb8d00dab16e72fe7a3f67f7f1a547b45d43294d1d45adb372fcacd86d8e447",
+        "bench/decoder-comparison-fixtures.ts": "c104e1032602842d7e839c8b42f0cd531d88a32d0de0bf686841b1b433ef7671"
+      },
+      "bundleSha256": "fbabcddd31317fb2a7e1f3cba79187ce84de96b2d2e4b160b9fb72a8f4d9f642"
+    }
+  },
+  "results": [
+    {
+      "round": 0,
+      "scenario": "rsa-v3-delta",
+      "variant": "baseline",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 92,
+      "warmMs": {
+        "samples": [93, 84, 91, 75, 108, 75, 67, 86, 70, 63, 60, 59],
+        "median": 75,
+        "min": 59,
+        "max": 108
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 1078008,
+        "unpackStackUs": 79034,
+        "allTopSelf": [
+          {
+            "functionName": "fetch",
+            "sampleUs": 244254
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 199687
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 160848
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 113905
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 111209
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 77522
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 46238
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 29243
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 17637
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 15712
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 13280
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 8024
+          },
+          {
+            "functionName": "__name",
+            "sampleUs": 6416
+          },
+          {
+            "functionName": "EventEmitter.init",
+            "sampleUs": 6378
+          },
+          {
+            "functionName": "EventEmitter",
+            "sampleUs": 6209
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 5187
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 3648
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 2775
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 1976
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 1783
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 1082
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 758
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 745
+          },
+          {
+            "functionName": "ZlibBase",
+            "sampleUs": 570
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 487
+          },
+          {
+            "functionName": "update",
+            "sampleUs": 386
+          },
+          {
+            "functionName": "isAnyArrayBuffer",
+            "sampleUs": 344
+          },
+          {
+            "functionName": "createBuffer",
+            "sampleUs": 341
+          },
+          {
+            "functionName": "highWaterMarkFrom",
+            "sampleUs": 329
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 328
+          }
+        ],
+        "topInclusive": [
+          {
+            "functionName": "(root)",
+            "sampleUs": 1078008
+          },
+          {
+            "functionName": "fetch",
+            "sampleUs": 835877
+          },
+          {
+            "functionName": "__facade_invokeChain__",
+            "sampleUs": 829461
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 829461
+          },
+          {
+            "functionName": "next",
+            "sampleUs": 829373
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 200031
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 188903
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 160848
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 138341
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 91941
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 79034
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 77522
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 75280
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 46238
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 29243
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 28344
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 22470
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 20795
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 15712
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 13280
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 12275
+          },
+          {
+            "functionName": "EventEmitter",
+            "sampleUs": 12261
+          },
+          {
+            "functionName": "__name",
+            "sampleUs": 6416
+          },
+          {
+            "functionName": "EventEmitter.init",
+            "sampleUs": 6378
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 3648
+          },
+          {
+            "functionName": "decompress",
+            "sampleUs": 3390
+          },
+          {
+            "functionName": "brotliDecompressSync",
+            "sampleUs": 3067
+          },
+          {
+            "functionName": "createHash",
+            "sampleUs": 2908
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 2775
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 2168
+          }
+        ],
+        "topSelf": [
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 71657,
+            "percentOfUnpackStack": 90.66604246273755
+          },
+          {
+            "functionName": "EventEmitter",
+            "sampleUs": 2908,
+            "percentOfUnpackStack": 3.6794291064605105
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 1082,
+            "percentOfUnpackStack": 1.369031049927879
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 745,
+            "percentOfUnpackStack": 0.9426322848394363
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 715,
+            "percentOfUnpackStack": 0.9046739377989219
+          },
+          {
+            "functionName": "ZlibBase",
+            "sampleUs": 570,
+            "percentOfUnpackStack": 0.72120859376977
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 364,
+            "percentOfUnpackStack": 0.46056127742490577
+          },
+          {
+            "functionName": "createBuffer",
+            "sampleUs": 341,
+            "percentOfUnpackStack": 0.43145987802717817
+          },
+          {
+            "functionName": "highWaterMarkFrom",
+            "sampleUs": 329,
+            "percentOfUnpackStack": 0.41627653921097246
+          },
+          {
+            "functionName": "decompress",
+            "sampleUs": 323,
+            "percentOfUnpackStack": 0.4086848698028696
+          }
+        ]
+      },
+      "stageSamples": [
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 92
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 81
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 89
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 73
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 107
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 73
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 65
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 84
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 68
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 61
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 58
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 57
+        }
+      ],
+      "memory": {
+        "usedSize": 36961220,
+        "totalSize": 93323264,
+        "embedderHeapUsedSize": 902752,
+        "backingStorageSize": 5207470
+      },
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-delta",
+      "variant": "candidate",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 78,
+      "warmMs": {
+        "samples": [69, 48, 47, 59, 60, 58, 46, 45, 55, 58, 53, 39],
+        "median": 55,
+        "min": 39,
+        "max": 69
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 787865,
+        "unpackStackUs": 63551,
+        "allTopSelf": [
+          {
+            "functionName": "fetch",
+            "sampleUs": 138929
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 133401
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 106999
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 106409
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 97955
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 48588
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 37622
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 24975
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 17004
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 13511
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 11431
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 8767
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 7757
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 7196
+          },
+          {
+            "functionName": "WritableState",
+            "sampleUs": 4498
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 4187
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 3815
+          },
+          {
+            "functionName": "__name",
+            "sampleUs": 3592
+          },
+          {
+            "functionName": "EventEmitter.init",
+            "sampleUs": 3179
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 1857
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 1406
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 1375
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 1331
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 645
+          },
+          {
+            "functionName": "uint",
+            "sampleUs": 640
+          },
+          {
+            "functionName": "EventEmitter",
+            "sampleUs": 399
+          },
+          {
+            "functionName": "slice",
+            "sampleUs": 348
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 49
+          }
+        ],
+        "topInclusive": [
+          {
+            "functionName": "(root)",
+            "sampleUs": 787865
+          },
+          {
+            "functionName": "fetch",
+            "sampleUs": 627318
+          },
+          {
+            "functionName": "__facade_invokeChain__",
+            "sampleUs": 623726
+          },
+          {
+            "functionName": "next",
+            "sampleUs": 623726
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 623726
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 170771
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 133401
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 107900
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 106409
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 80685
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 63551
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 54563
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 48588
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 37622
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 25526
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 25322
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 20838
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 13511
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 8767
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 7757
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 4909
+          },
+          {
+            "functionName": "WritableState",
+            "sampleUs": 4498
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 4187
+          },
+          {
+            "functionName": "__name",
+            "sampleUs": 3592
+          },
+          {
+            "functionName": "EventEmitter",
+            "sampleUs": 3238
+          },
+          {
+            "functionName": "EventEmitter.init",
+            "sampleUs": 3179
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 1857
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 1406
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 1375
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 993
+          }
+        ],
+        "topSelf": [
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 54563,
+            "percentOfUnpackStack": 85.85702821356077
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 7196,
+            "percentOfUnpackStack": 11.323189249579078
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 645,
+            "percentOfUnpackStack": 1.014932888546207
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 402,
+            "percentOfUnpackStack": 0.6325628235590314
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 348,
+            "percentOfUnpackStack": 0.5475916980063256
+          },
+          {
+            "functionName": "slice",
+            "sampleUs": 348,
+            "percentOfUnpackStack": 0.5475916980063256
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 49,
+            "percentOfUnpackStack": 0.07710342874226998
+          }
+        ]
+      },
+      "stageSamples": [
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 67
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 46
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 45
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 57
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 58
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 57
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 44
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 44
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 54
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 56
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 51
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 37
+        }
+      ],
+      "memory": {
+        "usedSize": 18608904,
+        "totalSize": 85196800,
+        "embedderHeapUsedSize": 1031712,
+        "backingStorageSize": 4086334
+      },
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-delta-metadata-none",
+      "variant": "baseline",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 81,
+      "warmMs": {
+        "samples": [69, 63, 61, 64, 66, 63, 60, 60, 63, 66, 63, 64],
+        "median": 63,
+        "min": 60,
+        "max": 69
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 853033,
+        "unpackStackUs": 57610,
+        "allTopSelf": [
+          {
+            "functionName": "fetch",
+            "sampleUs": 207474
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 156991
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 133023
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 87441
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 87296
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 40954
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 33105
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 30673
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 13839
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 12724
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 8403
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 6553
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 5290
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 3692
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 3647
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 3611
+          },
+          {
+            "functionName": "limitsFor",
+            "sampleUs": 3383
+          },
+          {
+            "functionName": "EventEmitter.init",
+            "sampleUs": 2681
+          },
+          {
+            "functionName": "EventEmitter",
+            "sampleUs": 2632
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 2324
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 1744
+          },
+          {
+            "functionName": "decode",
+            "sampleUs": 1267
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 738
+          },
+          {
+            "functionName": "uint",
+            "sampleUs": 703
+          },
+          {
+            "functionName": "WritableState",
+            "sampleUs": 697
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 333
+          },
+          {
+            "functionName": "validatePath",
+            "sampleUs": 331
+          },
+          {
+            "functionName": "isAnyArrayBuffer",
+            "sampleUs": 330
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 329
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 328
+          }
+        ],
+        "topInclusive": [
+          {
+            "functionName": "(root)",
+            "sampleUs": 853033
+          },
+          {
+            "functionName": "fetch",
+            "sampleUs": 673795
+          },
+          {
+            "functionName": "__facade_invokeChain__",
+            "sampleUs": 669847
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 669847
+          },
+          {
+            "functionName": "next",
+            "sampleUs": 669722
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 157321
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 154351
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 133023
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 106137
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 68393
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 57610
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 52152
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 40954
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 33105
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 31147
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 21449
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 20976
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 12724
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 11285
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 8403
+          },
+          {
+            "functionName": "EventEmitter",
+            "sampleUs": 5313
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 4959
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 3692
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 3647
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 3611
+          },
+          {
+            "functionName": "limitsFor",
+            "sampleUs": 3383
+          },
+          {
+            "functionName": "EventEmitter.init",
+            "sampleUs": 2681
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 2324
+          },
+          {
+            "functionName": "decode",
+            "sampleUs": 1267
+          },
+          {
+            "functionName": "uint",
+            "sampleUs": 703
+          }
+        ],
+        "topSelf": [
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 51823,
+            "percentOfUnpackStack": 89.95486894636348
+          },
+          {
+            "functionName": "limitsFor",
+            "sampleUs": 3383,
+            "percentOfUnpackStack": 5.872244402013539
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 738,
+            "percentOfUnpackStack": 1.2810275993751084
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 348,
+            "percentOfUnpackStack": 0.604061794827287
+          },
+          {
+            "functionName": "validatePath",
+            "sampleUs": 331,
+            "percentOfUnpackStack": 0.5745530289880229
+          },
+          {
+            "functionName": "decode",
+            "sampleUs": 330,
+            "percentOfUnpackStack": 0.5728172192327721
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 329,
+            "percentOfUnpackStack": 0.5710814094775213
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 328,
+            "percentOfUnpackStack": 0.5693455997222705
+          }
+        ]
+      },
+      "stageSamples": [
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 68
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 61
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 60
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 63
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 65
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 62
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 59
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 59
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 62
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 64
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 62
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 62
+        }
+      ],
+      "memory": {
+        "usedSize": 36959580,
+        "totalSize": 93061120,
+        "embedderHeapUsedSize": 902752,
+        "backingStorageSize": 5207502
+      },
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-delta-metadata-none",
+      "variant": "candidate",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 77,
+      "warmMs": {
+        "samples": [58, 43, 51, 63, 59, 63, 79, 48, 68, 51, 56, 40],
+        "median": 58,
+        "min": 40,
+        "max": 79
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 830755,
+        "unpackStackUs": 96986,
+        "allTopSelf": [
+          {
+            "functionName": "fetch",
+            "sampleUs": 170411
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 141710
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 128823
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 123277
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 84233
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 38253
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 37365
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 20889
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 17816
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 11040
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 10341
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 9481
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 9071
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 7436
+          },
+          {
+            "functionName": "EventEmitter.init",
+            "sampleUs": 5302
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 3972
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 2220
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 1893
+          },
+          {
+            "functionName": "nativeInfo",
+            "sampleUs": 1242
+          },
+          {
+            "functionName": "ZlibBase",
+            "sampleUs": 1116
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 956
+          },
+          {
+            "functionName": "EventEmitter",
+            "sampleUs": 902
+          },
+          {
+            "functionName": "WritableState",
+            "sampleUs": 668
+          },
+          {
+            "functionName": "createBuffer",
+            "sampleUs": 649
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 628
+          },
+          {
+            "functionName": "uint",
+            "sampleUs": 581
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 333
+          },
+          {
+            "functionName": "json",
+            "sampleUs": 81
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 37
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 29
+          }
+        ],
+        "topInclusive": [
+          {
+            "functionName": "(root)",
+            "sampleUs": 830755
+          },
+          {
+            "functionName": "fetch",
+            "sampleUs": 667507
+          },
+          {
+            "functionName": "__facade_invokeChain__",
+            "sampleUs": 667507
+          },
+          {
+            "functionName": "next",
+            "sampleUs": 667507
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 667507
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 203977
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 141710
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 123277
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 96986
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 92961
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 85148
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 78614
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 38253
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 37365
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 31288
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 21548
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 17816
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 16276
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 11040
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 10341
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 7436
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 5968
+          },
+          {
+            "functionName": "EventEmitter.init",
+            "sampleUs": 5302
+          },
+          {
+            "functionName": "EventEmitter",
+            "sampleUs": 4701
+          },
+          {
+            "functionName": "decompress",
+            "sampleUs": 3959
+          },
+          {
+            "functionName": "brotliDecompressSync",
+            "sampleUs": 2717
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 2220
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 1893
+          },
+          {
+            "functionName": "ZlibBase",
+            "sampleUs": 1765
+          },
+          {
+            "functionName": "Brotli",
+            "sampleUs": 1765
+          }
+        ],
+        "topSelf": [
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 92593,
+            "percentOfUnpackStack": 95.47048027550368
+          },
+          {
+            "functionName": "nativeInfo",
+            "sampleUs": 1242,
+            "percentOfUnpackStack": 1.280597199595818
+          },
+          {
+            "functionName": "ZlibBase",
+            "sampleUs": 1116,
+            "percentOfUnpackStack": 1.1506815416658074
+          },
+          {
+            "functionName": "createBuffer",
+            "sampleUs": 649,
+            "percentOfUnpackStack": 0.669168746004578
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 628,
+            "percentOfUnpackStack": 0.6475161363495763
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 368,
+            "percentOfUnpackStack": 0.37943620728764976
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 324,
+            "percentOfUnpackStack": 0.3340688346771699
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 37,
+            "percentOfUnpackStack": 0.038149836058812614
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 29,
+            "percentOfUnpackStack": 0.029901222856907186
+          }
+        ]
+      },
+      "stageSamples": [
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 56
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 41
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 49
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 61
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 57
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 61
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 77
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 46
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 67
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 49
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 54
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 38
+        }
+      ],
+      "memory": {
+        "usedSize": 18610484,
+        "totalSize": 85196800,
+        "embedderHeapUsedSize": 1031712,
+        "backingStorageSize": 4086494
+      },
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-delta-metadata-brotli",
+      "variant": "baseline",
+      "packetBytes": 2601117,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2599832,
+          "storedBytes": 2599840
+        }
+      },
+      "firstDecodeMs": 101,
+      "warmMs": {
+        "samples": [137, 118, 85, 70, 65, 65, 70, 70, 83, 80, 75, 85],
+        "median": 80,
+        "min": 65,
+        "max": 137
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 1122677,
+        "unpackStackUs": 110200,
+        "allTopSelf": [
+          {
+            "functionName": "fetch",
+            "sampleUs": 246865
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 177425
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 155717
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 111884
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 110240
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 57988
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 49478
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 35627
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 33398
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 30752
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 23787
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 18835
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 9472
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 7328
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 7264
+          },
+          {
+            "functionName": "update",
+            "sampleUs": 5291
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 5195
+          },
+          {
+            "functionName": "decode",
+            "sampleUs": 4797
+          },
+          {
+            "functionName": "isArrayBufferView",
+            "sampleUs": 4629
+          },
+          {
+            "functionName": "WritableState",
+            "sampleUs": 4408
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 3567
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 3195
+          },
+          {
+            "functionName": "EventEmitter.init",
+            "sampleUs": 2816
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 2357
+          },
+          {
+            "functionName": "alloc",
+            "sampleUs": 2198
+          },
+          {
+            "functionName": "uint",
+            "sampleUs": 2142
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 1137
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 984
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 873
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 777
+          }
+        ],
+        "topInclusive": [
+          {
+            "functionName": "(root)",
+            "sampleUs": 1122677
+          },
+          {
+            "functionName": "fetch",
+            "sampleUs": 900988
+          },
+          {
+            "functionName": "__facade_invokeChain__",
+            "sampleUs": 900988
+          },
+          {
+            "functionName": "next",
+            "sampleUs": 900988
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 900988
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 208371
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 178169
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 155717
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 141418
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 118179
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 110200
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 67156
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 57988
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 49478
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 46128
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 45534
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 33628
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 30752
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 30655
+          },
+          {
+            "functionName": "_processChunk",
+            "sampleUs": 30655
+          },
+          {
+            "functionName": "processChunk",
+            "sampleUs": 30655
+          },
+          {
+            "functionName": "brotliDecompressSync",
+            "sampleUs": 30655
+          },
+          {
+            "functionName": "decompress",
+            "sampleUs": 30655
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 23787
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 9472
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 7328
+          },
+          {
+            "functionName": "update",
+            "sampleUs": 5291
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 5195
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 5173
+          },
+          {
+            "functionName": "decode",
+            "sampleUs": 4797
+          }
+        ],
+        "topSelf": [
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 57256,
+            "percentOfUnpackStack": 51.95644283121597
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 23787,
+            "percentOfUnpackStack": 21.585299455535388
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 7264,
+            "percentOfUnpackStack": 6.5916515426497275
+          },
+          {
+            "functionName": "decode",
+            "sampleUs": 4797,
+            "percentOfUnpackStack": 4.352994555353902
+          },
+          {
+            "functionName": "isArrayBufferView",
+            "sampleUs": 4629,
+            "percentOfUnpackStack": 4.2005444646098
+          },
+          {
+            "functionName": "update",
+            "sampleUs": 4552,
+            "percentOfUnpackStack": 4.130671506352087
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 3567,
+            "percentOfUnpackStack": 3.236842105263158
+          },
+          {
+            "functionName": "alloc",
+            "sampleUs": 2198,
+            "percentOfUnpackStack": 1.9945553539019965
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 777,
+            "percentOfUnpackStack": 0.7050816696914701
+          },
+          {
+            "functionName": "Hash.digest",
+            "sampleUs": 719,
+            "percentOfUnpackStack": 0.6524500907441017
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 328,
+            "percentOfUnpackStack": 0.29764065335753176
+          },
+          {
+            "functionName": "slice",
+            "sampleUs": 326,
+            "percentOfUnpackStack": 0.2958257713248639
+          }
+        ]
+      },
+      "stageSamples": [
+        {
+          "preambleMs": 1,
+          "decompressMs": 2,
+          "entriesMs": 134
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 15,
+          "entriesMs": 102
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 82
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 67
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 62
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 63
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 68
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 67
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 81
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 78
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 73
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 82
+        }
+      ],
+      "memory": {
+        "usedSize": 37513776,
+        "totalSize": 93323264,
+        "embedderHeapUsedSize": 902752,
+        "backingStorageSize": 16009878
+      },
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-delta-metadata-brotli",
+      "variant": "candidate",
+      "packetBytes": 2601117,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2599832,
+          "storedBytes": 2599840
+        }
+      },
+      "firstDecodeMs": 78,
+      "warmMs": {
+        "samples": [65, 90, 212, 106, 67, 78, 81, 45, 60, 54, 54, 43],
+        "median": 67,
+        "min": 43,
+        "max": 212
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 1098910,
+        "unpackStackUs": 105324,
+        "allTopSelf": [
+          {
+            "functionName": "fetch",
+            "sampleUs": 232385
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 211371
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 136639
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 123122
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 116743
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 49090
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 46827
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 43944
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 18293
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 15211
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 13719
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 10678
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 9841
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 9260
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 8122
+          },
+          {
+            "functionName": "alloc",
+            "sampleUs": 8064
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 6798
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 6082
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 5602
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 5039
+          },
+          {
+            "functionName": "EventEmitter.init",
+            "sampleUs": 4920
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 3467
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 3278
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 2472
+          },
+          {
+            "functionName": "WritableState",
+            "sampleUs": 1715
+          },
+          {
+            "functionName": "EventEmitter",
+            "sampleUs": 1587
+          },
+          {
+            "functionName": "slice",
+            "sampleUs": 1142
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 680
+          },
+          {
+            "functionName": "isAnyArrayBuffer",
+            "sampleUs": 593
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 527
+          }
+        ],
+        "topInclusive": [
+          {
+            "functionName": "(root)",
+            "sampleUs": 1098910
+          },
+          {
+            "functionName": "fetch",
+            "sampleUs": 931358
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 931358
+          },
+          {
+            "functionName": "__facade_invokeChain__",
+            "sampleUs": 924560
+          },
+          {
+            "functionName": "next",
+            "sampleUs": 924560
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 257209
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 211663
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 141187
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 116743
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 105324
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 95763
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 76250
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 49090
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 46827
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 43944
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 31935
+          },
+          {
+            "functionName": "brotliDecompressSync",
+            "sampleUs": 23472
+          },
+          {
+            "functionName": "decompress",
+            "sampleUs": 23472
+          },
+          {
+            "functionName": "_processChunk",
+            "sampleUs": 22452
+          },
+          {
+            "functionName": "processChunk",
+            "sampleUs": 22452
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 22134
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 19673
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 18594
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 13719
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 10678
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 9260
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 8636
+          },
+          {
+            "functionName": "allocUnsafe",
+            "sampleUs": 8426
+          },
+          {
+            "functionName": "alloc",
+            "sampleUs": 8064
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 6082
+          }
+        ],
+        "topSelf": [
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 76250,
+            "percentOfUnpackStack": 72.39565531123012
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 9260,
+            "percentOfUnpackStack": 8.791918271239224
+          },
+          {
+            "functionName": "alloc",
+            "sampleUs": 8064,
+            "percentOfUnpackStack": 7.656374615472257
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 5602,
+            "percentOfUnpackStack": 5.318825718734571
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 3467,
+            "percentOfUnpackStack": 3.2917473700201283
+          },
+          {
+            "functionName": "slice",
+            "sampleUs": 1142,
+            "percentOfUnpackStack": 1.0842732900383578
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 527,
+            "percentOfUnpackStack": 0.5003607914625346
+          },
+          {
+            "functionName": "allocUnsafe",
+            "sampleUs": 362,
+            "percentOfUnpackStack": 0.3437013406251187
+          },
+          {
+            "functionName": "Brotli",
+            "sampleUs": 332,
+            "percentOfUnpackStack": 0.3152178041092249
+          },
+          {
+            "functionName": "_processChunk",
+            "sampleUs": 318,
+            "percentOfUnpackStack": 0.30192548706847444
+          }
+        ]
+      },
+      "stageSamples": [
+        {
+          "preambleMs": 2,
+          "decompressMs": 2,
+          "entriesMs": 61
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 87
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 210
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 12,
+          "entriesMs": 92
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 64
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 75
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 79
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 42
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 57
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 52
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 52
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 41
+        }
+      ],
+      "memory": {
+        "usedSize": 18646416,
+        "totalSize": 85721088,
+        "embedderHeapUsedSize": 1031712,
+        "backingStorageSize": 9550486
+      },
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-delta-metadata-zstd",
+      "variant": "baseline",
+      "packetBytes": 2601178,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2599832,
+          "storedBytes": 2599901
+        }
+      },
+      "firstDecodeMs": 152,
+      "warmMs": {
+        "samples": [90, 67, 72, 70, 79, 278, 106, 65, 120, 68, 65, 95],
+        "median": 79,
+        "min": 65,
+        "max": 278
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 1360828,
+        "unpackStackUs": 107484,
+        "allTopSelf": [
+          {
+            "functionName": "fetch",
+            "sampleUs": 329047
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 199519
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 178968
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 127730
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 109018
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 100675
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 64570
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 49897
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 46318
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 26906
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 18391
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 17837
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 15175
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 14879
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 9344
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 7138
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 6623
+          },
+          {
+            "functionName": "EventEmitter.init",
+            "sampleUs": 5113
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 4906
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 4354
+          },
+          {
+            "functionName": "WritableState",
+            "sampleUs": 3947
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 3343
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 2585
+          },
+          {
+            "functionName": "Zstd",
+            "sampleUs": 1953
+          },
+          {
+            "functionName": "alloc",
+            "sampleUs": 1890
+          },
+          {
+            "functionName": "uint",
+            "sampleUs": 1881
+          },
+          {
+            "functionName": "decode",
+            "sampleUs": 1804
+          },
+          {
+            "functionName": "ZlibBase",
+            "sampleUs": 1515
+          },
+          {
+            "functionName": "validateZstdFrame",
+            "sampleUs": 997
+          },
+          {
+            "functionName": "EventEmitter",
+            "sampleUs": 876
+          }
+        ],
+        "topInclusive": [
+          {
+            "functionName": "(root)",
+            "sampleUs": 1360828
+          },
+          {
+            "functionName": "fetch",
+            "sampleUs": 1062151
+          },
+          {
+            "functionName": "__facade_invokeChain__",
+            "sampleUs": 1062151
+          },
+          {
+            "functionName": "next",
+            "sampleUs": 1062151
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 1062151
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 241133
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 199824
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 178968
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 148403
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 126143
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 107484
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 100675
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 74106
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 64570
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 50201
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 46698
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 33948
+          },
+          {
+            "functionName": "decompress",
+            "sampleUs": 32588
+          },
+          {
+            "functionName": "_processChunk",
+            "sampleUs": 27807
+          },
+          {
+            "functionName": "processChunk",
+            "sampleUs": 27807
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 27491
+          },
+          {
+            "functionName": "zstdDecompressSync",
+            "sampleUs": 26007
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 20552
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 18391
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 17837
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 15175
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 14879
+          },
+          {
+            "functionName": "Stream",
+            "sampleUs": 9332
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 6623
+          },
+          {
+            "functionName": "brotliDecompressSync",
+            "sampleUs": 5584
+          }
+        ],
+        "topSelf": [
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 74106,
+            "percentOfUnpackStack": 68.94607569498716
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 17837,
+            "percentOfUnpackStack": 16.595028097205166
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 6623,
+            "percentOfUnpackStack": 6.161847344721075
+          },
+          {
+            "functionName": "Zstd",
+            "sampleUs": 1953,
+            "percentOfUnpackStack": 1.8170146254326225
+          },
+          {
+            "functionName": "alloc",
+            "sampleUs": 1890,
+            "percentOfUnpackStack": 1.758401250418667
+          },
+          {
+            "functionName": "ZlibBase",
+            "sampleUs": 1515,
+            "percentOfUnpackStack": 1.4095121134308362
+          },
+          {
+            "functionName": "validateZstdFrame",
+            "sampleUs": 997,
+            "percentOfUnpackStack": 0.927579918871646
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 785,
+            "percentOfUnpackStack": 0.7303412600945257
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 462,
+            "percentOfUnpackStack": 0.4298314167690075
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 356,
+            "percentOfUnpackStack": 0.33121208738044733
+          },
+          {
+            "functionName": "Reader",
+            "sampleUs": 328,
+            "percentOfUnpackStack": 0.30516169848535596
+          },
+          {
+            "functionName": "_processChunk",
+            "sampleUs": 316,
+            "percentOfUnpackStack": 0.2939972461017454
+          },
+          {
+            "functionName": "ZstdDecoder",
+            "sampleUs": 316,
+            "percentOfUnpackStack": 0.2939972461017454
+          }
+        ]
+      },
+      "stageSamples": [
+        {
+          "preambleMs": 3,
+          "decompressMs": 4,
+          "entriesMs": 83
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 64
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 2,
+          "entriesMs": 68
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 3,
+          "entriesMs": 66
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 77
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 7,
+          "entriesMs": 269
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 3,
+          "entriesMs": 102
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 62
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 118
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 66
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 63
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 93
+        }
+      ],
+      "memory": {
+        "usedSize": 37502368,
+        "totalSize": 93323264,
+        "embedderHeapUsedSize": 902752,
+        "backingStorageSize": 16012083
+      },
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-delta-metadata-zstd",
+      "variant": "candidate",
+      "packetBytes": 2601178,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2599832,
+          "storedBytes": 2599901
+        }
+      },
+      "firstDecodeMs": 67,
+      "warmMs": {
+        "samples": [61, 98, 66, 68, 54, 53, 47, 45, 54, 56, 62, 46],
+        "median": 56,
+        "min": 45,
+        "max": 98
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 833971,
+        "unpackStackUs": 75009,
+        "allTopSelf": [
+          {
+            "functionName": "fetch",
+            "sampleUs": 164084
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 135355
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 121578
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 106157
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 101125
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 45537
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 39568
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 30689
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 22460
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 9318
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 9035
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 6658
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 5248
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 4433
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 4313
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 3732
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 3723
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 3347
+          },
+          {
+            "functionName": "alloc",
+            "sampleUs": 3291
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 2373
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 2038
+          },
+          {
+            "functionName": "EventEmitter",
+            "sampleUs": 1495
+          },
+          {
+            "functionName": "WritableState",
+            "sampleUs": 1394
+          },
+          {
+            "functionName": "EventEmitter.init",
+            "sampleUs": 1390
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 1298
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 1289
+          },
+          {
+            "functionName": "_processChunk",
+            "sampleUs": 423
+          },
+          {
+            "functionName": "BrotliDecoder",
+            "sampleUs": 392
+          },
+          {
+            "functionName": "slice",
+            "sampleUs": 349
+          },
+          {
+            "functionName": "fromArrayBuffer",
+            "sampleUs": 337
+          }
+        ],
+        "topInclusive": [
+          {
+            "functionName": "(root)",
+            "sampleUs": 833971
+          },
+          {
+            "functionName": "fetch",
+            "sampleUs": 667324
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 667324
+          },
+          {
+            "functionName": "__facade_invokeChain__",
+            "sampleUs": 663592
+          },
+          {
+            "functionName": "next",
+            "sampleUs": 663592
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 177640
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 135355
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 121578
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 106442
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 75663
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 75009
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 59752
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 45537
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 39568
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 31379
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 22460
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 19447
+          },
+          {
+            "functionName": "decompress",
+            "sampleUs": 14619
+          },
+          {
+            "functionName": "_processChunk",
+            "sampleUs": 13575
+          },
+          {
+            "functionName": "processChunk",
+            "sampleUs": 13575
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 13152
+          },
+          {
+            "functionName": "zstdDecompressSync",
+            "sampleUs": 12427
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 10824
+          },
+          {
+            "functionName": "_addListener",
+            "sampleUs": 9035
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 5248
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 4433
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 4313
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 3723
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 3347
+          },
+          {
+            "functionName": "alloc",
+            "sampleUs": 3291
+          }
+        ],
+        "topSelf": [
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 59752,
+            "percentOfUnpackStack": 79.65977416043408
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 4433,
+            "percentOfUnpackStack": 5.909957471770054
+          },
+          {
+            "functionName": "alloc",
+            "sampleUs": 3291,
+            "percentOfUnpackStack": 4.387473503179618
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 2373,
+            "percentOfUnpackStack": 3.1636203655561337
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 2038,
+            "percentOfUnpackStack": 2.7170072924582382
+          },
+          {
+            "functionName": "_processChunk",
+            "sampleUs": 423,
+            "percentOfUnpackStack": 0.5639323281206255
+          },
+          {
+            "functionName": "BrotliDecoder",
+            "sampleUs": 392,
+            "percentOfUnpackStack": 0.5226039541921637
+          },
+          {
+            "functionName": "slice",
+            "sampleUs": 349,
+            "percentOfUnpackStack": 0.4652775000333293
+          },
+          {
+            "functionName": "Transform",
+            "sampleUs": 340,
+            "percentOfUnpackStack": 0.45327893986055007
+          },
+          {
+            "functionName": "fromArrayBuffer",
+            "sampleUs": 337,
+            "percentOfUnpackStack": 0.449279419802957
+          },
+          {
+            "functionName": "validateOffset",
+            "sampleUs": 331,
+            "percentOfUnpackStack": 0.4412803796877708
+          },
+          {
+            "functionName": "validatePath",
+            "sampleUs": 321,
+            "percentOfUnpackStack": 0.4279486461624605
+          },
+          {
+            "functionName": "toString",
+            "sampleUs": 317,
+            "percentOfUnpackStack": 0.4226159527523364
+          },
+          {
+            "functionName": "ZlibBase",
+            "sampleUs": 312,
+            "percentOfUnpackStack": 0.41595008598968125
+          }
+        ]
+      },
+      "stageSamples": [
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 58
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 2,
+          "entriesMs": 95
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 63
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 66
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 52
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 51
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 44
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 42
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 52
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 54
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 59
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 2,
+          "entriesMs": 43
+        }
+      ],
+      "memory": {
+        "usedSize": 18675784,
+        "totalSize": 85721088,
+        "embedderHeapUsedSize": 1031712,
+        "backingStorageSize": 9550739
+      },
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-legacy",
+      "variant": "baseline",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 24,
+      "warmMs": {
+        "samples": [19, 20, 17, 19, 22, 15, 16, 16, 17, 18, 15, 16],
+        "median": 17,
+        "min": 15,
+        "max": 22
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 286871,
+        "unpackStackUs": 49794,
+        "allTopSelf": [
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 87310
+          },
+          {
+            "functionName": "fetch",
+            "sampleUs": 60613
+          },
+          {
+            "functionName": "update",
+            "sampleUs": 46800
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 32280
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 18052
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 10176
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 7681
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 6582
+          },
+          {
+            "functionName": "__facade_invokeChain__",
+            "sampleUs": 4076
+          },
+          {
+            "functionName": "set tracing",
+            "sampleUs": 3331
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 2908
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 1370
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 1157
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 855
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 718
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 628
+          },
+          {
+            "functionName": "isAnyArrayBuffer",
+            "sampleUs": 414
+          },
+          {
+            "functionName": "Hash.digest",
+            "sampleUs": 387
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 380
+          },
+          {
+            "functionName": "uint",
+            "sampleUs": 332
+          },
+          {
+            "functionName": "Brotli",
+            "sampleUs": 328
+          },
+          {
+            "functionName": "fromArrayLike",
+            "sampleUs": 326
+          },
+          {
+            "functionName": "(anonymous)",
+            "sampleUs": 167
+          }
+        ],
+        "topInclusive": [
+          {
+            "functionName": "(root)",
+            "sampleUs": 286871
+          },
+          {
+            "functionName": "fetch",
+            "sampleUs": 246164
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 242833
+          },
+          {
+            "functionName": "__facade_invokeChain__",
+            "sampleUs": 239925
+          },
+          {
+            "functionName": "next",
+            "sampleUs": 239925
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 87724
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 49794
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 47513
+          },
+          {
+            "functionName": "update",
+            "sampleUs": 46800
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 46800
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 32280
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 18052
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 10176
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 7681
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 6582
+          },
+          {
+            "functionName": "set tracing",
+            "sampleUs": 3331
+          },
+          {
+            "functionName": "__name",
+            "sampleUs": 3331
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 1370
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 1157
+          },
+          {
+            "functionName": "brotliDecompressSync",
+            "sampleUs": 1046
+          },
+          {
+            "functionName": "decompress",
+            "sampleUs": 1046
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 855
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 718
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 718
+          },
+          {
+            "functionName": "_processChunk",
+            "sampleUs": 718
+          },
+          {
+            "functionName": "processChunk",
+            "sampleUs": 718
+          },
+          {
+            "functionName": "Hash.digest",
+            "sampleUs": 713
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 628
+          },
+          {
+            "functionName": "isAnyArrayBuffer",
+            "sampleUs": 414
+          },
+          {
+            "functionName": "uint",
+            "sampleUs": 332
+          }
+        ],
+        "topSelf": [
+          {
+            "functionName": "update",
+            "sampleUs": 46800,
+            "percentOfUnpackStack": 93.98722737679238
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 855,
+            "percentOfUnpackStack": 1.717074346306784
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 718,
+            "percentOfUnpackStack": 1.441940796079849
+          },
+          {
+            "functionName": "Hash.digest",
+            "sampleUs": 387,
+            "percentOfUnpackStack": 0.7772020725388601
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 380,
+            "percentOfUnpackStack": 0.7631441539141262
+          },
+          {
+            "functionName": "Brotli",
+            "sampleUs": 328,
+            "percentOfUnpackStack": 0.6587139012732458
+          },
+          {
+            "functionName": "fromArrayLike",
+            "sampleUs": 326,
+            "percentOfUnpackStack": 0.6546973530947504
+          }
+        ]
+      },
+      "stageSamples": [
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 18
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 18
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 15
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 17
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 21
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 14
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 14
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 14
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 15
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 16
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 1,
+          "entriesMs": 13
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 14
+        }
+      ],
+      "memory": {
+        "usedSize": 15720492,
+        "totalSize": 82051072,
+        "embedderHeapUsedSize": 515872,
+        "backingStorageSize": 3746507
+      },
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-legacy",
+      "variant": "candidate",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 24,
+      "warmMs": {
+        "samples": [17, 16, 16, 14, 16, 14, 16, 18, 15, 14, 15, 15],
+        "median": 16,
+        "min": 14,
+        "max": 18
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 254788,
+        "unpackStackUs": 64659,
+        "allTopSelf": [
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 79493
+          },
+          {
+            "functionName": "fetch",
+            "sampleUs": 53885
+          },
+          {
+            "functionName": "update",
+            "sampleUs": 51113
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 24461
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 12896
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 7225
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 5228
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 5006
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 3596
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 2853
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 1762
+          },
+          {
+            "functionName": "Brotli",
+            "sampleUs": 974
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 963
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 652
+          },
+          {
+            "functionName": "readHeaderStrings",
+            "sampleUs": 634
+          },
+          {
+            "functionName": "createBuffer",
+            "sampleUs": 564
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 475
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 388
+          },
+          {
+            "functionName": "isAnyArrayBuffer",
+            "sampleUs": 336
+          },
+          {
+            "functionName": "ZlibBase",
+            "sampleUs": 331
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 326
+          },
+          {
+            "functionName": "text",
+            "sampleUs": 326
+          },
+          {
+            "functionName": "fromArrayLike",
+            "sampleUs": 323
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 320
+          },
+          {
+            "functionName": "getEncodingOps",
+            "sampleUs": 311
+          },
+          {
+            "functionName": "uint",
+            "sampleUs": 309
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 38
+          }
+        ],
+        "topInclusive": [
+          {
+            "functionName": "(root)",
+            "sampleUs": 254788
+          },
+          {
+            "functionName": "fetch",
+            "sampleUs": 220694
+          },
+          {
+            "functionName": "__facade_invokeChain__",
+            "sampleUs": 220694
+          },
+          {
+            "functionName": "next",
+            "sampleUs": 220694
+          },
+          {
+            "functionName": "__facade_invoke__",
+            "sampleUs": 220694
+          },
+          {
+            "functionName": "decodeHash",
+            "sampleUs": 79804
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 64659
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 59631
+          },
+          {
+            "functionName": "update",
+            "sampleUs": 51113
+          },
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 51113
+          },
+          {
+            "functionName": "(idle)",
+            "sampleUs": 24461
+          },
+          {
+            "functionName": "Buffer",
+            "sampleUs": 12896
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 7859
+          },
+          {
+            "functionName": "createHash",
+            "sampleUs": 7859
+          },
+          {
+            "functionName": "(garbage collector)",
+            "sampleUs": 7225
+          },
+          {
+            "functionName": "bidirectionalIndexOf",
+            "sampleUs": 5228
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 5006
+          },
+          {
+            "functionName": "brotliDecompressSync",
+            "sampleUs": 3704
+          },
+          {
+            "functionName": "decompress",
+            "sampleUs": 3704
+          },
+          {
+            "functionName": "byteLength",
+            "sampleUs": 3596
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 1924
+          },
+          {
+            "functionName": "_processChunk",
+            "sampleUs": 1924
+          },
+          {
+            "functionName": "processChunk",
+            "sampleUs": 1924
+          },
+          {
+            "functionName": "Brotli",
+            "sampleUs": 1780
+          },
+          {
+            "functionName": "BrotliDecompress",
+            "sampleUs": 1780
+          },
+          {
+            "functionName": "(program)",
+            "sampleUs": 1762
+          },
+          {
+            "functionName": "size",
+            "sampleUs": 963
+          },
+          {
+            "functionName": "ZlibBase",
+            "sampleUs": 806
+          },
+          {
+            "functionName": "_from",
+            "sampleUs": 659
+          },
+          {
+            "functionName": "from",
+            "sampleUs": 659
+          }
+        ],
+        "topSelf": [
+          {
+            "functionName": "update",
+            "sampleUs": 51113,
+            "percentOfUnpackStack": 79.05009356779412
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 5006,
+            "percentOfUnpackStack": 7.742154997757467
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 2853,
+            "percentOfUnpackStack": 4.412378787175799
+          },
+          {
+            "functionName": "Brotli",
+            "sampleUs": 974,
+            "percentOfUnpackStack": 1.506364156575264
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 652,
+            "percentOfUnpackStack": 1.0083669713419632
+          },
+          {
+            "functionName": "readHeaderStrings",
+            "sampleUs": 634,
+            "percentOfUnpackStack": 0.9805286193723999
+          },
+          {
+            "functionName": "createBuffer",
+            "sampleUs": 564,
+            "percentOfUnpackStack": 0.8722683617129866
+          },
+          {
+            "functionName": "Duplex",
+            "sampleUs": 475,
+            "percentOfUnpackStack": 0.7346231769745898
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 388,
+            "percentOfUnpackStack": 0.6000711424550333
+          },
+          {
+            "functionName": "isAnyArrayBuffer",
+            "sampleUs": 336,
+            "percentOfUnpackStack": 0.5196492367651835
+          },
+          {
+            "functionName": "ZlibBase",
+            "sampleUs": 331,
+            "percentOfUnpackStack": 0.5119163612180826
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 326,
+            "percentOfUnpackStack": 0.5041834856709816
+          },
+          {
+            "functionName": "text",
+            "sampleUs": 326,
+            "percentOfUnpackStack": 0.5041834856709816
+          },
+          {
+            "functionName": "fromArrayLike",
+            "sampleUs": 323,
+            "percentOfUnpackStack": 0.499543760342721
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 320,
+            "percentOfUnpackStack": 0.4949040350144605
+          },
+          {
+            "functionName": "now",
+            "sampleUs": 38,
+            "percentOfUnpackStack": 0.058769854157967184
+          }
+        ]
+      },
+      "stageSamples": [
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 15
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 15
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 15
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 12
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 15
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 13
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 14
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 1,
+          "entriesMs": 15
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 13
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 13
+        },
+        {
+          "preambleMs": 1,
+          "decompressMs": 0,
+          "entriesMs": 14
+        },
+        {
+          "preambleMs": 2,
+          "decompressMs": 0,
+          "entriesMs": 13
+        }
+      ],
+      "memory": {
+        "usedSize": 25668692,
+        "totalSize": 77070336,
+        "embedderHeapUsedSize": 515872,
+        "backingStorageSize": 3886163
+      },
+      "singleShotHash": "function"
+    }
+  ]
+}

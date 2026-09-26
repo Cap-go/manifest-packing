@@ -1,0 +1,316 @@
+{
+  "generatedAt": "2026-09-26T12:55:39.875Z",
+  "mode": "profile",
+  "baselineRef": "b8b099401f78ea8c52c648fbd250c82af7d682ac",
+  "runtime": {
+    "node": "v22.15.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M4 Pro",
+    "wrangler": "4.140.0",
+    "workerd": "1.20260923.1"
+  },
+  "method": {
+    "rounds": 1,
+    "warmSamples": 9,
+    "warmups": 3,
+    "profileIterations": 12,
+    "profileIntervalUs": 250,
+    "freshIsolatePerScenarioVariantRound": true,
+    "order": "AB/BA alternates each round",
+    "syntheticOnly": true,
+    "exactTupleFingerprintAfterFirstTimedDecode": true,
+    "inputPacketsFromBaselineNodeEncoder": true,
+    "forcedGc": false,
+    "singleDecodePerRequest": true,
+    "timingExcludesFixtureAndVerification": true
+  },
+  "source": {
+    "baseline": {
+      "hashes": {
+        "src/binary.ts": "b5527ebc474423cf53cbfafa32ee87a525016ad25ba96e5a4a59713607e4b195",
+        "src/codec.ts": "1b709ea0ed92c7a729263ed08976059098a748276bee282e50f8c0a170ff4b83",
+        "src/compression.ts": "7a8c2919d111482d1b89ca8905428f8596fa2ed2147fb05c280e4c329fa8ee02",
+        "src/errors.ts": "b94921d49472fa1aef3eee49208ef9702ff42797048aa1a90e5df34cc1f9a57b",
+        "src/index.ts": "875c5b487fc373bc768568732ee4764a34cea4a648d87245a3bfd9e9fc365c6f",
+        "src/paths.ts": "ce9218b1275f582196b9fd1373edc94e0e7a490852a4231f578462c6cea971b5",
+        "src/types.ts": "b9ec239f714b3995766a361cfea26b76cc9f4bbd620840fe930310a11fcf41c5",
+        "fixtures/synthetic.ts": "35b63dac1f0188bd9d2b5f842a83825fa576c5c8f84ab1b7b34d0d66783f9998",
+        "bench/decoder-comparison-worker.ts": "bd8e2cf656e54b530fc47777ebbca60eaae248680045c9ea05dbbd3787111165",
+        "bench/decoder-comparison-fixtures.ts": "a530be9a98dc8f40c04e105c534879538f67ff0624f0d0b225ddb287722aa592"
+      },
+      "bundleSha256": "b3a525da8f6a36f89f35f347b53797f772d6f6c54e5f7da22c51f35fd8eeba42"
+    },
+    "candidate": {
+      "hashes": {
+        "src/binary.ts": "3cd46ae049478160b4ebd80bf123b8c0d4c0657e4ba57a99ebd2937d550c2391",
+        "src/codec.ts": "cf361254b9a799e04ebf8461d132afd3f4c503af3de9612e5dfde806cfa93bb1",
+        "src/compression.ts": "7a8c2919d111482d1b89ca8905428f8596fa2ed2147fb05c280e4c329fa8ee02",
+        "src/errors.ts": "b94921d49472fa1aef3eee49208ef9702ff42797048aa1a90e5df34cc1f9a57b",
+        "src/index.ts": "875c5b487fc373bc768568732ee4764a34cea4a648d87245a3bfd9e9fc365c6f",
+        "src/paths.ts": "97b2553311c28241bfbf89f1c95bf93df08cc0a88be4868e1e06df019aa34f5f",
+        "src/types.ts": "b9ec239f714b3995766a361cfea26b76cc9f4bbd620840fe930310a11fcf41c5",
+        "fixtures/synthetic.ts": "35b63dac1f0188bd9d2b5f842a83825fa576c5c8f84ab1b7b34d0d66783f9998",
+        "bench/decoder-comparison-worker.ts": "bd8e2cf656e54b530fc47777ebbca60eaae248680045c9ea05dbbd3787111165",
+        "bench/decoder-comparison-fixtures.ts": "a530be9a98dc8f40c04e105c534879538f67ff0624f0d0b225ddb287722aa592"
+      },
+      "bundleSha256": "1b8cf41bb142e7e9ae2b16d0a6599c952a1e4ac0bb810bb18829e54aec688e78"
+    }
+  },
+  "results": [
+    {
+      "round": 0,
+      "scenario": "rsa-v3-delta",
+      "variant": "baseline",
+      "packetBytes": 2601109,
+      "firstDecodeMs": 57,
+      "warmMs": {
+        "samples": [42, 39, 40, 40, 45, 66, 47, 47, 45, 42, 43, 42],
+        "median": 43,
+        "min": 39,
+        "max": 66
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 640690,
+        "unpackStackUs": 63827,
+        "topSelf": [
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 59017,
+            "percentOfUnpackStack": 92.46400426151942
+          },
+          {
+            "functionName": "createHash",
+            "sampleUs": 2581,
+            "percentOfUnpackStack": 4.043743243454964
+          },
+          {
+            "functionName": "data",
+            "sampleUs": 510,
+            "percentOfUnpackStack": 0.7990348911902487
+          },
+          {
+            "functionName": "HashHandle",
+            "sampleUs": 450,
+            "percentOfUnpackStack": 0.705030786344337
+          },
+          {
+            "functionName": "setErrorHandler",
+            "sampleUs": 322,
+            "percentOfUnpackStack": 0.5044886960063922
+          },
+          {
+            "functionName": "Budget",
+            "sampleUs": 318,
+            "percentOfUnpackStack": 0.49822175568333155
+          },
+          {
+            "functionName": "Brotli",
+            "sampleUs": 317,
+            "percentOfUnpackStack": 0.4966550206025663
+          },
+          {
+            "functionName": "Hash.digest",
+            "sampleUs": 312,
+            "percentOfUnpackStack": 0.4888213451987404
+          }
+        ]
+      },
+      "memory": {
+        "usedSize": 36955472,
+        "totalSize": 93323264,
+        "embedderHeapUsedSize": 902752,
+        "backingStorageSize": 5207502
+      }
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-delta",
+      "variant": "candidate",
+      "packetBytes": 2601109,
+      "firstDecodeMs": 53,
+      "warmMs": {
+        "samples": [51, 39, 39, 56, 66, 52, 38, 37, 47, 46, 49, 37],
+        "median": 47,
+        "min": 37,
+        "max": 66
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 663050,
+        "unpackStackUs": 52971,
+        "topSelf": [
+          {
+            "functionName": "Hash.update",
+            "sampleUs": 49385,
+            "percentOfUnpackStack": 93.23025806573409
+          },
+          {
+            "functionName": "unpackManifest",
+            "sampleUs": 1830,
+            "percentOfUnpackStack": 3.4547205074474716
+          },
+          {
+            "functionName": "Brotli",
+            "sampleUs": 397,
+            "percentOfUnpackStack": 0.7494666893205717
+          },
+          {
+            "functionName": "createBuffer",
+            "sampleUs": 364,
+            "percentOfUnpackStack": 0.6871684506616828
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 347,
+            "percentOfUnpackStack": 0.6550754186252855
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 331,
+            "percentOfUnpackStack": 0.624870212002794
+          },
+          {
+            "functionName": "_processChunk",
+            "sampleUs": 317,
+            "percentOfUnpackStack": 0.5984406562081139
+          }
+        ]
+      },
+      "memory": {
+        "usedSize": 18615148,
+        "totalSize": 85196800,
+        "embedderHeapUsedSize": 1031712,
+        "backingStorageSize": 4086366
+      }
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-legacy",
+      "variant": "baseline",
+      "packetBytes": 2601122,
+      "firstDecodeMs": 24,
+      "warmMs": {
+        "samples": [14, 16, 14, 15, 17, 14, 14, 14, 14, 16, 13, 13],
+        "median": 14,
+        "min": 13,
+        "max": 17
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 231028,
+        "unpackStackUs": 45283,
+        "topSelf": [
+          {
+            "functionName": "update",
+            "sampleUs": 39841,
+            "percentOfUnpackStack": 87.98224499260208
+          },
+          {
+            "functionName": "Hash",
+            "sampleUs": 2858,
+            "percentOfUnpackStack": 6.311419296424707
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 967,
+            "percentOfUnpackStack": 2.1354592231080094
+          },
+          {
+            "functionName": "concat",
+            "sampleUs": 651,
+            "percentOfUnpackStack": 1.4376255990106663
+          },
+          {
+            "functionName": "Brotli",
+            "sampleUs": 335,
+            "percentOfUnpackStack": 0.7397919749133228
+          },
+          {
+            "functionName": "digest",
+            "sampleUs": 321,
+            "percentOfUnpackStack": 0.7088752953647064
+          },
+          {
+            "functionName": "nativeInfo",
+            "sampleUs": 310,
+            "percentOfUnpackStack": 0.6845836185765077
+          }
+        ]
+      },
+      "memory": {
+        "usedSize": 15745628,
+        "totalSize": 82051072,
+        "embedderHeapUsedSize": 515872,
+        "backingStorageSize": 3746507
+      }
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-legacy",
+      "variant": "candidate",
+      "packetBytes": 2601122,
+      "firstDecodeMs": 18,
+      "warmMs": {
+        "samples": [12, 12, 11, 10, 11, 10, 11, 11, 11, 10, 10, 10],
+        "median": 11,
+        "min": 10,
+        "max": 12
+      },
+      "correctness": true,
+      "profile": {
+        "totalProfileUs": 186893,
+        "unpackStackUs": 45458,
+        "topSelf": [
+          {
+            "functionName": "update",
+            "sampleUs": 42336,
+            "percentOfUnpackStack": 93.13212195873113
+          },
+          {
+            "functionName": "writeSync",
+            "sampleUs": 1223,
+            "percentOfUnpackStack": 2.6903955299397246
+          },
+          {
+            "functionName": "processChunkSync",
+            "sampleUs": 341,
+            "percentOfUnpackStack": 0.750142989132826
+          },
+          {
+            "functionName": "fromArrayLike",
+            "sampleUs": 323,
+            "percentOfUnpackStack": 0.7105459985041137
+          },
+          {
+            "functionName": "ZlibBase",
+            "sampleUs": 323,
+            "percentOfUnpackStack": 0.7105459985041137
+          },
+          {
+            "functionName": "Reader",
+            "sampleUs": 320,
+            "percentOfUnpackStack": 0.7039465000659949
+          },
+          {
+            "functionName": "text",
+            "sampleUs": 318,
+            "percentOfUnpackStack": 0.6995468344405825
+          },
+          {
+            "functionName": "Brotli",
+            "sampleUs": 274,
+            "percentOfUnpackStack": 0.6027541906815083
+          }
+        ]
+      },
+      "memory": {
+        "usedSize": 25664820,
+        "totalSize": 77070336,
+        "embedderHeapUsedSize": 515872,
+        "backingStorageSize": 3886163
+      }
+    }
+  ]
+}

@@ -186,8 +186,12 @@ export class Writer {
 
 export class Reader {
   offset = 0;
+  private readonly buffer: Buffer;
 
-  constructor(readonly bytes: Uint8Array) {}
+  constructor(readonly bytes: Uint8Array) {
+    // One shared view per block, rather than two temporary views per hash.
+    this.buffer = Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  }
 
   byte(): number {
     if (this.offset >= this.bytes.length) invalid("Truncated packet");
@@ -242,6 +246,13 @@ export class Reader {
     const bytes = this.bytes.subarray(this.offset, this.offset + length);
     this.offset += length;
     return bytes;
+  }
+
+  encoded(length: number, encoding: "hex" | "base64"): string {
+    if (length > this.bytes.length - this.offset) invalid("Truncated field");
+    const start = this.offset;
+    this.offset += length;
+    return this.buffer.toString(encoding, start, this.offset);
   }
 
   lp(max: number): Uint8Array {

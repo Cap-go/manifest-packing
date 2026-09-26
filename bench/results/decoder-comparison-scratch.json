@@ -1,0 +1,2080 @@
+{
+  "passed": true,
+  "generatedAt": "2026-09-26T13:07:10.147Z",
+  "mode": "compare",
+  "baselineRef": "b8b099401f78ea8c52c648fbd250c82af7d682ac",
+  "runtime": {
+    "node": "v22.15.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M4 Pro",
+    "wrangler": "4.140.0",
+    "workerd": "1.20260923.1"
+  },
+  "method": {
+    "rounds": 3,
+    "warmSamples": 9,
+    "warmups": 3,
+    "profileIterations": 12,
+    "profileIntervalUs": 250,
+    "freshIsolatePerScenarioVariantRound": true,
+    "order": "AB/BA alternates each round",
+    "syntheticOnly": true,
+    "exactTupleFingerprintAfterFirstTimedDecode": true,
+    "inputPacketsFromBaselineNodeEncoder": true,
+    "forcedGc": false,
+    "singleDecodePerRequest": true,
+    "timingExcludesFixtureAndVerification": true,
+    "profileOnlyCoarseStageInstrumentation": false
+  },
+  "source": {
+    "baseline": {
+      "hashes": {
+        "src/binary.ts": "b5527ebc474423cf53cbfafa32ee87a525016ad25ba96e5a4a59713607e4b195",
+        "src/codec.ts": "1b709ea0ed92c7a729263ed08976059098a748276bee282e50f8c0a170ff4b83",
+        "src/compression.ts": "7a8c2919d111482d1b89ca8905428f8596fa2ed2147fb05c280e4c329fa8ee02",
+        "src/errors.ts": "b94921d49472fa1aef3eee49208ef9702ff42797048aa1a90e5df34cc1f9a57b",
+        "src/index.ts": "875c5b487fc373bc768568732ee4764a34cea4a648d87245a3bfd9e9fc365c6f",
+        "src/paths.ts": "ce9218b1275f582196b9fd1373edc94e0e7a490852a4231f578462c6cea971b5",
+        "src/types.ts": "b9ec239f714b3995766a361cfea26b76cc9f4bbd620840fe930310a11fcf41c5",
+        "fixtures/synthetic.ts": "35b63dac1f0188bd9d2b5f842a83825fa576c5c8f84ab1b7b34d0d66783f9998",
+        "bench/decoder-comparison-worker.ts": "6fb8d00dab16e72fe7a3f67f7f1a547b45d43294d1d45adb372fcacd86d8e447",
+        "bench/decoder-comparison-fixtures.ts": "91a8ddbe727e80f05d300fea0aa58c05a04ad41393d3d667f78d6204798d79bd"
+      },
+      "bundleSha256": "aa6a6e20df47086ec0d1f10991755286be58a6059316772569a5732c74d7f926"
+    },
+    "candidate": {
+      "hashes": {
+        "src/binary.ts": "3cd46ae049478160b4ebd80bf123b8c0d4c0657e4ba57a99ebd2937d550c2391",
+        "src/codec.ts": "a56a23d06317e4cfc1c1305ec80b064917b0750da83ccd8fa965623e4a1e9ba1",
+        "src/compression.ts": "7a8c2919d111482d1b89ca8905428f8596fa2ed2147fb05c280e4c329fa8ee02",
+        "src/errors.ts": "b94921d49472fa1aef3eee49208ef9702ff42797048aa1a90e5df34cc1f9a57b",
+        "src/index.ts": "875c5b487fc373bc768568732ee4764a34cea4a648d87245a3bfd9e9fc365c6f",
+        "src/paths.ts": "4550bd490a6bf0b0d51e117e347c0d53faa5e964e9a078c00aa88357b6eeac3a",
+        "src/types.ts": "b9ec239f714b3995766a361cfea26b76cc9f4bbd620840fe930310a11fcf41c5",
+        "fixtures/synthetic.ts": "35b63dac1f0188bd9d2b5f842a83825fa576c5c8f84ab1b7b34d0d66783f9998",
+        "bench/decoder-comparison-worker.ts": "6fb8d00dab16e72fe7a3f67f7f1a547b45d43294d1d45adb372fcacd86d8e447",
+        "bench/decoder-comparison-fixtures.ts": "91a8ddbe727e80f05d300fea0aa58c05a04ad41393d3d667f78d6204798d79bd"
+      },
+      "bundleSha256": "95ced4364e941004c8f91c70e3ba8a26cf76aa28f682206718591f41216dd30a"
+    }
+  },
+  "results": [
+    {
+      "round": 0,
+      "scenario": "rsa-v2-delta",
+      "variant": "baseline",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 52,
+      "warmMs": {
+        "samples": [35, 36, 27, 27, 35, 38, 37, 35, 36],
+        "median": 35,
+        "min": 27,
+        "max": 38
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v2-delta",
+      "variant": "candidate",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 50,
+      "warmMs": {
+        "samples": [33, 24, 20, 28, 19, 19, 27, 21, 19],
+        "median": 21,
+        "min": 19,
+        "max": 33
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-delta",
+      "variant": "baseline",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 50,
+      "warmMs": {
+        "samples": [39, 36, 38, 38, 37, 37, 39, 47, 43],
+        "median": 38,
+        "min": 36,
+        "max": 47
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-delta",
+      "variant": "candidate",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 37,
+      "warmMs": {
+        "samples": [24, 23, 30, 31, 29, 26, 30, 31, 26],
+        "median": 29,
+        "min": 23,
+        "max": 31
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v2-legacy",
+      "variant": "baseline",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 20,
+      "warmMs": {
+        "samples": [11, 11, 11, 8, 9, 8, 8, 8, 8],
+        "median": 8,
+        "min": 8,
+        "max": 11
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v2-legacy",
+      "variant": "candidate",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 13,
+      "warmMs": {
+        "samples": [7, 6, 6, 7, 6, 7, 6, 7, 7],
+        "median": 7,
+        "min": 6,
+        "max": 7
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-legacy",
+      "variant": "baseline",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 19,
+      "warmMs": {
+        "samples": [12, 15, 13, 14, 18, 14, 12, 12, 11],
+        "median": 13,
+        "min": 11,
+        "max": 18
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-legacy",
+      "variant": "candidate",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 17,
+      "warmMs": {
+        "samples": [11, 11, 11, 9, 11, 10, 10, 10, 10],
+        "median": 10,
+        "min": 9,
+        "max": 11
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v2-mixed",
+      "variant": "baseline",
+      "packetBytes": 2638063,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2779815,
+          "storedBytes": 2636773
+        }
+      },
+      "firstDecodeMs": 62,
+      "warmMs": {
+        "samples": [21, 20, 25, 18, 18, 21, 17, 19, 18],
+        "median": 19,
+        "min": 17,
+        "max": 25
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v2-mixed",
+      "variant": "candidate",
+      "packetBytes": 2638063,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2779815,
+          "storedBytes": 2636773
+        }
+      },
+      "firstDecodeMs": 23,
+      "warmMs": {
+        "samples": [16, 16, 15, 15, 13, 14, 13, 14, 18],
+        "median": 15,
+        "min": 13,
+        "max": 18
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-mixed",
+      "variant": "baseline",
+      "packetBytes": 2638255,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2779815,
+          "storedBytes": 2636965
+        }
+      },
+      "firstDecodeMs": 38,
+      "warmMs": {
+        "samples": [26, 25, 23, 29, 22, 20, 25, 20, 24],
+        "median": 24,
+        "min": 20,
+        "max": 29
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-mixed",
+      "variant": "candidate",
+      "packetBytes": 2638255,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2779815,
+          "storedBytes": 2636965
+        }
+      },
+      "firstDecodeMs": 27,
+      "warmMs": {
+        "samples": [16, 28, 16, 17, 16, 16, 17, 17, 17],
+        "median": 17,
+        "min": 16,
+        "max": 28
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v2-mixed-metadata-brotli",
+      "variant": "baseline",
+      "packetBytes": 2644776,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2779815,
+          "storedBytes": 2643486
+        }
+      },
+      "firstDecodeMs": 34,
+      "warmMs": {
+        "samples": [26, 25, 25, 24, 23, 24, 24, 24, 23],
+        "median": 24,
+        "min": 23,
+        "max": 26
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v2-mixed-metadata-brotli",
+      "variant": "candidate",
+      "packetBytes": 2644776,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2779815,
+          "storedBytes": 2643486
+        }
+      },
+      "firstDecodeMs": 29,
+      "warmMs": {
+        "samples": [21, 22, 21, 22, 21, 20, 21, 23, 31],
+        "median": 21,
+        "min": 20,
+        "max": 31
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-mixed-metadata-brotli",
+      "variant": "baseline",
+      "packetBytes": 2644803,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2779815,
+          "storedBytes": 2643513
+        }
+      },
+      "firstDecodeMs": 39,
+      "warmMs": {
+        "samples": [28, 30, 29, 32, 31, 26, 27, 25, 32],
+        "median": 29,
+        "min": 25,
+        "max": 32
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-mixed-metadata-brotli",
+      "variant": "candidate",
+      "packetBytes": 2644803,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2779815,
+          "storedBytes": 2643513
+        }
+      },
+      "firstDecodeMs": 36,
+      "warmMs": {
+        "samples": [23, 27, 25, 25, 25, 30, 33, 22, 24],
+        "median": 25,
+        "min": 22,
+        "max": 33
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-mixed-metadata-none",
+      "variant": "baseline",
+      "packetBytes": 2781105,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2779815,
+          "storedBytes": 2779815
+        }
+      },
+      "firstDecodeMs": 30,
+      "warmMs": {
+        "samples": [21, 21, 18, 19, 18, 18, 20, 19, 19],
+        "median": 19,
+        "min": 18,
+        "max": 21
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "rsa-v3-mixed-metadata-none",
+      "variant": "candidate",
+      "packetBytes": 2781105,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2779815,
+          "storedBytes": 2779815
+        }
+      },
+      "firstDecodeMs": 30,
+      "warmMs": {
+        "samples": [15, 15, 15, 15, 15, 14, 16, 15, 16],
+        "median": 15,
+        "min": 14,
+        "max": 16
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "sha256-delta",
+      "variant": "baseline",
+      "packetBytes": 361107,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 45,
+      "warmMs": {
+        "samples": [28, 30, 30, 30, 26, 29, 36, 47, 33],
+        "median": 30,
+        "min": 26,
+        "max": 47
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "sha256-delta",
+      "variant": "candidate",
+      "packetBytes": 361107,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 29,
+      "warmMs": {
+        "samples": [23, 18, 18, 19, 18, 19, 18, 18, 18],
+        "median": 18,
+        "min": 18,
+        "max": 23
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "unicode-delta",
+      "variant": "baseline",
+      "packetBytes": 361101,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73789,
+          "storedBytes": 1215
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 55,
+      "warmMs": {
+        "samples": [40, 33, 31, 35, 38, 41, 44, 35, 34],
+        "median": 35,
+        "min": 31,
+        "max": 44
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "unicode-delta",
+      "variant": "candidate",
+      "packetBytes": 361101,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73789,
+          "storedBytes": 1215
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 36,
+      "warmMs": {
+        "samples": [27, 29, 25, 25, 32, 34, 25, 24, 30],
+        "median": 27,
+        "min": 24,
+        "max": 34
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "long-delta",
+      "variant": "baseline",
+      "packetBytes": 361179,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 84008,
+          "storedBytes": 1293
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 62,
+      "warmMs": {
+        "samples": [44, 44, 47, 44, 44, 45, 43, 44, 47],
+        "median": 44,
+        "min": 43,
+        "max": 47
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 0,
+      "scenario": "long-delta",
+      "variant": "candidate",
+      "packetBytes": 361179,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 84008,
+          "storedBytes": 1293
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 37,
+      "warmMs": {
+        "samples": [29, 36, 32, 23, 22, 28, 29, 22, 21],
+        "median": 28,
+        "min": 21,
+        "max": 36
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v2-delta",
+      "variant": "candidate",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 33,
+      "warmMs": {
+        "samples": [27, 21, 20, 28, 20, 19, 26, 19, 19],
+        "median": 20,
+        "min": 19,
+        "max": 28
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v2-delta",
+      "variant": "baseline",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 51,
+      "warmMs": {
+        "samples": [34, 36, 27, 29, 35, 34, 54, 35, 36],
+        "median": 35,
+        "min": 27,
+        "max": 54
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v3-delta",
+      "variant": "candidate",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 36,
+      "warmMs": {
+        "samples": [25, 24, 30, 30, 24, 26, 33, 45, 27],
+        "median": 27,
+        "min": 24,
+        "max": 45
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v3-delta",
+      "variant": "baseline",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 47,
+      "warmMs": {
+        "samples": [38, 38, 37, 38, 37, 38, 38, 38, 38],
+        "median": 38,
+        "min": 37,
+        "max": 38
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v2-legacy",
+      "variant": "candidate",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 14,
+      "warmMs": {
+        "samples": [7, 7, 6, 7, 6, 6, 6, 7, 8],
+        "median": 7,
+        "min": 6,
+        "max": 8
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v2-legacy",
+      "variant": "baseline",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 16,
+      "warmMs": {
+        "samples": [16, 10, 9, 8, 10, 10, 8, 9, 7],
+        "median": 9,
+        "min": 7,
+        "max": 16
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v3-legacy",
+      "variant": "candidate",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 17,
+      "warmMs": {
+        "samples": [11, 11, 12, 11, 12, 11, 11, 11, 12],
+        "median": 11,
+        "min": 11,
+        "max": 12
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v3-legacy",
+      "variant": "baseline",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 21,
+      "warmMs": {
+        "samples": [12, 13, 12, 12, 13, 11, 11, 11, 11],
+        "median": 12,
+        "min": 11,
+        "max": 13
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v2-mixed",
+      "variant": "candidate",
+      "packetBytes": 2638063,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2779815,
+          "storedBytes": 2636773
+        }
+      },
+      "firstDecodeMs": 23,
+      "warmMs": {
+        "samples": [17, 17, 15, 15, 13, 15, 13, 15, 20],
+        "median": 15,
+        "min": 13,
+        "max": 20
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v2-mixed",
+      "variant": "baseline",
+      "packetBytes": 2638063,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2779815,
+          "storedBytes": 2636773
+        }
+      },
+      "firstDecodeMs": 32,
+      "warmMs": {
+        "samples": [21, 21, 20, 20, 17, 21, 35, 18, 16],
+        "median": 20,
+        "min": 16,
+        "max": 35
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v3-mixed",
+      "variant": "candidate",
+      "packetBytes": 2638255,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2779815,
+          "storedBytes": 2636965
+        }
+      },
+      "firstDecodeMs": 27,
+      "warmMs": {
+        "samples": [16, 17, 15, 16, 16, 16, 18, 16, 17],
+        "median": 16,
+        "min": 15,
+        "max": 18
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v3-mixed",
+      "variant": "baseline",
+      "packetBytes": 2638255,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2779815,
+          "storedBytes": 2636965
+        }
+      },
+      "firstDecodeMs": 33,
+      "warmMs": {
+        "samples": [23, 24, 21, 23, 21, 19, 20, 21, 28],
+        "median": 21,
+        "min": 19,
+        "max": 28
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v2-mixed-metadata-brotli",
+      "variant": "candidate",
+      "packetBytes": 2644776,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2779815,
+          "storedBytes": 2643486
+        }
+      },
+      "firstDecodeMs": 29,
+      "warmMs": {
+        "samples": [21, 21, 22, 20, 19, 19, 18, 19, 24],
+        "median": 20,
+        "min": 18,
+        "max": 24
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v2-mixed-metadata-brotli",
+      "variant": "baseline",
+      "packetBytes": 2644776,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2779815,
+          "storedBytes": 2643486
+        }
+      },
+      "firstDecodeMs": 35,
+      "warmMs": {
+        "samples": [29, 32, 38, 35, 24, 31, 24, 24, 25],
+        "median": 29,
+        "min": 24,
+        "max": 38
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v3-mixed-metadata-brotli",
+      "variant": "candidate",
+      "packetBytes": 2644803,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2779815,
+          "storedBytes": 2643513
+        }
+      },
+      "firstDecodeMs": 33,
+      "warmMs": {
+        "samples": [23, 23, 23, 22, 22, 23, 24, 22, 23],
+        "median": 23,
+        "min": 22,
+        "max": 24
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v3-mixed-metadata-brotli",
+      "variant": "baseline",
+      "packetBytes": 2644803,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2779815,
+          "storedBytes": 2643513
+        }
+      },
+      "firstDecodeMs": 70,
+      "warmMs": {
+        "samples": [29, 30, 28, 30, 27, 27, 31, 26, 31],
+        "median": 29,
+        "min": 26,
+        "max": 31
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v3-mixed-metadata-none",
+      "variant": "candidate",
+      "packetBytes": 2781105,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2779815,
+          "storedBytes": 2779815
+        }
+      },
+      "firstDecodeMs": 24,
+      "warmMs": {
+        "samples": [15, 16, 14, 16, 14, 16, 15, 15, 16],
+        "median": 15,
+        "min": 14,
+        "max": 16
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "rsa-v3-mixed-metadata-none",
+      "variant": "baseline",
+      "packetBytes": 2781105,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2779815,
+          "storedBytes": 2779815
+        }
+      },
+      "firstDecodeMs": 29,
+      "warmMs": {
+        "samples": [21, 20, 18, 18, 18, 18, 19, 18, 19],
+        "median": 18,
+        "min": 18,
+        "max": 21
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "sha256-delta",
+      "variant": "candidate",
+      "packetBytes": 361107,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 31,
+      "warmMs": {
+        "samples": [22, 18, 18, 21, 20, 20, 20, 20, 19],
+        "median": 20,
+        "min": 18,
+        "max": 22
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "sha256-delta",
+      "variant": "baseline",
+      "packetBytes": 361107,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 39,
+      "warmMs": {
+        "samples": [28, 30, 28, 31, 26, 26, 33, 35, 24],
+        "median": 28,
+        "min": 24,
+        "max": 35
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "unicode-delta",
+      "variant": "candidate",
+      "packetBytes": 361101,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73789,
+          "storedBytes": 1215
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 39,
+      "warmMs": {
+        "samples": [28, 31, 26, 49, 36, 34, 25, 25, 31],
+        "median": 31,
+        "min": 25,
+        "max": 49
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "unicode-delta",
+      "variant": "baseline",
+      "packetBytes": 361101,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73789,
+          "storedBytes": 1215
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 50,
+      "warmMs": {
+        "samples": [39, 30, 31, 36, 37, 36, 37, 30, 30],
+        "median": 36,
+        "min": 30,
+        "max": 39
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "long-delta",
+      "variant": "candidate",
+      "packetBytes": 361179,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 84008,
+          "storedBytes": 1293
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 33,
+      "warmMs": {
+        "samples": [21, 26, 30, 23, 21, 26, 29, 22, 21],
+        "median": 23,
+        "min": 21,
+        "max": 30
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 1,
+      "scenario": "long-delta",
+      "variant": "baseline",
+      "packetBytes": 361179,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 84008,
+          "storedBytes": 1293
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 58,
+      "warmMs": {
+        "samples": [114, 47, 47, 49, 46, 47, 44, 43, 47],
+        "median": 47,
+        "min": 43,
+        "max": 114
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v2-delta",
+      "variant": "baseline",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 43,
+      "warmMs": {
+        "samples": [35, 36, 26, 26, 34, 35, 35, 34, 35],
+        "median": 35,
+        "min": 26,
+        "max": 36
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v2-delta",
+      "variant": "candidate",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 33,
+      "warmMs": {
+        "samples": [26, 20, 18, 28, 19, 19, 27, 20, 19],
+        "median": 20,
+        "min": 18,
+        "max": 28
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v3-delta",
+      "variant": "baseline",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 46,
+      "warmMs": {
+        "samples": [52, 60, 47, 46, 46, 54, 42, 47, 39],
+        "median": 47,
+        "min": 39,
+        "max": 60
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v3-delta",
+      "variant": "candidate",
+      "packetBytes": 2601109,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 37,
+      "warmMs": {
+        "samples": [26, 25, 32, 33, 25, 24, 30, 33, 23],
+        "median": 26,
+        "min": 23,
+        "max": 33
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v2-legacy",
+      "variant": "baseline",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 15,
+      "warmMs": {
+        "samples": [8, 9, 8, 8, 8, 8, 7, 8, 7],
+        "median": 8,
+        "min": 7,
+        "max": 9
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v2-legacy",
+      "variant": "candidate",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 13,
+      "warmMs": {
+        "samples": [6, 6, 7, 6, 6, 6, 7, 6, 6],
+        "median": 6,
+        "min": 6,
+        "max": 7
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v3-legacy",
+      "variant": "baseline",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 27,
+      "warmMs": {
+        "samples": [12, 12, 11, 12, 14, 11, 11, 11, 12],
+        "median": 12,
+        "min": 11,
+        "max": 14
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v3-legacy",
+      "variant": "candidate",
+      "packetBytes": 2601122,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2599832,
+          "storedBytes": 2599832
+        }
+      },
+      "firstDecodeMs": 17,
+      "warmMs": {
+        "samples": [11, 11, 11, 10, 11, 10, 10, 10, 10],
+        "median": 10,
+        "min": 10,
+        "max": 11
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v2-mixed",
+      "variant": "baseline",
+      "packetBytes": 2638063,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2779815,
+          "storedBytes": 2636773
+        }
+      },
+      "firstDecodeMs": 32,
+      "warmMs": {
+        "samples": [19, 19, 19, 18, 16, 17, 17, 17, 17],
+        "median": 17,
+        "min": 16,
+        "max": 19
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v2-mixed",
+      "variant": "candidate",
+      "packetBytes": 2638063,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2779815,
+          "storedBytes": 2636773
+        }
+      },
+      "firstDecodeMs": 23,
+      "warmMs": {
+        "samples": [16, 15, 14, 14, 13, 14, 17, 15, 21],
+        "median": 15,
+        "min": 13,
+        "max": 21
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v3-mixed",
+      "variant": "baseline",
+      "packetBytes": 2638255,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2779815,
+          "storedBytes": 2636965
+        }
+      },
+      "firstDecodeMs": 34,
+      "warmMs": {
+        "samples": [23, 26, 23, 27, 22, 21, 25, 20, 24],
+        "median": 23,
+        "min": 20,
+        "max": 27
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v3-mixed",
+      "variant": "candidate",
+      "packetBytes": 2638255,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 2,
+          "rawBytes": 2779815,
+          "storedBytes": 2636965
+        }
+      },
+      "firstDecodeMs": 96,
+      "warmMs": {
+        "samples": [18, 17, 17, 16, 16, 16, 18, 17, 17],
+        "median": 17,
+        "min": 16,
+        "max": 18
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v2-mixed-metadata-brotli",
+      "variant": "baseline",
+      "packetBytes": 2644776,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2779815,
+          "storedBytes": 2643486
+        }
+      },
+      "firstDecodeMs": 40,
+      "warmMs": {
+        "samples": [27, 27, 24, 24, 22, 24, 21, 23, 23],
+        "median": 24,
+        "min": 21,
+        "max": 27
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v2-mixed-metadata-brotli",
+      "variant": "candidate",
+      "packetBytes": 2644776,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2779815,
+          "storedBytes": 2643486
+        }
+      },
+      "firstDecodeMs": 29,
+      "warmMs": {
+        "samples": [22, 23, 22, 20, 19, 19, 19, 21, 24],
+        "median": 21,
+        "min": 19,
+        "max": 24
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v3-mixed-metadata-brotli",
+      "variant": "baseline",
+      "packetBytes": 2644803,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2779815,
+          "storedBytes": 2643513
+        }
+      },
+      "firstDecodeMs": 39,
+      "warmMs": {
+        "samples": [28, 30, 27, 29, 28, 27, 26, 26, 30],
+        "median": 28,
+        "min": 26,
+        "max": 30
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v3-mixed-metadata-brotli",
+      "variant": "candidate",
+      "packetBytes": 2644803,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 1,
+          "rawBytes": 2779815,
+          "storedBytes": 2643513
+        }
+      },
+      "firstDecodeMs": 33,
+      "warmMs": {
+        "samples": [24, 25, 24, 22, 23, 22, 23, 23, 24],
+        "median": 23,
+        "min": 22,
+        "max": 25
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v3-mixed-metadata-none",
+      "variant": "baseline",
+      "packetBytes": 2781105,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2779815,
+          "storedBytes": 2779815
+        }
+      },
+      "firstDecodeMs": 29,
+      "warmMs": {
+        "samples": [23, 30, 29, 29, 34, 25, 21, 19, 26],
+        "median": 26,
+        "min": 19,
+        "max": 34
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "rsa-v3-mixed-metadata-none",
+      "variant": "candidate",
+      "packetBytes": 2781105,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 2779815,
+          "storedBytes": 2779815
+        }
+      },
+      "firstDecodeMs": 25,
+      "warmMs": {
+        "samples": [16, 17, 15, 15, 16, 15, 15, 14, 15],
+        "median": 15,
+        "min": 14,
+        "max": 17
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "sha256-delta",
+      "variant": "baseline",
+      "packetBytes": 361107,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 91,
+      "warmMs": {
+        "samples": [31, 29, 29, 30, 26, 25, 34, 36, 26],
+        "median": 29,
+        "min": 25,
+        "max": 36
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "sha256-delta",
+      "variant": "candidate",
+      "packetBytes": 361107,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73768,
+          "storedBytes": 1221
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 43,
+      "warmMs": {
+        "samples": [21, 18, 17, 19, 17, 21, 20, 18, 18],
+        "median": 18,
+        "min": 17,
+        "max": 21
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "unicode-delta",
+      "variant": "baseline",
+      "packetBytes": 361101,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73789,
+          "storedBytes": 1215
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 46,
+      "warmMs": {
+        "samples": [39, 31, 30, 36, 39, 40, 40, 31, 30],
+        "median": 36,
+        "min": 30,
+        "max": 40
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "unicode-delta",
+      "variant": "candidate",
+      "packetBytes": 361101,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 73789,
+          "storedBytes": 1215
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 68,
+      "warmMs": {
+        "samples": [30, 32, 29, 31, 35, 36, 27, 25, 30],
+        "median": 30,
+        "min": 25,
+        "max": 36
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "long-delta",
+      "variant": "baseline",
+      "packetBytes": 361179,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 84008,
+          "storedBytes": 1293
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 63,
+      "warmMs": {
+        "samples": [43, 43, 47, 45, 45, 48, 44, 46, 64],
+        "median": 45,
+        "min": 43,
+        "max": 64
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    },
+    {
+      "round": 2,
+      "scenario": "long-delta",
+      "variant": "candidate",
+      "packetBytes": 361179,
+      "blocks": {
+        "filenames": {
+          "codec": 1,
+          "rawBytes": 84008,
+          "storedBytes": 1293
+        },
+        "metadata": {
+          "codec": 0,
+          "rawBytes": 359832,
+          "storedBytes": 359832
+        }
+      },
+      "firstDecodeMs": 33,
+      "warmMs": {
+        "samples": [21, 28, 29, 20, 21, 28, 28, 21, 20],
+        "median": 21,
+        "min": 20,
+        "max": 29
+      },
+      "correctness": true,
+      "stageSamples": [],
+      "singleShotHash": "function"
+    }
+  ]
+}

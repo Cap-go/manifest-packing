@@ -1,5 +1,7 @@
 # Local Workers results — 2026-09-25
 
+These are the preserved **pre-optimization** results. See the [2026-09-26 decoder follow-up](decoder-allocation-optimization.md) for the current implementation's controlled before/after comparison and refreshed Worker validation. Historical first-decode timings below should not be treated as its current latency.
+
 The full local suite passed field-for-field validation for eight synthetic workloads and 126 malformed-packet cases. All bounded suite phases stayed below the diagnostic 96 MiB accounting threshold; the largest observed sum was 91,091,654 bytes. The deliberately unguarded eight-request stress run failed the 128 MB check. These are measured local results, not a guarantee about total production isolate memory.
 
 Environment: Apple M4 Pro, macOS arm64, Node 22.15.0, Wrangler 4.140.0, workerd 1.20260923.1, compatibility date 2026-09-25. The full suite Worker bundle SHA-256 is `aa3de5cb52ad3e2e7916c4064e4afdbd1fe5cfec212ccb8590256ae542d8ace5`. All inputs are invented synthetic fixtures. See [methodology](benchmark-methodology.md), [full raw suite](../bench/results/suite.json), [codec matrix](../bench/results/matrix.json), [memory rerun](../bench/results/memory.json), and [quick smoke](../bench/results/quick.json).

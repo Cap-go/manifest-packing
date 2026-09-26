@@ -1,0 +1,229 @@
+{
+  "phases": [
+    {
+      "timestamp": "2026-09-26T13:04:21.168Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 64
+      },
+      "summary": [
+        {
+          "codec": "64",
+          "method": "createHash-reuseBuffer",
+          "medianMs": 14,
+          "p95Ms": 15
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 5567788,
+          "totalSize": 11272192,
+          "embedderHeapUsedSize": 644832,
+          "backingStorageSize": 1116206
+        },
+        "maximumAccountedBytes": 17815942,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "64",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 20,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "64",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 16,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "64",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 13,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "64",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 15,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "64",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 14,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "64",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 11,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:04:22.297Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 344
+      },
+      "summary": [
+        {
+          "codec": "344",
+          "method": "createHash-reuseBuffer",
+          "medianMs": 16,
+          "p95Ms": 17
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 7846264,
+          "totalSize": 19136512,
+          "embedderHeapUsedSize": 773792,
+          "backingStorageSize": 1405990
+        },
+        "maximumAccountedBytes": 21995414,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "344",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 18,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "344",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 15,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "344",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 16,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "344",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 12,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "344",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 17,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "344",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 12,
+          "verifiedHashes": 10000
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-26T13:04:23.464Z",
+      "runtime": {
+        "node": "v22.15.0",
+        "wrangler": "4.140.0",
+        "workerd": "1.20260923.1"
+      },
+      "method": "Synthetic 10000 unique checksum strings. Fresh workerd per character length/method, 6 rounds first 2 warmup. Includes input TextEncoder and output lowercase hexadecimal conversion for WebCrypto, no more than 32 concurrent digests. Timings exclude fixture preparation and exact correctness comparisons. CDP sampled every 5 ms, no forced GC; native allocations may be absent.",
+      "prepared": {
+        "count": 10000,
+        "characters": 512
+      },
+      "summary": [
+        {
+          "codec": "512",
+          "method": "createHash-reuseBuffer",
+          "medianMs": 17,
+          "p95Ms": 20
+        }
+      ],
+      "memory": {
+        "baseline": {
+          "usedSize": 12030404,
+          "totalSize": 22020096,
+          "embedderHeapUsedSize": 644832,
+          "backingStorageSize": 3064046
+        },
+        "maximumAccountedBytes": 23430450,
+        "sampleCount": 6
+      },
+      "timings": [
+        {
+          "round": 0,
+          "codec": "512",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 19,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 1,
+          "codec": "512",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 16,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 2,
+          "codec": "512",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 17,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 3,
+          "codec": "512",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 14,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 4,
+          "codec": "512",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 20,
+          "verifiedHashes": 10000
+        },
+        {
+          "round": 5,
+          "codec": "512",
+          "method": "createHash-reuseBuffer",
+          "elapsedMs": 14,
+          "verifiedHashes": 10000
+        }
+      ]
+    }
+  ]
+}

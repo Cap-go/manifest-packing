@@ -65,8 +65,36 @@ export function deltaPrefix(header: Header): string {
   );
 }
 
-export function encodedName(name: string): string {
-  return name.split("/").map(encodeURIComponent).join("/");
+export function encodePathName(name: string): string {
+  // Most bundle names are already URI-safe. Keep the original string and avoid
+  // per-segment arrays; on the slow path only actual slash bytes are restored.
+  if (/^[A-Za-z0-9_!~*'()./-]*$/.test(name)) return name;
+  return encodeURIComponent(name).replaceAll("%2F", "/");
+}
+
+export const PATH_HASH_SCRATCH_BYTES = 512;
+
+/** Keep the common hash-text conversion buffer local to one decode operation. */
+export class PathHasher {
+  private readonly bytes = Buffer.alloc(PATH_HASH_SCRATCH_BYTES);
+  private readonly sha = this.bytes.subarray(0, 64);
+  private readonly base64 = this.bytes.subarray(0, 344);
+
+  digest(value: string, byteLength: number): string {
+    if (byteLength > this.bytes.length)
+      return createHash("sha256").update(value, "utf8").digest("hex");
+    const written = this.bytes.write(value, 0, byteLength, "utf8");
+    if (written !== byteLength) invalid("Hash text byte length mismatch");
+    const bytes =
+      byteLength === 512
+        ? this.bytes
+        : byteLength === 344
+          ? this.base64
+          : byteLength === 64
+            ? this.sha
+            : this.bytes.subarray(0, byteLength);
+    return createHash("sha256").update(bytes).digest("hex");
+  }
 }
 
 export function deltaPath(prefix: string, name: string, hash: string): string {
@@ -74,7 +102,7 @@ export function deltaPath(prefix: string, name: string, hash: string): string {
     prefix +
     createHash("sha256").update(hash, "utf8").digest("hex") +
     "_" +
-    encodedName(name)
+    encodePathName(name)
   );
 }
 
@@ -194,8 +222,5 @@ export function decodeHash(reader: Reader, max: number): string {
   if (kind > 3) invalid("Unknown hash representation");
   const textLength = kind === 0 ? 64 : kind === 1 ? 344 : 512;
   if (textLength > max) resource("Hash exceeds string byte limit");
-  const bytes = reader.data(kind === 0 ? 32 : 256);
-  return Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength).toString(
-    kind === 1 ? "base64" : "hex"
-  );
+  return reader.encoded(kind === 0 ? 32 : 256, kind === 1 ? "base64" : "hex");
 }

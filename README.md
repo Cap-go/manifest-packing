@@ -178,10 +178,11 @@ Node 22.15 is also tested; the package commands explicitly enable TypeScript
 stripping instead of relying on a newer Node version's default.
 
 Recorded evidence includes the [aggregate corpus result](docs/corpus-verification-results.json),
-[local Worker results and codec matrix](docs/benchmark-results.md), and a
-[controlled decoder optimization experiment](docs/decoder-optimization.md).
-The experiment reports modest, workload-dependent effects, not a universal
-speedup or proof that no faster implementation exists.
+[local Worker results and codec matrix](docs/benchmark-results.md), the
+[decoder allocation follow-up](docs/decoder-allocation-optimization.md), and a
+[prior numeric-reader experiment](docs/decoder-optimization.md).
+These measurements are workload-dependent, not a universal speedup or proof
+that no faster implementation exists.
 
 Protocol version 0 is independent of the npm package version. A database storing
 it must permit `format_version = 0`; older draft SQL with `CHECK (format_version > 0)`
