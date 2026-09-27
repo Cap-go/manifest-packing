@@ -1,6 +1,6 @@
 {
   "name": "@capgo/manifest-packing",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Versioned binary packing for Capgo manifests",
   "type": "module",
   "packageManager": "bun@1.3.9",
