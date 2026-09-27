@@ -546,28 +546,27 @@ export function unpackManifest(
   input: UnpackManifestInput,
   options: UnpackManifestOptions = {}
 ): DecodedManifestEntry[] {
-  const hasSize = input?.manifest_size != null;
-  if (hasSize !== (input?.manifest_size_payload_hash != null))
+  const packet = input?.manifest_size;
+  const hash = input?.manifest_size_payload_hash;
+  const hasSize = packet != null;
+  if (hasSize !== (hash != null))
     throw new ManifestPackingError(
       "INVALID_INPUT",
       "Size packet and hash must be supplied together"
     );
   if (
     hasSize &&
-    (!(input.manifest_size instanceof Uint8Array) ||
-      !(input.manifest_size_payload_hash instanceof Uint8Array))
+    (!(packet instanceof Uint8Array) || !(hash instanceof Uint8Array))
   )
     throw new ManifestPackingError(
       "INVALID_INPUT",
       "Size packet and hash must be byte arrays"
     );
-  const { rows, tags, maxPacketBytes } = decodeMain(input, options);
-  if (!hasSize) return rows;
-  const packet = input.manifest_size!;
-  const hash = input.manifest_size_payload_hash!;
-  if (packet.length > maxPacketBytes)
+  if (hasSize && packet.length > limitsFor(options?.limits).maxPacketBytes)
     resource("Size packet exceeds byte limit");
-  if (hash.length !== 32 || !timingSafeEqual(digest(packet), hash))
+  const { rows, tags } = decodeMain(input, options);
+  if (!hasSize) return rows;
+  if (hash!.length !== 32 || !timingSafeEqual(digest(packet), hash!))
     throw new ManifestPackingError(
       "INTEGRITY_MISMATCH",
       "Size packet hash mismatch"

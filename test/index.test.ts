@@ -578,6 +578,21 @@ describe("hash and integer representations", () => {
     );
   });
 
+  it("rejects an oversized sidecar before decoding a bad main packet", () => {
+    const packed = packManifest([entry], { encodeSize: false });
+    expect(() =>
+      unpackManifest(
+        {
+          ...packed,
+          payload_hash: new Uint8Array(32),
+          manifest_size: new Uint8Array(packed.manifest.length + 1),
+          manifest_size_payload_hash: new Uint8Array(32)
+        },
+        { limits: { maxPacketBytes: packed.manifest.length } }
+      )
+    ).toThrowError(expect.objectContaining({ code: "RESOURCE_LIMIT" }));
+  });
+
   it("rejects ambiguous late sizes for duplicate main identities", () => {
     const pending = packManifest([entry, entry], { encodeSize: false });
     expect(() =>
