@@ -51,7 +51,27 @@ jobs:
       - name: Install npm CLI for staged publishing
         run: npm install -g npm@^11.15.0
 
+      - name: Check whether the package exists on npm
+        id: package_status
+        run: |
+          package_name=$(node -p "require('./package.json').name")
+          if lookup=$(npm view "$package_name" version --json 2>&1); then
+            echo 'exists=true' >> "$GITHUB_OUTPUT"
+          elif [[ "$lookup" == *'E404'* ]]; then
+            echo 'exists=false' >> "$GITHUB_OUTPUT"
+          else
+            printf '%s\n' "$lookup" >&2
+            exit 1
+          fi
+
+      - name: Publish the first package version to npm
+        if: steps.package_status.outputs.exists == 'false'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --tag latest --provenance --access public --ignore-scripts
+
       - name: Stage publish to npm
+        if: steps.package_status.outputs.exists == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
@@ -59,6 +79,7 @@ jobs:
           npm stage publish --tag latest --provenance --access public --ignore-scripts
 
       - name: Request stage approval
+        if: steps.package_status.outputs.exists == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.NPM_STAGE_DISPATCH_TOKEN }}
