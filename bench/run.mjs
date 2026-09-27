@@ -391,7 +391,7 @@ async function pausedDecode(server) {
   });
   const lines = scriptSource.split("\n");
   const decoderStart = lines.findIndex((line) =>
-    line.startsWith("function unpackManifest(")
+    line.startsWith("function decodeMain(")
   );
   const decoderEnd = lines.findIndex(
     (line, index) => index > decoderStart && line === "}"
@@ -402,10 +402,12 @@ async function pausedDecode(server) {
   const locations = [];
   for (const [label, statement] of [
     ["decoded-blocks-alive", "const names = new Reader(nameData);"],
-    ["decoded-entries-alive", "return rows;"]
+    ["decoded-entries-alive", "return { rows, tags,"]
   ]) {
     const matches = lines.flatMap((line, index) =>
-      index > decoderStart && index < decoderEnd && line.trim() === statement
+      index > decoderStart &&
+      index < decoderEnd &&
+      line.trim().startsWith(statement)
         ? [index]
         : []
     );

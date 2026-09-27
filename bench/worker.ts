@@ -236,20 +236,8 @@ export default {
       }
       if (url.pathname === "/import" && request.method === "POST") {
         const name = url.searchParams.get("case") ?? "maximum";
-        const wire = (await request.json()) as Omit<
-          PackedManifest,
-          | "manifest"
-          | "payload_hash"
-          | "manifest_size"
-          | "manifest_size_payload_hash"
-          | "total_file_size"
-        > & {
-          manifest: string;
-          payload_hash: string;
-          manifest_size: string;
-          manifest_size_payload_hash: string;
-          total_file_size: string;
-        };
+        const wire = (await request.json()) as Record<string, string> &
+          Pick<PackedManifest, "format_version" | "entry_count">;
         const expected = expectedEntries(
           rowsFor(name, url.searchParams.get("sizeCorpus") ?? "mixed")
         ) as DecodedManifestEntry[];
