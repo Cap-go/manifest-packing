@@ -1,11 +1,7 @@
 import { brotliCompressSync, constants, zstdCompressSync } from "node:zlib";
 import { describe, expect, it } from "vitest";
 
-import {
-  packManifest,
-  unpackManifest,
-  type Compression
-} from "../src/index.js";
+import { packManifest, unpackManifest } from "../src/index.js";
 import {
   expectedEntries,
   syntheticContext,
@@ -135,7 +131,7 @@ describe("independent codec interoperability", () => {
     ).toEqual([]);
   });
 
-  it("decodes all packed flag bits together", () => {
+  it("decodes every assigned header flag together", () => {
     const headers = bytes(
       lp(syntheticContext.org_id),
       lp(syntheticContext.app_id),
@@ -143,10 +139,10 @@ describe("independent codec interoperability", () => {
       lp("session")
     );
     const input = packet({
-      flags: 0xff,
+      flags: 0x7f,
       headers,
       names: block(bytes(uint(0), [97, 0])),
-      tails: block(bytes([2], uint(1), [3], lp("x")))
+      tails: block(bytes([2, 0x5a, 3], lp("x")))
     });
     expect(unpackManifest(input)).toEqual([
       {
@@ -200,30 +196,17 @@ describe("deterministic writer selection", () => {
   );
 
   it.each([1, 100, 1000])(
-    "selects complete metadata frames with documented tie ordering (%i rows)",
+    "selects a metadata frame no larger than raw for the same tags (%i rows)",
     (count) => {
       const entries = syntheticManifest(count, { pathMode: "literal" });
-      const candidates = codecs.map((metadata: Compression) => {
-        const candidate = inspectPacket(
-          packManifest(entries, {
-            compression: { filenames: "none", metadata }
-          }).manifest
-        ).blocks[1]!;
-        return {
-          length: completeBlockLength(candidate),
-          codec: candidate.codec
-        };
+      const packed = packManifest(entries, {
+        compression: { filenames: "none" }
       });
-      candidates.sort(
-        (left, right) => left.length - right.length || left.codec - right.codec
+      const selected = inspectPacket(packed.manifest).blocks[1]!;
+      expect(completeBlockLength(selected)).toBeLessThanOrEqual(
+        1 + uint(selected.rawLength).length * 2 + selected.rawLength
       );
-      const selected = inspectPacket(
-        packManifest(entries, { compression: { filenames: "none" } }).manifest
-      ).blocks[1]!;
-      expect({
-        length: completeBlockLength(selected),
-        codec: selected.codec
-      }).toEqual(candidates[0]);
+      expect(unpackManifest(packed)).toEqual(expectedEntries(entries));
     }
   );
 
@@ -233,11 +216,11 @@ describe("deterministic writer selection", () => {
     expect(inspected.blocks.map((item) => item.codec)).toEqual([0, 0]);
   });
 
-  it("produces identical packets for repeat calls without depending on input identity", () => {
+  it("uses fresh entry tags without changing logical decoded entries", () => {
     const entries = syntheticManifest(256);
     const first = packManifest(entries);
     const second = packManifest(entries.map((entry) => ({ ...entry })));
-    expect(second.manifest).toEqual(first.manifest);
-    expect(second.payload_hash).toEqual(first.payload_hash);
+    expect(second.manifest).not.toEqual(first.manifest);
+    expect(unpackManifest(second)).toEqual(unpackManifest(first));
   });
 });

@@ -590,7 +590,7 @@ try {
     active = await start();
     for (const transform of ["raw", "prefix"])
       for (const codec of ["none", "brotli", "zstd"])
-        for (const sizes of ["absolute", "delta"]) {
+        for (const sizes of ["mixed", "monotonic"]) {
           process.stdout.write(`Matrix ${transform}/${codec}/${sizes}\n`);
           const { prepared, packet } = encodeFixture(
             "maximum",
@@ -598,7 +598,7 @@ try {
             transform,
             sizes
           );
-          await request("/import?case=maximum", {
+          await request(`/import?case=maximum&sizeCorpus=${sizes}`, {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(packet)

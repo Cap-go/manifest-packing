@@ -24,7 +24,7 @@ export default {
       if (bytes.length !== declaredLength)
         throw new Error("Fixture length mismatch");
       prepared = {
-        format_version: 0,
+        format_version: 1,
         entry_count: Number(url.searchParams.get("count")),
         total_file_size: BigInt(url.searchParams.get("total") ?? "0"),
         payload_hash: Buffer.from(url.searchParams.get("hash") ?? "", "hex"),

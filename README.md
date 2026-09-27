@@ -1,7 +1,7 @@
 # `@capgo/manifest-packing`
 
 Lossless TypeScript encoding and decoding of Capgo manifests, using binary
-**protocol version 0**. Each app version is independently readable. The encoder
+**protocol version 1**. Each app version is independently readable. The encoder
 shares path components, packs hexadecimal/Base64 hashes into bytes, prefix-codes
 sorted filenames, and independently compresses filenames and entry metadata.
 
@@ -18,6 +18,7 @@ npm install @capgo/manifest-packing
 ```ts
 import {
   packManifest,
+  packSizeManifest,
   unpackManifest,
   ManifestPackingError,
   type ManifestEntry
@@ -41,10 +42,15 @@ try {
     }
   });
 
-  // Store all five fields together, associated with the immutable app version.
-  // Pass the entire stored object back to also verify total_file_size.
+  // Store both packets and hashes with the immutable app version.
   const decoded = unpackManifest(packed);
   console.log(decoded[0]?.file_name);
+
+  // If sizes are not checked yet, omit the sidecar. After receipt validation,
+  // attach it without rewriting the main packet:
+  const pending = packManifest(entries, { encodeSize: false });
+  const checkedSizes = packSizeManifest(pending, entries);
+  const completed = unpackManifest({ ...pending, ...checkedSizes });
 } catch (error) {
   if (error instanceof ManifestPackingError) {
     console.error(error.code, error.message);
@@ -54,14 +60,18 @@ try {
 }
 ```
 
-Both APIs are synchronous. `packManifest` returns `format_version`, `entry_count`,
-`total_file_size`, `payload_hash` (32-byte SHA-256), and `manifest` (`Uint8Array`).
-Node `Buffer` inputs are also accepted. `unpackManifest` verifies the complete
-stored packet's hash before decompressing; it checks the embedded version and
-entry count against the external fields. Supply `total_file_size` to verify its
-sum. Omitting that field is supported for the initial API's input shape.
+All three APIs are synchronous. `packManifest` returns `format_version`,
+`entry_count`, `total_file_size`, `payload_hash` (32-byte SHA-256), `manifest`
+(`Uint8Array`), plus `manifest_size` and `manifest_size_payload_hash` when
+`encodeSize` is true (the default). Both size fields are `null` otherwise.
+`total_file_size` is also `null` when `encodeSize` is false. Node `Buffer` inputs
+are also accepted. `unpackManifest` verifies both packet hashes, embedded
+versions, entry counts, the main-hash binding, and corresponding entry tags.
+Pass `total_file_size` to verify the sidecar sum when a size packet is present.
 
-The four preserved fields are `file_name`, `s3_path`, `file_hash`, and `file_size`.
+The four decoded fields are `file_name`, `s3_path`, `file_hash`, and `file_size`.
+Without a size packet, every decoded `file_size` is `null`. The codec does not
+verify R2 size receipts; callers must do that before creating/storing a sidecar.
 Database row `id` and `app_version_id` are optional input fields and are not
 serialized. If version IDs are supplied, they must agree. The caller associates
 the packet with its owning immutable version and enforces authorization.
@@ -70,8 +80,9 @@ Whole entries are stably sorted by exact UTF-8 filename bytes. Duplicate names a
 duplicate tuples remain present, with equal-name entries retaining input order.
 No Unicode normalization, hash normalization, deduplication, or path repair occurs.
 Decoded sizes use `number` through `Number.MAX_SAFE_INTEGER`, then `bigint` through
-`2^63 - 1`; the total has the same representation. Null, negative, fractional,
-unsafe-number, and overflowing file sizes are rejected. Use `bigint` for large
+`2^63 - 1`; the total has the same representation. Negative, fractional,
+unsafe-number, and overflowing file sizes are rejected. Null sizes are accepted
+only with `encodeSize: false`. Use `bigint` for large
 integers; standard JSON needs a custom serializer for those values.
 
 If `context` is omitted, the encoder infers shared components from recognizable
@@ -81,12 +92,12 @@ context avoids inference and is recommended when already available.
 
 ## Encoding choices
 
-| Option                  | Default      | Alternatives                                                    |
-| ----------------------- | ------------ | --------------------------------------------------------------- |
-| `filenameTransform`     | `"auto"`     | `"raw"`, `"prefix"`                                             |
-| `fileSizeMode`          | `"absolute"` | `"delta"`, requiring nondecreasing sizes after filename sorting |
-| `compression.filenames` | `"auto"`     | `"none"`, `"brotli"`, `"zstd"`                                  |
-| `compression.metadata`  | `"auto"`     | `"none"`, `"brotli"`, `"zstd"`                                  |
+| Option                  | Default  | Alternatives                      |
+| ----------------------- | -------- | --------------------------------- |
+| `filenameTransform`     | `"auto"` | `"raw"`, `"prefix"`               |
+| `encodeSize`            | `true`   | `false` to defer the size sidecar |
+| `compression.filenames` | `"auto"` | `"none"`, `"brotli"`, `"zstd"`    |
+| `compression.metadata`  | `"auto"` | `"none"`, `"brotli"`, `"zstd"`    |
 
 Automatic filenames compare raw/prefix transforms with uncompressed/Brotli quality
 11 blocks. Automatic metadata compares uncompressed, Brotli quality 6, and Zstandard
@@ -184,9 +195,9 @@ Recorded evidence includes the [aggregate corpus result](docs/corpus-verificatio
 These measurements are workload-dependent, not a universal speedup or proof
 that no faster implementation exists.
 
-Protocol version 0 is independent of the npm package version. A database storing
-it must permit `format_version = 0`; older draft SQL with `CHECK (format_version > 0)`
-needs adjustment by its owner before integration.
+Protocol version 1 is independent of the npm package version. Existing protocol
+0 decoders intentionally reject version 1 packets. Deploy a compatible decoder
+before storing packets with `format_version = 1`.
 
 ## Releases
 

@@ -1,5 +1,5 @@
 /** Binary protocol version; independent of the npm package version. */
-export const MANIFEST_FORMAT_VERSION = 0 as const;
+export const MANIFEST_FORMAT_VERSION = 1 as const;
 /** Default operational entry limit. It may be raised explicitly within budgets. */
 export const MAX_MANIFEST_ENTRIES = 10_000 as const;
 
@@ -11,7 +11,7 @@ export interface ManifestEntry {
   readonly file_name: string;
   readonly s3_path: string;
   readonly file_hash: string;
-  /** Null source values are rejected. Big integers are lossless through 2^63-1. */
+  /** Null is allowed when sizes are not encoded yet. */
   readonly file_size: number | bigint | null;
 }
 
@@ -22,16 +22,19 @@ export interface DecodedManifestEntry {
   s3_path: string;
   file_hash: string;
   /** Safe integers use number; larger values use bigint. */
-  file_size: number | bigint;
+  /** Null when the optional size packet was not supplied. */
+  file_size: number | bigint | null;
 }
 
 export interface PackedManifest {
   readonly format_version: typeof MANIFEST_FORMAT_VERSION;
   readonly entry_count: number;
-  readonly total_file_size: number | bigint;
+  readonly total_file_size: number | bigint | null;
   /** Raw SHA-256 of the entire stored packet. */
   readonly payload_hash: Uint8Array;
   readonly manifest: Uint8Array;
+  readonly manifest_size: Uint8Array | null;
+  readonly manifest_size_payload_hash: Uint8Array | null;
 }
 
 export interface UnpackManifestInput {
@@ -39,8 +42,16 @@ export interface UnpackManifestInput {
   readonly entry_count: number;
   readonly payload_hash: Uint8Array;
   readonly manifest: Uint8Array;
+  readonly manifest_size?: Uint8Array | null;
+  readonly manifest_size_payload_hash?: Uint8Array | null;
   /** Pass database metadata here to verify the sum as well as the entry count. */
-  readonly total_file_size?: number | bigint;
+  readonly total_file_size?: number | bigint | null;
+}
+
+export interface PackedSizeManifest {
+  readonly manifest_size: Uint8Array;
+  readonly manifest_size_payload_hash: Uint8Array;
+  readonly total_file_size: number | bigint;
 }
 
 export interface ManifestContext {
@@ -66,8 +77,8 @@ export interface PackManifestOptions {
   /** Inferred from exact source paths when omitted. Never repairs a source path. */
   readonly context?: ManifestContext;
   readonly filenameTransform?: "auto" | "raw" | "prefix";
-  /** Delta mode requires nondecreasing sizes after stable filename sorting. */
-  readonly fileSizeMode?: "absolute" | "delta";
+  /** Defaults to true. False permits null sizes and omits the size packet. */
+  readonly encodeSize?: boolean;
   readonly compression?: {
     readonly filenames?: Compression;
     readonly metadata?: Compression;

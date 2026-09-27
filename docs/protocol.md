@@ -1,9 +1,10 @@
-# Manifest binary protocol 0
+# Manifest binary protocol 1
 
 One independently decodable packet represents one app version. The external
 `payload_hash` is the 32-byte SHA-256 of the entire packet. External
-`format_version` and `entry_count` must match; supply `total_file_size` to verify
-the sum. All string bytes are exact, strict UTF-8, with BOM and normalization
+`format_version` and `entry_count` must match. Sizes live only in the optional
+size packet; supply it together with its SHA-256 hash to recover sizes and verify
+`total_file_size`. Without it, decoded `file_size` is `null`. All string bytes are exact, strict UTF-8, with BOM and normalization
 preserved. Lengths count bytes.
 
 ## Packet
@@ -13,7 +14,7 @@ continuation. `LP(s)` is `U(byte_length)` followed by exact bytes. No ZigZag.
 
 | Order | Field            | Encoding                                                  |
 | ----: | ---------------- | --------------------------------------------------------- |
-|     1 | Protocol version | Two-byte big-endian `00 00`                               |
+|     1 | Protocol version | Two-byte big-endian `00 01`                               |
 |     2 | Entry count      | `U(count)`                                                |
 |     3 | Header flags     | One byte, below                                           |
 |     4 | Header strings   | Present strings in bit order 0 through 3, each `LP(UTF8)` |
@@ -29,9 +30,9 @@ continuation. `LP(s)` is `U(byte_length)` followed by exact bytes. No ZigZag.
 | 3          | `session_key` present                            |
 | 4–5        | Path mode: 0 literal, 1 legacy, 2 delta, 3 mixed |
 | 6          | Filename transform: 0 raw, 1 prefix-coded        |
-| 7          | File size: 0 absolute, 1 nonnegative deltas      |
+| 7          | Reserved; must be 0                              |
 
-All eight bits are assigned. Mixed mode stores one additional mode byte per
+Mixed mode stores one additional mode byte per
 entry, limited to 0, 1, or 2. Reconstructed legacy and delta paths require
 nonempty org/app fields. Legacy additionally requires the version field.
 
@@ -68,13 +69,42 @@ Metadata entry `i` belongs to filename `i`.
 | ----: | ------------------------------------------ | -------------------- |
 |     1 | Per-entry path mode, only for mixed header | One byte: 0, 1, or 2 |
 |     2 | Literal path, only for effective mode 0    | `LP(path UTF8)`      |
-|     3 | File size or size delta                    | `U(value)`           |
+|     3 | Entry tag                                  | One random byte      |
 |     4 | Hash kind                                  | One byte             |
 |     5 | Hash data                                  | Representation below |
 
-Absolute sizes are independent. Delta sizes add to the previous decoded size,
-starting at zero. Sizes and their sum cannot exceed `2^63 - 1`; negatives and
-nulls are not representable. The recommended writer uses absolute sizes.
+The encoder draws one independent random tag per sorted entry. It is a lightweight
+ordering sanity check, not an authenticity guarantee; the full main-packet hash
+in the size packet binds the packets together.
+
+## Optional size packet
+
+The external `manifest_size_payload_hash` is SHA-256 of every byte of
+`manifest_size`. Both fields must be present together, or both absent. Neither
+packet is a proof that storage receipts were checked; the caller must establish
+that before writing a size packet. `packSizeManifest` verifies that provided
+filename/path/hash tuples match the main packet in its stable sorted order.
+Late sidecar generation rejects duplicate identities with differing sizes:
+the size-free main packet cannot distinguish those duplicates.
+
+| Order | Field                      | Encoding                                   |
+| ----: | -------------------------- | ------------------------------------------ |
+|     1 | Protocol version           | Two-byte big-endian `00 01`                |
+|     2 | Main packet `payload_hash` | Exactly 32 bytes                           |
+|     3 | Entry count                | `U(count)`, equal to the main packet count |
+|     4 | Entries                    | Repeated `count` times, table below        |
+|     5 | End                        | No trailing bytes                          |
+
+| Order | Per-entry field | Encoding                                        |
+| ----: | --------------- | ----------------------------------------------- |
+|     1 | Entry tag       | One byte, equal to the corresponding main entry |
+|     2 | File size       | `U(size)`, absolute bytes, at most `2^63 - 1`   |
+
+Sizes and their sum cannot exceed `2^63 - 1`; negative/null sizes cannot be
+encoded. The sidecar preserves zero-byte files. Its entry order must be exactly
+the main packet's order. The tag adds only an 8-bit mismatch check for each
+position; it is not a cryptographic receipt or a substitute for comparing source
+entry identities when packing.
 
 | Hash kind | Data             | Reconstructed text                     |
 | --------: | ---------------- | -------------------------------------- |
@@ -109,13 +139,12 @@ access to the resulting storage object.
 ## Synthetic header example
 
 Two entries, org `o`, app `a`, version `v`, legacy paths, prefix-coded filenames,
-and absolute sizes begin:
+begin:
 
 ```text
-00 00 | 02 | 57 | 01 6f | 01 61 | 01 76
+00 01 | 02 | 57 | 01 6f | 01 61 | 01 76
 version count flags    org      app      version
 ```
 
-`0x57 = 0x07 | (1 << 4) | (1 << 6)`. Golden tests construct packets independently
-of the encoder. This version differs from the old research draft's provisional
-version 3 and its separate header/control bytes; those packets are not accepted.
+`0x57 = 0x07 | (1 << 4) | (1 << 6)`. Independent fixtures construct packets
+without using the encoder. Protocol 0 packets are intentionally rejected.

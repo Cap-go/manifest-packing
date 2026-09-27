@@ -249,7 +249,7 @@ async function runWorker(input: WorkerInput): Promise<Totals> {
           Buffer.from(source.name).equals(actualFields[0]!) &&
             Buffer.from(source.path).equals(actualFields[1]!) &&
             Buffer.from(source.hash).equals(actualFields[2]!) &&
-            BigInt(actual.file_size) === source.size,
+            BigInt(actual.file_size!) === source.size,
           "EXACT_TUPLE_MISMATCH"
         );
         const sourceSize = source.size!;
@@ -258,7 +258,7 @@ async function runWorker(input: WorkerInput): Promise<Totals> {
           [source.name, source.path, source.hash],
           sourceSize
         );
-        addTuple(decodedHash, actualFields, BigInt(actual.file_size));
+        addTuple(decodedHash, actualFields, BigInt(actual.file_size!));
         versionSize += sourceSize;
         checkpoint.inputFieldBytes +=
           source.name.byteLength +
@@ -266,7 +266,7 @@ async function runWorker(input: WorkerInput): Promise<Totals> {
           source.hash.byteLength;
       }
       requireCondition(
-        BigInt(packed.total_file_size) === versionSize,
+        BigInt(packed.total_file_size!) === versionSize,
         "FILE_SIZE_SUM_MISMATCH"
       );
       checkpoint.sourceChain = chain(
@@ -451,7 +451,7 @@ async function main(): Promise<void> {
   requireCondition(
     unpackManifest(empty).length === 0 &&
       empty.entry_count === 0 &&
-      BigInt(empty.total_file_size) === 0n,
+      BigInt(empty.total_file_size!) === 0n,
     "EMPTY_MANIFEST_MISMATCH"
   );
   const active: Worker[] = [];

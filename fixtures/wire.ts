@@ -38,8 +38,9 @@ export function packet({
   flags = 0,
   headers = new Uint8Array(),
   names = block(lp("a")),
-  tails = block(bytes(lp("p"), uint(1), [3], lp("x"))),
-  version = 0,
+  tails = block(literalTail()),
+  version = 1,
+  sizes,
   suffix = new Uint8Array()
 }: {
   count?: number;
@@ -48,9 +49,10 @@ export function packet({
   names?: Uint8Array;
   tails?: Uint8Array;
   version?: number;
+  sizes?: readonly (number | bigint)[];
   suffix?: Uint8Array;
 } = {}): UnpackManifestInput {
-  return withDigest(
+  const main = withDigest(
     bytes(
       [version >> 8, version & 255],
       uint(count),
@@ -62,6 +64,31 @@ export function packet({
     ),
     count
   );
+  if (count > 10_000) return main;
+  const values = sizes ?? Array.from({ length: count }, () => 1);
+  return withSizePacket(
+    main,
+    bytes(...values.map((size) => bytes([0x5a], uint(size))))
+  );
+}
+
+export function withSizePacket(
+  main: UnpackManifestInput,
+  entries: Uint8Array
+): UnpackManifestInput {
+  const manifest_size = bytes(
+    [0, 1],
+    main.payload_hash,
+    uint(main.entry_count),
+    entries
+  );
+  return {
+    ...main,
+    manifest_size,
+    manifest_size_payload_hash: createHash("sha256")
+      .update(manifest_size)
+      .digest()
+  };
 }
 
 export function withDigest(
@@ -69,15 +96,19 @@ export function withDigest(
   entryCount = 1
 ): UnpackManifestInput {
   return {
-    format_version: 0,
+    format_version: 1,
     entry_count: entryCount,
     payload_hash: createHash("sha256").update(manifest).digest(),
     manifest
   };
 }
 
-export function literalTail(size: number | bigint = 1, hash = "x", path = "p") {
-  return bytes(lp(path), uint(size), [3], lp(hash));
+export function literalTail(
+  _size: number | bigint = 1,
+  hash = "x",
+  path = "p"
+) {
+  return bytes(lp(path), [0x5a, 3], lp(hash));
 }
 
 export function readUint(

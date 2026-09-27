@@ -1,5 +1,5 @@
 import { Buffer } from "node:buffer";
-import { createHash, timingSafeEqual } from "node:crypto";
+import { createHash, randomBytes, timingSafeEqual } from "node:crypto";
 import {
   Budget,
   decodeUtf8,
@@ -41,6 +41,7 @@ import {
   type DecodedManifestEntry,
   type ManifestEntry,
   type PackedManifest,
+  type PackedSizeManifest,
   type PackManifestOptions,
   type UnpackManifestInput,
   type UnpackManifestOptions
@@ -49,7 +50,7 @@ import {
 interface Prepared {
   entry: ManifestEntry;
   name: Buffer;
-  size: bigint;
+  size: bigint | null;
 }
 
 function digest(bytes: Uint8Array): Buffer {
@@ -67,6 +68,36 @@ function addSize(
   const sum = BigInt(left) + BigInt(right);
   if (sum > MAX_SIZE) invalid("File-size sum exceeds signed bigint");
   return sum;
+}
+
+function encodeSizePacket(
+  mainHash: Uint8Array,
+  tags: Uint8Array,
+  sizes: readonly bigint[],
+  limit: number
+): PackedSizeManifest {
+  const writer = new Writer(limit);
+  writer.byte(0);
+  writer.byte(MANIFEST_FORMAT_VERSION);
+  writer.data(mainHash);
+  writer.uint(sizes.length);
+  let total = 0n;
+  for (let i = 0; i < sizes.length; i++) {
+    writer.byte(tags[i]!);
+    writer.size(sizes[i]!);
+    total += sizes[i]!;
+    if (total > MAX_SIZE)
+      throw new ManifestPackingError(
+        "INVALID_INPUT",
+        "File-size sum exceeds signed bigint"
+      );
+  }
+  const manifest_size = new Uint8Array(writer.finish());
+  return {
+    manifest_size,
+    manifest_size_payload_hash: digest(manifest_size),
+    total_file_size: publicSize(total)
+  };
 }
 
 /** Encode one version; stably sort whole entries by exact UTF-8 name bytes. */
@@ -102,18 +133,17 @@ export function packManifest(
     );
   }
   const transform = options.filenameTransform ?? "auto";
-  const sizeMode = options.fileSizeMode ?? "absolute";
+  const encodeSize = options.encodeSize ?? true;
   if (
     !["auto", "raw", "prefix"].includes(transform) ||
-    !["absolute", "delta"].includes(sizeMode)
+    typeof encodeSize !== "boolean"
   ) {
     throw new ManifestPackingError(
       "INVALID_INPUT",
-      "Unknown filename or file-size mode"
+      "Unknown filename transform or encodeSize value"
     );
   }
   const prepared: Prepared[] = [];
-  let total = 0n;
   let nameBytes = 0;
   let sourceBytes = 0;
   let tailEstimate = 0;
@@ -157,12 +187,11 @@ export function packManifest(
     const hash = utf8(entry.file_hash, limits.maxStringBytes);
     validatePath(entry.file_name, true);
     validatePath(entry.s3_path, true);
-    const size = sizeValue(entry.file_size);
-    total += size;
-    if (total > MAX_SIZE)
+    const size = entry.file_size === null ? null : sizeValue(entry.file_size);
+    if (size === null && encodeSize)
       throw new ManifestPackingError(
         "INVALID_INPUT",
-        "File-size sum exceeds signed bigint"
+        "Cannot encode unknown file size"
       );
     nameBytes += name.length;
     sourceBytes += name.length + path.length + hash.length;
@@ -181,6 +210,7 @@ export function packManifest(
     prepared.push({ entry, name, size });
   }
   prepared.sort((a, b) => Buffer.compare(a.name, b.name));
+  const tags = randomBytes(prepared.length);
   const ordered = prepared.map((item) => item.entry);
   for (const value of Object.values(options.context ?? {})) {
     if (value !== undefined) utf8(value, limits.maxStringBytes);
@@ -206,7 +236,6 @@ export function packManifest(
           Math.min(nameBytes + entries.length * 4, limits.maxBlockBytes)
         );
   let previousName: Uint8Array = new Uint8Array();
-  let previousSize = 0n;
   for (let i = 0; i < prepared.length; i++) {
     const item = prepared[i]!;
     const mode = modes[i]!;
@@ -223,14 +252,7 @@ export function packManifest(
     }
     if (header.mode === 3) tail.byte(mode);
     if (mode === 0) tail.lp(utf8(item.entry.s3_path, limits.maxStringBytes));
-    const size = sizeMode === "delta" ? item.size - previousSize : item.size;
-    if (size < 0n)
-      throw new ManifestPackingError(
-        "INVALID_INPUT",
-        "Size deltas require nondecreasing sizes in filename order"
-      );
-    tail.size(size);
-    previousSize = item.size;
+    tail.byte(tags[i]!);
     const hash = encodeHash(item.entry.file_hash, limits.maxStringBytes);
     tail.byte(hash.kind);
     if (hash.kind === 3) tail.lp(hash.bytes);
@@ -276,30 +298,36 @@ export function packManifest(
   writer.byte(0);
   writer.byte(MANIFEST_FORMAT_VERSION);
   writer.uint(entries.length);
-  writer.byte(
-    header.presence |
-      (header.mode << 4) |
-      (nameTransform << 6) |
-      (sizeMode === "delta" ? 128 : 0)
-  );
+  writer.byte(header.presence | (header.mode << 4) | (nameTransform << 6));
   writeHeaderStrings(writer, header, limits.maxStringBytes);
   writeBlock(writer, names);
   writeBlock(writer, tails);
   const manifest = new Uint8Array(writer.finish());
+  const payload_hash = digest(manifest);
+  const sizes = encodeSize
+    ? encodeSizePacket(
+        payload_hash,
+        tags,
+        prepared.map((item) => item.size!),
+        limits.maxPacketBytes
+      )
+    : null;
   return {
     format_version: MANIFEST_FORMAT_VERSION,
     entry_count: entries.length,
-    total_file_size: publicSize(total),
-    payload_hash: digest(manifest),
-    manifest
+    total_file_size: sizes?.total_file_size ?? null,
+    payload_hash,
+    manifest,
+    manifest_size: sizes?.manifest_size ?? null,
+    manifest_size_payload_hash: sizes?.manifest_size_payload_hash ?? null
   };
 }
 
-/** Decode with integrity, canonical framing, path, integer and resource checks. */
-export function unpackManifest(
+/** Decode the main packet while retaining its per-entry size-binding tags. */
+function decodeMain(
   input: UnpackManifestInput,
   options: UnpackManifestOptions = {}
-): DecodedManifestEntry[] {
+): { rows: DecodedManifestEntry[]; tags: Uint8Array; maxPacketBytes: number } {
   if (!options || typeof options !== "object" || Array.isArray(options)) {
     throw new ManifestPackingError(
       "INVALID_INPUT",
@@ -344,6 +372,7 @@ export function unpackManifest(
   if (count !== input.entry_count)
     throw new ManifestPackingError("METADATA_MISMATCH", "Entry count mismatch");
   const flags = reader.byte();
+  if (flags & 128) invalid("Reserved header flag is set");
   const header = readHeaderStrings(reader, flags, limits.maxStringBytes);
   validateContext(header);
   const namesBlock = readBlock(reader, limits.maxBlockBytes);
@@ -353,6 +382,9 @@ export function unpackManifest(
     invalid("Entry count cannot fit declared blocks");
   const fixedBytes =
     input.manifest.byteLength +
+    (input.manifest_size instanceof Uint8Array
+      ? input.manifest_size.byteLength
+      : 0) +
     namesBlock.rawLength * 2 +
     tailsBlock.rawLength * 2 +
     count * 256 +
@@ -367,13 +399,11 @@ export function unpackManifest(
   const tails = new Reader(tailData);
   // oxlint-disable-next-line unicorn/no-new-array -- Fixed-size output avoids an O(n) initialization pass.
   const rows: DecodedManifestEntry[] = new Array(count);
+  const tags = new Uint8Array(count);
   const prefixMode = (flags & 64) !== 0;
-  const sizeDelta = (flags & 128) !== 0;
   let scratch = new Uint8Array(Math.min(256, limits.maxStringBytes));
   let previousLength = 0;
   let previousName = "";
-  let previousSize: number | bigint = 0;
-  let total: number | bigint = 0;
   const legacy = pathPrefix(header) + header.version + "/";
   const delta = deltaPrefix(header);
   const legacyLength = Buffer.byteLength(legacy);
@@ -434,10 +464,7 @@ export function unpackManifest(
       budget.text(bytes.length);
       path = decodeUtf8(bytes);
     }
-    let size = tails.size();
-    if (sizeDelta) size = addSize(size, previousSize);
-    previousSize = size;
-    total = addSize(total, size);
+    tags[i] = tails.byte();
     const hash = decodeHash(tails, limits.maxStringBytes);
     const hashLength = Buffer.byteLength(hash);
     budget.text(hashLength);
@@ -460,20 +487,126 @@ export function unpackManifest(
       file_name: name,
       s3_path: path,
       file_hash: hash,
-      file_size: size
+      file_size: null
     };
   }
   names.end();
   tails.end();
+  return { rows, tags, maxPacketBytes: limits.maxPacketBytes };
+}
+
+/** Attach verified sizes to an existing main packet without changing that packet. */
+export function packSizeManifest(
+  input: UnpackManifestInput,
+  entries: readonly ManifestEntry[],
+  options: UnpackManifestOptions = {}
+): PackedSizeManifest {
+  const { rows, tags, maxPacketBytes } = decodeMain(input, options);
+  if (!Array.isArray(entries) || entries.length !== rows.length)
+    throw new ManifestPackingError(
+      "INVALID_INPUT",
+      "Size entries do not match manifest count"
+    );
+  const limits = limitsFor(options.limits);
+  const ordered = entries.map((entry) => ({
+    entry,
+    name: utf8(entry?.file_name, limits.maxStringBytes)
+  }));
+  ordered.sort((a, b) => Buffer.compare(a.name, b.name));
+  const sizes = ordered.map(({ entry }, i) => {
+    const row = rows[i]!;
+    if (
+      entry.file_name !== row.file_name ||
+      entry.s3_path !== row.s3_path ||
+      entry.file_hash !== row.file_hash
+    )
+      throw new ManifestPackingError(
+        "METADATA_MISMATCH",
+        "Size entry does not match manifest"
+      );
+    const size = sizeValue(entry.file_size);
+    const previous = ordered[i - 1]?.entry;
+    if (
+      previous?.file_name === entry.file_name &&
+      previous.s3_path === entry.s3_path &&
+      previous.file_hash === entry.file_hash &&
+      sizeValue(previous.file_size) !== size
+    )
+      throw new ManifestPackingError(
+        "METADATA_MISMATCH",
+        "Duplicate identities have ambiguous sizes"
+      );
+    return size;
+  });
+  return encodeSizePacket(input.payload_hash, tags, sizes, maxPacketBytes);
+}
+
+/** Decode with integrity, canonical framing, path, integer and resource checks. */
+export function unpackManifest(
+  input: UnpackManifestInput,
+  options: UnpackManifestOptions = {}
+): DecodedManifestEntry[] {
+  const hasSize = input?.manifest_size != null;
+  if (hasSize !== (input?.manifest_size_payload_hash != null))
+    throw new ManifestPackingError(
+      "INVALID_INPUT",
+      "Size packet and hash must be supplied together"
+    );
   if (
-    input.total_file_size !== undefined &&
+    hasSize &&
+    (!(input.manifest_size instanceof Uint8Array) ||
+      !(input.manifest_size_payload_hash instanceof Uint8Array))
+  )
+    throw new ManifestPackingError(
+      "INVALID_INPUT",
+      "Size packet and hash must be byte arrays"
+    );
+  const { rows, tags, maxPacketBytes } = decodeMain(input, options);
+  if (!hasSize) return rows;
+  const packet = input.manifest_size!;
+  const hash = input.manifest_size_payload_hash!;
+  if (packet.length > maxPacketBytes)
+    resource("Size packet exceeds byte limit");
+  if (hash.length !== 32 || !timingSafeEqual(digest(packet), hash))
+    throw new ManifestPackingError(
+      "INTEGRITY_MISMATCH",
+      "Size packet hash mismatch"
+    );
+  const reader = new Reader(packet);
+  if (reader.byte() !== 0 || reader.byte() !== MANIFEST_FORMAT_VERSION)
+    throw new ManifestPackingError(
+      "UNSUPPORTED_VERSION",
+      "Unsupported size packet version"
+    );
+  if (!timingSafeEqual(reader.data(32), input.payload_hash))
+    throw new ManifestPackingError(
+      "INTEGRITY_MISMATCH",
+      "Size packet targets another manifest"
+    );
+  if (reader.uint(rows.length) !== rows.length)
+    throw new ManifestPackingError(
+      "METADATA_MISMATCH",
+      "Size entry count mismatch"
+    );
+  let total: number | bigint = 0;
+  for (let i = 0; i < rows.length; i++) {
+    if (reader.byte() !== tags[i])
+      throw new ManifestPackingError(
+        "METADATA_MISMATCH",
+        "Size entry tag mismatch"
+      );
+    const size = reader.size();
+    rows[i]!.file_size = size;
+    total = addSize(total, size);
+  }
+  reader.end();
+  if (
+    input.total_file_size != null &&
     sizeValue(input.total_file_size) !== BigInt(total)
-  ) {
+  )
     throw new ManifestPackingError(
       "METADATA_MISMATCH",
       "Total file size mismatch"
     );
-  }
-  // Memory checkpoint: decoded entries alive.
   return rows;
 }
