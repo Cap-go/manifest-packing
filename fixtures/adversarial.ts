@@ -13,7 +13,8 @@ import {
   packet,
   text,
   uint,
-  withDigest
+  withDigest,
+  withSizePacket
 } from "./wire.js";
 
 export interface AdversarialPacket {
@@ -42,10 +43,10 @@ export function adversarialPackets(): AdversarialPacket[] {
     cases.push({ name, input, expectedCodes, ...(options ? { options } : {}) });
   };
   const valid = packet();
-  add("external format version", { ...valid, format_version: 1 }, [
+  add("external format version", { ...valid, format_version: 0 }, [
     "UNSUPPORTED_VERSION"
   ]);
-  add("embedded format version", packet({ version: 1 }), [
+  add("embedded format version", packet({ version: 0 }), [
     "UNSUPPORTED_VERSION"
   ]);
   add("packet trailer", packet({ suffix: Uint8Array.of(0) }));
@@ -60,13 +61,13 @@ export function adversarialPackets(): AdversarialPacket[] {
   ]);
   add(
     "nonminimal count",
-    withDigest(bytes([0, 0, 0x81, 0], valid.manifest.subarray(3)))
+    withDigest(bytes([0, 1, 0x81, 0], valid.manifest.subarray(3)))
   );
   add(
     "unterminated count",
-    withDigest(bytes([0, 0], new Uint8Array(10).fill(0x80)))
+    withDigest(bytes([0, 1], new Uint8Array(10).fill(0x80)))
   );
-  add("overflowing count", withDigest(bytes([0, 0], uint(1n << 64n), [0])), [
+  add("overflowing count", withDigest(bytes([0, 1], uint(1n << 64n), [0])), [
     "RESOURCE_LIMIT",
     "TOO_MANY_ENTRIES",
     "INVALID_PACKET"
@@ -134,42 +135,33 @@ export function adversarialPackets(): AdversarialPacket[] {
   );
   add(
     "overflowing file size",
-    packet({ tails: block(literalTail(1n << 63n)) })
+    withSizePacket(valid, bytes([0x5a], uint(1n << 63n)))
   );
-  add(
-    "nonminimal file size",
-    packet({ tails: block(bytes(lp("p"), [0x81, 0, 3], lp("x"))) })
-  );
+  add("nonminimal file size", withSizePacket(valid, bytes([0x5a, 0x81, 0])));
   for (const width of [7, 8, 9, 10]) {
     add(
       `nonminimal ${width}-byte file size`,
-      packet({
-        tails: block(
-          bytes(
-            lp("p"),
-            [0x81],
-            new Uint8Array(width - 2).fill(0x80),
-            [0, 3],
-            lp("x")
-          )
-        )
-      })
+      withSizePacket(
+        valid,
+        bytes([0x5a, 0x81], new Uint8Array(width - 2).fill(0x80), [0])
+      )
     );
   }
   add(
     "unterminated file size",
-    packet({ tails: block(bytes(lp("p"), new Uint8Array(10).fill(0x80))) })
+    withSizePacket(valid, bytes([0x5a], new Uint8Array(10).fill(0x80)))
   );
   add(
     "overflowing absolute size total",
     packet({
       count: 2,
+      sizes: [(1n << 63n) - 1n, 1],
       names: block(bytes(lp("a"), lp("b"))),
       tails: block(bytes(literalTail((1n << 63n) - 1n), literalTail(1)))
     })
   );
   add(
-    "overflowing delta size",
+    "reserved size-delta flag",
     packet({
       count: 2,
       flags: 0x80,

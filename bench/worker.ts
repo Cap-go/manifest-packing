@@ -236,18 +236,21 @@ export default {
       }
       if (url.pathname === "/import" && request.method === "POST") {
         const name = url.searchParams.get("case") ?? "maximum";
-        const wire = (await request.json()) as Omit<
-          PackedManifest,
-          "manifest" | "payload_hash" | "total_file_size"
-        > & { manifest: string; payload_hash: string; total_file_size: string };
+        const wire = (await request.json()) as Record<string, string> &
+          Pick<PackedManifest, "format_version" | "entry_count">;
         const expected = expectedEntries(
-          rowsFor(name, "monotonic")
+          rowsFor(name, url.searchParams.get("sizeCorpus") ?? "mixed")
         ) as DecodedManifestEntry[];
         fixture = {
           packet: {
             ...wire,
             manifest: Buffer.from(wire.manifest, "base64"),
             payload_hash: Buffer.from(wire.payload_hash, "base64"),
+            manifest_size: Buffer.from(wire.manifest_size, "base64"),
+            manifest_size_payload_hash: Buffer.from(
+              wire.manifest_size_payload_hash,
+              "base64"
+            ),
             total_file_size: BigInt(wire.total_file_size)
           },
           fingerprint: fingerprint(expected),
@@ -269,18 +272,12 @@ export default {
           transform !== "prefix"
         )
           throw new Error("Unknown transform");
-        const sizeMode = url.searchParams.get("sizes") ?? "absolute";
-        if (sizeMode !== "absolute" && sizeMode !== "delta")
-          throw new Error("Unknown size mode");
-        const sizeCorpus =
-          url.searchParams.get("sizeCorpus") ??
-          (sizeMode === "delta" ? "monotonic" : "mixed");
+        const sizeCorpus = url.searchParams.get("sizeCorpus") ?? "mixed";
         const rows = rowsFor(name, sizeCorpus);
         const start = performance.now();
         const packet = packManifest(rows, {
           context: syntheticContext,
           filenameTransform: transform,
-          fileSizeMode: sizeMode,
           compression: {
             filenames: compression as Compression,
             metadata: compression as Compression
@@ -296,7 +293,6 @@ export default {
           count: test.count,
           compression,
           transform,
-          sizeMode,
           sizeCorpus,
           packetBytes: packet.manifest.byteLength,
           jsonBytes: new TextEncoder().encode(json).byteLength,

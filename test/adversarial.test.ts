@@ -251,7 +251,7 @@ describe("source and option validation", () => {
 
   it.each([
     { filenameTransform: "unknown" },
-    { fileSizeMode: "unknown" },
+    { encodeSize: "unknown" },
     { compression: { filenames: "unknown" } },
     { compression: { metadata: "unknown" } },
     { limits: { maxEntries: 0 } },

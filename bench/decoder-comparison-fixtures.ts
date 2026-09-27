@@ -41,7 +41,10 @@ for (const [name, options] of Object.entries(scenarios)) {
       : name.endsWith("-zstd")
         ? "zstd"
         : "auto";
-  const packed = packManifest(rows, { compression: { metadata: codec } });
+  const packed = packManifest(rows, {
+    encodeSize: false,
+    compression: { metadata: codec }
+  });
   const reader = new Reader(packed.manifest);
   reader.byte();
   reader.byte();
@@ -54,7 +57,7 @@ for (const [name, options] of Object.entries(scenarios)) {
   metadata.push({
     name,
     count: packed.entry_count,
-    total: packed.total_file_size.toString(),
+    total: packed.total_file_size?.toString() ?? "0",
     hash: Buffer.from(packed.payload_hash).toString("hex"),
     packetBytes: packed.manifest.length,
     blocks: {
@@ -70,7 +73,11 @@ for (const [name, options] of Object.entries(scenarios)) {
       }
     },
     fingerprint: createHash("sha256")
-      .update(JSON.stringify(expectedEntries(rows)))
+      .update(
+        JSON.stringify(
+          expectedEntries(rows).map((row) => ({ ...row, file_size: null }))
+        )
+      )
       .digest("hex")
   });
 }

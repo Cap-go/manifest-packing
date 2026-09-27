@@ -11,14 +11,13 @@ export function encodeFixture(
   name: string,
   compression: Compression,
   transform: PackManifestOptions["filenameTransform"],
-  sizes: PackManifestOptions["fileSizeMode"]
+  sizeCorpus: "mixed" | "monotonic"
 ) {
-  const rows = rowsFor(name, "monotonic");
+  const rows = rowsFor(name, sizeCorpus);
   const start = performance.now();
   const packet = packManifest(rows, {
     context: syntheticContext,
     filenameTransform: transform,
-    fileSizeMode: sizes,
     compression: { filenames: compression, metadata: compression }
   });
   return {
@@ -27,8 +26,7 @@ export function encodeFixture(
       count: rows.length,
       compression,
       transform,
-      sizeMode: sizes,
-      sizeCorpus: "monotonic",
+      sizeCorpus,
       encoder: "node",
       packetBytes: packet.manifest.byteLength,
       jsonBytes: Buffer.byteLength(JSON.stringify(expectedEntries(rows))),
@@ -38,6 +36,10 @@ export function encodeFixture(
       ...packet,
       manifest: Buffer.from(packet.manifest).toString("base64"),
       payload_hash: Buffer.from(packet.payload_hash).toString("base64"),
+      manifest_size: Buffer.from(packet.manifest_size!).toString("base64"),
+      manifest_size_payload_hash: Buffer.from(
+        packet.manifest_size_payload_hash!
+      ).toString("base64"),
       total_file_size: packet.total_file_size?.toString()
     }
   };

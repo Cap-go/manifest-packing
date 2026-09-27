@@ -6,6 +6,7 @@ import {
   MAX_MANIFEST_ENTRIES,
   ManifestPackingError,
   packManifest,
+  packSizeManifest,
   unpackManifest,
   type ManifestEntry
 } from "../src/index.js";
@@ -38,26 +39,25 @@ const entry: ManifestEntry = {
   file_size: 1
 };
 
-describe("manifest format v0", () => {
-  it("exports version zero and preserves the exact uncompressed golden packet", () => {
-    expect(MANIFEST_FORMAT_VERSION).toBe(0);
+describe("manifest format v1", () => {
+  it("uses version one and rejects the old wire version", () => {
+    expect(MANIFEST_FORMAT_VERSION).toBe(1);
     const packed = packManifest([entry], { ...raw, filenameTransform: "raw" });
-    expect(Buffer.from(packed.manifest).toString("hex")).toBe(
-      "000001000002020161000606017001030178"
-    );
+    expect(Array.from(packed.manifest.subarray(0, 2))).toEqual([0, 1]);
     expect(packed).toMatchObject({
-      format_version: 0,
+      format_version: 1,
       entry_count: 1,
       total_file_size: 1
     });
     expect(packed.payload_hash).toEqual(
       createHash("sha256").update(packed.manifest).digest()
     );
-    expect(
+    expect(unpackManifest(packed)).toEqual(expectedEntries([entry]));
+    expect(() =>
       unpackManifest(
         withDigest(Buffer.from("000001000002020161000606017001030178", "hex"))
       )
-    ).toEqual(expectedEntries([entry]));
+    ).toThrowError(/Unsupported embedded manifest version/);
   });
 
   it("round-trips an empty manifest", () => {
@@ -164,6 +164,7 @@ describe("manifest format v0", () => {
     );
     const input = packet({
       count: 4,
+      sizes: [1, 2, 3, 4],
       flags: 0x40,
       names: block(names),
       tails: block(
@@ -197,6 +198,7 @@ describe("manifest format v0", () => {
   it("preserves encoded order when independently decoding unsorted names", () => {
     const input = packet({
       count: 2,
+      sizes: [1, 2],
       names: block(bytes(lp("z"), lp("a"))),
       tails: block(bytes(literalTail(1), literalTail(2)))
     });
@@ -248,8 +250,8 @@ describe("manifest format v0", () => {
       "s3_path"
     ]);
     expect(
-      packManifest([{ ...entry, id: 42, app_version_id: 99 }]).manifest
-    ).toEqual(packManifest([entry]).manifest);
+      unpackManifest(packManifest([{ ...entry, id: 42, app_version_id: 99 }]))
+    ).toEqual(unpackManifest(packManifest([entry])));
   });
 });
 
@@ -379,7 +381,7 @@ describe("hash and integer representations", () => {
     (kind, width, encoding) => {
       const hashBytes = Uint8Array.from({ length: width }, (_, index) => index);
       const input = packet({
-        tails: block(bytes(lp("p"), uint(1), [kind], hashBytes))
+        tails: block(bytes(lp("p"), [0x5a, kind], hashBytes))
       });
       expect(unpackManifest(input)[0]!.file_hash).toBe(
         Buffer.from(hashBytes).toString(encoding)
@@ -393,7 +395,11 @@ describe("hash and integer representations", () => {
         filenameTransform: "raw"
       });
       expect(inspectPacket(packed.manifest).blocks[1]!.stored).toEqual(
-        bytes(lp("p"), uint(1), [kind], hashBytes)
+        bytes(
+          lp("p"),
+          [inspectPacket(packed.manifest).blocks[1]!.stored[2]!, kind],
+          hashBytes
+        )
       );
     }
   );
@@ -465,7 +471,7 @@ describe("hash and integer representations", () => {
     1n << 56n,
     (1n << 63n) - 1n
   ])("decodes independently framed integer boundary %s", (size) => {
-    const input = packet({ tails: block(literalTail(size)) });
+    const input = packet({ tails: block(literalTail(size)), sizes: [size] });
     const expected =
       size <= BigInt(Number.MAX_SAFE_INTEGER) ? Number(size) : size;
     expect(
@@ -473,12 +479,12 @@ describe("hash and integer representations", () => {
     ).toBe(expected);
   });
 
-  it("promotes delta sizes and totals without losing precision", () => {
+  it("round-trips size sidecar integers and verifies the total", () => {
     const sizes = [(1n << 53n) - 1n, 1n << 53n, (1n << 53n) + 1n];
     const total = sizes.reduce((sum, size) => sum + size, 0n);
     const input = packet({
       count: 3,
-      flags: 0x80,
+      sizes,
       names: block(bytes(lp("a"), lp("b"), lp("c"))),
       tails: block(
         bytes(literalTail(sizes[0]!), literalTail(1), literalTail(1))
@@ -497,7 +503,7 @@ describe("hash and integer representations", () => {
       file_name: String(index),
       file_size: size
     }));
-    const packed = packManifest(entries, { ...raw, fileSizeMode: "delta" });
+    const packed = packManifest(entries, raw);
     expect(packed.total_file_size).toBe(total);
     expect(unpackManifest(packed)).toEqual(expectedEntries(entries));
   });
@@ -512,36 +518,91 @@ describe("hash and integer representations", () => {
     );
   });
 
-  it("decodes nonnegative deltas after stable filename sorting", () => {
+  it("can attach checked sizes later without changing the main packet", () => {
     const entries = [
       { ...entry, file_name: "c", file_size: 129 },
       { ...entry, file_name: "a", file_size: 1 },
       { ...entry, file_name: "b", file_size: 1 }
     ];
-    const packed = packManifest(entries, { ...raw, fileSizeMode: "delta" });
-    expect(inspectPacket(packed.manifest).flags & 0x80).toBe(0x80);
-    expect(unpackManifest(packed)).toEqual(expectedEntries(entries));
-    expect(
-      unpackManifest(
-        packet({
-          count: 2,
-          flags: 0x80,
-          names: block(bytes(lp("a"), lp("b"))),
-          tails: block(bytes(literalTail(127), literalTail(1)))
-        })
-      ).map((row) => row.file_size)
-    ).toEqual([127, 128]);
+    const packed = packManifest(
+      entries.map((value) => ({ ...value, file_size: null })),
+      {
+        ...raw,
+        encodeSize: false
+      }
+    );
+    expect(packed.total_file_size).toBeNull();
+    expect(packed.manifest_size).toBeNull();
+    expect(packed.manifest_size_payload_hash).toBeNull();
+    expect(unpackManifest(packed).map((row) => row.file_size)).toEqual([
+      null,
+      null,
+      null
+    ]);
+    const sidecar = packSizeManifest(packed, entries);
+    expect(unpackManifest({ ...packed, ...sidecar })).toEqual(
+      expectedEntries(entries)
+    );
+    expect(sidecar.total_file_size).toBe(131);
   });
 
-  it("rejects negative deltas induced by sorting", () => {
+  it("rejects mismatched identities, incomplete size arguments, and tampered sidecars", () => {
+    const packed = packManifest([entry], { ...raw, encodeSize: false });
     expect(() =>
-      packManifest(
-        [
-          { ...entry, file_name: "z", file_size: 1 },
-          { ...entry, file_name: "a", file_size: 2 }
-        ],
-        { fileSizeMode: "delta" }
-      )
+      packSizeManifest(packed, [{ ...entry, file_hash: "other" }])
     ).toThrow(ManifestPackingError);
+    const sidecar = packSizeManifest(packed, [entry]);
+    expect(() =>
+      unpackManifest({ ...packed, manifest_size: sidecar.manifest_size })
+    ).toThrow(ManifestPackingError);
+    expect(() =>
+      unpackManifest({
+        ...packed,
+        manifest_size_payload_hash: sidecar.manifest_size_payload_hash
+      })
+    ).toThrow(ManifestPackingError);
+    const changed = sidecar.manifest_size.slice();
+    changed[35] = changed[35]! ^ 1;
+    expect(() =>
+      unpackManifest({
+        ...packed,
+        manifest_size: changed,
+        manifest_size_payload_hash: createHash("sha256")
+          .update(changed)
+          .digest()
+      })
+    ).toThrowError(/tag mismatch/);
+    const other = packManifest([entry], { ...raw, encodeSize: false });
+    expect(() => unpackManifest({ ...other, ...sidecar })).toThrowError(
+      /targets another manifest/
+    );
+  });
+
+  it("rejects an oversized sidecar before decoding a bad main packet", () => {
+    const packed = packManifest([entry], { encodeSize: false });
+    expect(() =>
+      unpackManifest(
+        {
+          ...packed,
+          payload_hash: new Uint8Array(32),
+          manifest_size: new Uint8Array(packed.manifest.length + 1),
+          manifest_size_payload_hash: new Uint8Array(32)
+        },
+        { limits: { maxPacketBytes: packed.manifest.length } }
+      )
+    ).toThrowError(expect.objectContaining({ code: "RESOURCE_LIMIT" }));
+  });
+
+  it("rejects ambiguous late sizes for duplicate main identities", () => {
+    const pending = packManifest([entry, entry], { encodeSize: false });
+    expect(() =>
+      packSizeManifest(pending, [entry, { ...entry, file_size: 2 }])
+    ).toThrowError(/ambiguous sizes/);
+    expect(
+      unpackManifest({
+        ...pending,
+        ...packSizeManifest(pending, [entry, entry])
+      })
+    ).toEqual(expectedEntries([entry, entry]));
   });
 });
